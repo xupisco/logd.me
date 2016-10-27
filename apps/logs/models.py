@@ -23,8 +23,8 @@ class Log(models.Model):
 
     reminder = models.BooleanField(_('reminder'), default=False)
 
-    companies = models.ManyToManyField(Company, related_name='companies', blank=True, null=True)
-    people = models.ManyToManyField(Person, related_name='people', blank=True, null=True)
+    companies = models.ManyToManyField(Company, related_name='companies', blank=True)
+    people = models.ManyToManyField(Person, related_name='people', blank=True)
 
     created_on = models.DateTimeField(_('created on'), auto_now_add=True)
     updated_on = models.DateTimeField(_('updated on'), auto_now=True)
