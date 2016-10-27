@@ -10,6 +10,7 @@ backups/
 *.ini
 *.pyc
 *.sublime-*
+*.sqlite3
 
 # OSX Files
 *.DS_Store
