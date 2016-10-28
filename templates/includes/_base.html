@@ -1,0 +1,109 @@
+{% load static from staticfiles %}
+<!doctype html>
+
+<html lang="pt">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ownCRM{% if page_title %} - {{ page_title }}{% endif %}</title>
+    <meta name="description" content="Etternum Reloaded">
+    <meta name="author" content="@labCorp">
+    <link rel="icon" type="image/png" href="{% static 'images/logo_ico.png' %}" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/lumen_bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datetimepicker.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/global.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/timeline.css' %}" />
+
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+    <![endif]-->
+
+    <script>
+    $(function () {
+        $('#logtime_datepicker').datetimepicker({
+            language: 'pt-BR'
+        });
+    })
+    </script>
+
+    {% block js %}
+    {% endblock %}
+
+</head>
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">ownCRM</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Fill me...">
+                </div>
+                <button type="submit" class="btn btn-success">Go!</button>
+            </form>
+            {% if request.user.is_authenticated %}
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        {{ request.user.get_full_name }} <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu user_options_header">
+                        {% if request.user.socialaccount_set.all %}
+                            <li class="dropdown-header"><img src="{{ request.user.socialaccount_set.all.0.get_avatar_url }}" class="pull-left user_avatar_menu" /></li>
+                        {% else %}
+                            <li class="dropdown-header"><img src="{% static 'images/avatar_not-found.gif' %}" class="pull-left user_avatar_menu" /></li>
+                        {% endif %}
+                        <li class="dropdown-header"></li>
+                        <li><a href="/user/"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;+ Log</a></li>
+                        <li><a href="/user/tributes/"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;+ Person</a></li>
+                        <li><a href="/user/tributes/"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>&nbsp;&nbsp;+ Company</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="/accounts/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;Sair</a></li>
+                        {% if request.user.is_staff %}
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/admin/" target="_blank" class="text-success"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;&nbsp;Admin</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+            {% else %}
+            <a href="#" class="btn btn-info navbar-btn navbar-right">Login</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+    {% block content %}
+    {% include "timeline.html" %}
+    {% endblock %}
+    </div>
+</div>
+
+<footer class="footer navbar-fixed-bottom">
+    <div class="container">
+        <a href="http://labcorp.com.br" target="_blank"><img alt="@labCorp" src="{% static 'images/logo_labcorp.png' %}" class="footer_logo-lab pull-right"></a>
+        <p class="text-muted">Política de Privacidade e Segurança - Termos e Condições de Uso | Todos os direitos reservados, etternum {% now "Y" %}©</p>
+    </div>
+</footer>
+
+</body>
+</html>

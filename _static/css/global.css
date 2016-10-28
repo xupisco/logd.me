@@ -1,0 +1,123 @@
+@import 'https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700';
+
+body {
+    margin-bottom: 70px;
+    background-image: url("/static/images/poly_bg.jpg");
+    background-size: cover;
+}
+
+.breadcrumb {
+    margin-top: 12px;
+    margin-bottom: 30px;
+    border-width: 0;
+    border-radius: 0;
+    background-color: transparent;
+    padding: 0 1px;
+}
+
+img.user_avatar_header {
+    width: 45px;
+    height: 45px;
+    border-radius: 25px;
+    border: 3px solid #8b9aa2;
+    top: 3px;
+    left: -38px;
+    position: absolute;
+    display: none;
+}
+
+img.user_avatar_menu {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    border: 4px solid #8b9aa2;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-left: 10px;
+}
+
+ul.user_options_header {
+    left: 15px !important;
+    top: 41px;
+    -webkit-box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.3);
+    box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.3);
+}
+
+.navbar-brand {
+    font-size: 24px;
+    letter-spacing: -1px;
+}
+
+.navbar {
+    border-width: 0 0 3px 0;
+    padding: 6px 0;
+}
+
+.navbar-default {
+    border-color: #73d6f4;
+    background-color: #fff;
+}
+
+img.main_logo {
+    width: 140px;
+    margin-top: -5px;
+}
+
+img.footer_logo {
+    margin-top: 11px;
+    margin-right: 100px;
+}
+
+.navbar-form .form-control {
+    background-color: #f3f3f3;
+    width: 400px;
+}
+
+img.footer_logo-lab {
+    margin-top: 20px;
+}
+
+.thumbnail {
+    border-radius: 0;
+    -webkit-box-shadow: 0px 1px 10px -1px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 10px -1px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 10px -1px rgba(0,0,0,0.3)
+}
+
+.thumbnail:hover {
+    border-radius: 0;
+    -webkit-box-shadow: 0px 1px 10px 1px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 1px 10px 1px rgba(0,0,0,0.3);
+    box-shadow: 0px 1px 10px 1px rgba(0,0,0,0.3)
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #e0e5e7;
+    font-size: 12px;
+    z-index: 999;
+}
+
+.container .text-muted {
+    margin: 22px 0;
+}
+
+.calendar_icon {
+    margin-top: 91px;
+    position: absolute;
+    right: 24px;
+    font-size: 18px;
+}
+
+.calendar_icon:hover {
+    cursor: pointer;
+}
