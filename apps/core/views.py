@@ -7,6 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.views.generic import View
 
+from ..people.models import Person
+
 
 class StaticView(View):
     page_title = ""
@@ -20,4 +22,25 @@ def home(request):
     context = {
         'dude': 'Alaor'
     }
-    return render(request, 'index.html', context)    
+    return render(request, 'timeline.html', context)
+
+
+def people(request):
+    context = {
+        'people': Person.objects.order_by('name')
+    }
+    return render(request, 'people.html', context)
+
+
+def companies(request):
+    context = {
+        'dude': 'Alaor'
+    }
+    return render(request, 'companies.html', context)
+
+
+def calendar(request):
+    context = {
+        'dude': 'Alaor'
+    }
+    return render(request, 'calendar.html', context)
