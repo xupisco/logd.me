@@ -1,5 +1,18 @@
 @import 'https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700';
 
+html {
+    position: relative;
+    min-height: 100%;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #e0e5e7;
+    font-size: 12px;
+    z-index: 999;
+}
+
 body {
     margin-bottom: 70px;
     background-image: url("/static/images/poly_bg.jpg");
@@ -92,20 +105,6 @@ img.footer_logo-lab {
     box-shadow: 0px 1px 10px 1px rgba(0,0,0,0.3)
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-    position: relative;
-    min-height: 100%;
-}
-.footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    background-color: #e0e5e7;
-    font-size: 12px;
-    z-index: 999;
-}
 
 .container .text-muted {
     margin: 22px 0;
@@ -120,4 +119,18 @@ html {
 
 .calendar_icon:hover {
     cursor: pointer;
+}
+
+.end_date {
+    
+}
+
+.hidden {
+    display: none;
+}
+
+.divcontent {
+    background-color: #fff;
+    padding: 11px;
+    padding-bottom: 5px;
 }

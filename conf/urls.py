@@ -10,6 +10,7 @@ from django.views import defaults as default_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^accounts/', include('allauth.urls')),
     url(r'^', include('apps.core.urls', namespace='core')),
 
     # Your stuff: custom urls includes go here

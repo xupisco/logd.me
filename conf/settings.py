@@ -27,7 +27,7 @@ ADMINS = (
 DJANGO_APPS = (
     #'grappelli',  # Thirdparty APP, but must be called before contrib.admin
     #'filebrowser',  # Thirdparty APP, but must be called before contrib.admin
-    #'django.contrib.sites',
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,6 +37,10 @@ DJANGO_APPS = (
 )
 
 EXTERNAL_APPS = (
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
 )
 
 PROJECT_APPS = (
@@ -47,6 +51,8 @@ PROJECT_APPS = (
 )
 
 INSTALLED_APPS = DJANGO_APPS + EXTERNAL_APPS + PROJECT_APPS
+
+SITE_ID = 1
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,6 +86,7 @@ TEMPLATES = [
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 LOGIN_REDIRECT_URL = '/'
