@@ -1,30 +1,51 @@
 {% extends 'includes/_base.html' %}
 {% load static from staticfiles %}
 
+{% block js %}
+<script type="text/javascript">
+$(function() {
+    var vlogs = new Vue({
+        el: '#vue_app',
+        delimiters: ["[[", "]]"],
+        data: {
+            q: '',
+            people: {{ people|safe }}
+        },
+        computed: {
+            filteredPeople() {
+                var self = this
+                return this.people.filter(function(person) {
+                    return person.name.toLowerCase().indexOf(self.q.toLowerCase()) > -1
+                })
+            }
+        }
+    })
+})
+</script>
+{% endblock %}
+
 {% block content %}
-{% for person in people %}
-<div class="col-xs-18 col-sm-6 col-md-4">
-    <div class="thumbnail">
-        <a href="{{ person.get_absolute_url }}">
+<div id="main_people">
+    <div class="col-xs-18 col-sm-6 col-md-4" v-for="person in filteredPeople">
+        <div class="thumbnail">
             <img src="{% static 'images/cover_not-found-poly.jpg' %}" width="350" class="cover_card" />
             <img src="{% static 'images/avatar_not-found.gif' %}" width="100" class="avatar_card" />
-        </a>
-        <div class="caption" style="margin-top: -20px;">
-            <h3 style="text-align: center; margin-bottom: 20px;">
-                {{ person.name }}<br />
-                <small>{{ person.role }}</small>
-            </h3>
-            <ul class="list-group">
-                <li class="list-group-item">{{ person.email }}</li>
-                <li class="list-group-item"><span class="glyphicon glyphicon-earphone" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span>Mobile: <span class="pull-right">{{ person.mobile }}</span></li>
-                <li class="list-group-item"><span class="glyphicon glyphicon-briefcase" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span>Empresa: <span class="pull-right">{{ person.company }}</span></li>
-                <li class="list-group-item"><span class="glyphicon glyphicon-calendar" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span>Criado em: <span class="pull-right">{{ person.created_on|date:"d/m/Y H:i"|default:"-" }}</span></li>
-            </ul>
-            <div class="btn-group dropup">
-                <button href="{{ tribute.get_absolute_url }}" class="btn btn-success btn-s" role="button">Buscar logs...</button>
+            <div class="caption" style="margin-top: -20px;">
+                <h3 style="text-align: center; margin-bottom: 20px;">
+                    [[ person.name ]]<br />
+                    <small>[[ person.role__name ]]</small>
+                </h3>
+                <ul class="list-group">
+                    <li class="list-group-item">[[ person.email ]]</li>
+                    <li class="list-group-item"><span class="glyphicon glyphicon-earphone" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span>Mobile: <span class="pull-right">[[ person.mobile ]]</span></li>
+                    <li class="list-group-item"><span class="glyphicon glyphicon-briefcase" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span>Empresa: <span class="pull-right">[[ person.company__name ]]</span></li>
+                    <li class="list-group-item"><span class="glyphicon glyphicon-calendar" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span>Criado em: <span class="pull-right">[[ person.created_on ]]</span></li>
+                </ul>
+                <div class="btn-group dropup">
+                    <button href="" class="btn btn-success btn-s" role="button">Buscar logs...</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
-{% endfor %}
 {% endblock %}

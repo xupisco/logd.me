@@ -6,6 +6,9 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.views.generic import View
+from django.core.serializers.json import DjangoJSONEncoder
+
+import json
 
 from ..people.models import Person
 
@@ -26,8 +29,10 @@ def home(request):
 
 
 def people(request):
+    ppl = Person.objects.order_by('name').values('name', 'company__name', 'role__name', 'email', 'mobile', 'created_on')
+    ppl_json = json.dumps(list(ppl), cls=DjangoJSONEncoder)
     context = {
-        'people': Person.objects.order_by('name')
+        'people': ppl_json
     }
     return render(request, 'people.html', context)
 
