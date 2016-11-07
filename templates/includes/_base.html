@@ -25,13 +25,16 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
     <![endif]-->
 
-    <script type="text/javascript">
-    $(function() {
-    })
-    </script>
-
     {% block js %}
     {% endblock %}
+
+    <script type="text/javascript">
+    $(function() {
+        $('#icon_clear').click(function() {
+            vlogs.q = '';
+        });
+    })
+    </script>
 
 </head>
 <body>
@@ -57,9 +60,9 @@
                 </ul>
                 <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
-                        <input type="text" v-model="q" class="form-control" placeholder="Fill me...">
+                        <input id="q" type="text" v-model="q" class="form-control" placeholder="Fill me...">
                     </div>
-                    <button type="submit" class="btn btn-success">Go!</button>
+                    <div id="icon_clear" class="glyphicon glyphicon-remove" aria-hidden="true"></div>
                 </form>
                 {% if request.user.is_authenticated %}
                 <ul class="nav navbar-nav navbar-right">

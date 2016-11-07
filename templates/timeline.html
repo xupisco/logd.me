@@ -25,11 +25,11 @@ $(function() {
                 })
             }
         }
-    })
+    });
 
     $('.has_enddate').click(function() {
         $('.end_date').toggleClass('hidden');
-    })
+    });
 
     $('form#new_log').submit(function() {
         return false;
@@ -40,7 +40,7 @@ $(function() {
         loadLogs();
     })
 
-    //loadLogs();
+    loadLogs();
 })
 
 function loadLogs() {
@@ -48,6 +48,10 @@ function loadLogs() {
         vlogs.logs = res;
         $('#fake_loading').removeClass('icon-spin');
     });
+}
+
+function qs(el) {
+    vlogs.q = $(el).html();
 }
 </script>
 {% endblock %}
@@ -68,8 +72,8 @@ function loadLogs() {
                     <p v-html="log.body"></p>
 
                     <div class="has_companies" v-show="log.companies || log.people">
-                        <span class="label label-primary" v-for="company in log.companies">[[ company.name ]]</span>
-                        <span class="label label-info" v-for="person in log.people">[[ person.name ]]</span>
+                        <span class="label label-primary" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span>
+                        <span class="label label-info" onclick="qs(this);" v-for="person in log.people">[[ person.name ]]</span>
                     </div>
                 </div>
             </div>
