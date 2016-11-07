@@ -2,8 +2,10 @@
 
 {% block js %}
 <script type="text/javascript">
+var vlogs;
+
 $(function() {
-    var vlogs = new Vue({
+    vlogs = new Vue({
         el: '#vue_app',
         delimiters: ["[[", "]]"],
         data: {
@@ -25,14 +27,28 @@ $(function() {
         }
     })
 
-    $.getJSON('/api/v1/logs/', function(res) {
-        vlogs.logs = res;
-    });
-
     $('.has_enddate').click(function() {
         $('.end_date').toggleClass('hidden');
     })
+
+    $('form#new_log').submit(function() {
+        return false;
+    })
+
+    $('#fake_reload').click(function() {
+        $('#fake_loading').addClass('icon-spin');
+        loadLogs();
+    })
+
+    //loadLogs();
 })
+
+function loadLogs() {
+    $.getJSON('/api/v1/logs/', function(res) {
+        vlogs.logs = res;
+        $('#fake_loading').removeClass('icon-spin');
+    });
+}
 </script>
 {% endblock %}
 
@@ -61,7 +77,8 @@ $(function() {
 
         <article class="timeline-entry begin">
             <div class="timeline-entry-inner">
-                <div class="timeline-icon bg-black" style="background: #333;">
+                <div id="fake_reload" class="timeline-icon bg-black" style="background: #333;">
+                    <span id="fake_loading" class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                 </div>
             </div>
         </article>
@@ -70,14 +87,19 @@ $(function() {
 </div>
 <div class="col-md-4">
     <h3>New log!</h3>
-    <form>
+    <form id="new_log">
         <div class="form-group">
+            <a id="new_kind" class="label label-warning new_kind pull-right">+ new</a>
             <label for="exampleInputEmail1">What?</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
+            <select class="form-control" id="exampleInputEmail1" placeholder="">
+                {% for kind in kinds %}
+                <option value="{{ kind.id }}">{{ kind.name }}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">When?</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="dd/mm/yyyy hh:mm">
+            <input type="text" class="form-control" id="new_start_date" placeholder="dd/mm/yyyy hh:mm">
         </div>
         <div class="checkbox">
             <label>
@@ -86,15 +108,15 @@ $(function() {
         </div>
         <div class="form-group end_date hidden">
             <label for="exampleInputPassword1">When is done?</label>
-            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="dd/mm/yyyy hh:mm">
+            <input type="text" class="form-control" id="new_end_date" placeholder="dd/mm/yyyy hh:mm">
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Description...</label>
-            <textarea class="form-control mention" rows="3"></textarea>
+            <textarea class="form-control mention" rows="4" id="new_body"></textarea>
         </div>
         <div class="checkbox">
             <label>
-              <input type="checkbox"> Reminder?
+                <input type="checkbox" id="new_reminder"> Reminder?
             </label>
         </div>
         <br />
