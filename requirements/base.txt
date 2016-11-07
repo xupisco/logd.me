@@ -1,4 +1,6 @@
 Django==1.10.2
 pytz==2016.7
 python-decouple==3.0
-django-allauth-0.28.0
+django-allauth==0.28.0
+djangorestframework==3.5.3
+markdown==2.6.7

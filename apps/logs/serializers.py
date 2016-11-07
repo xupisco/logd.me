@@ -6,6 +6,7 @@ from django.utils.safestring import mark_safe
 
 from rest_framework import serializers
 from datetime import datetime
+from markdown import markdown
 
 from .models import Log, LogKind
 from ..companies.serializers import CompanySerializer
@@ -32,7 +33,7 @@ class LogSerializer(serializers.ModelSerializer):
         fields = ('kind', 'body', 'companies', 'people', 'start_date', 'end_date', 'reminder', 'created_on', 'updated_on', 'meta')
 
     def get_body(self, obj):
-        return linebreaks(obj.body)
+        return markdown(obj.body)
 
     def get_start_date(self, obj):
         return obj.start_date.strftime("%d/%m/%Y %H:%M")

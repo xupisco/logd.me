@@ -262,6 +262,24 @@
     color: #333;
 }
 
+pre {
+    margin-top: 10px !important;
+}
+
+.timeline-label ul {
+    margin-top: 10px !important;
+}
+
+.timeline-label a {
+    color: dodgerblue !important;
+}
+
+.timeline-label a:hover {
+    color: #fff !important;
+    background-color: dodgerblue;
+    text-decoration: none;
+}
+
 .icon-spin {
     -webkit-animation: spin 1000ms infinite linear;
     animation: spin 1000ms infinite linear;
