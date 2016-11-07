@@ -3,8 +3,9 @@
 
 {% block js %}
 <script type="text/javascript">
+var vlogs;
 $(function() {
-    var vlogs = new Vue({
+    vlogs = new Vue({
         el: '#vue_app',
         delimiters: ["[[", "]]"],
         data: {
