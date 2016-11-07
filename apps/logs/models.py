@@ -10,6 +10,7 @@ from ..people.models import Person
 class LogKind(models.Model):
     name = models.CharField(_('name'), max_length=255)
     slug = models.CharField(_('slug'), max_length=255, blank=False)
+    glyphicon_name = models.CharField(_('icon'), max_length=32, blank=True, default='')
 
     def __unicode__(self):
         return self.name

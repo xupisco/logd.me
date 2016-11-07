@@ -15,7 +15,11 @@ $(function() {
             filteredPeople() {
                 var self = this
                 return this.people.filter(function(person) {
-                    return person.name.toLowerCase().indexOf(self.q.toLowerCase()) > -1
+                    return (
+                        (person.name.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
+                        (person.company__name.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
+                        (person.role__name.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
+                    )
                 })
             }
         }

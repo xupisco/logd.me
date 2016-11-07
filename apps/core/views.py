@@ -10,6 +10,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 import json
 
+from ..logs.models import Log
 from ..people.models import Person
 
 
@@ -22,8 +23,11 @@ class StaticView(View):
 
 
 def home(request):
+    timeline = Log.objects.order_by('-start_date').values('kind__name', 'kind__glyphicon_name', 'body', 'start_date', 'end_date', 'reminder')
+    timeline_json = json.dumps(list(timeline), cls=DjangoJSONEncoder)
+
     context = {
-        'dude': 'Alaor'
+        'timeline': timeline_json
     }
     return render(request, 'timeline.html', context)
 

@@ -8,35 +8,21 @@ $(function() {
     })
 
     var vlogs = new Vue({
-        el: '#main_timeline',
+        el: '#vue_app',
         delimiters: ["[[", "]]"],
         data: {
-            logs: [
-                {
-                    icon: 'cog',
-                    datetime: '12/02/2016 17:23',
-                    body: 'Hello World',
-                    reminder: false
-                },
-                {
-                    icon: 'cog',
-                    datetime: '12/02/2016 17:23',
-                    body: 'Hello World 123',
-                    reminder: false
-                }, 
-                {
-                    icon: 'cog',
-                    datetime: '12/02/2016 17:23',
-                    body: 'Hello World montezuma...',
-                    reminder: true
-                },
-                {
-                    icon: 'cog',
-                    datetime: '12/02/2016 17:23',
-                    body: 'Hello World 123',
-                    reminder: false
-                }, 
-            ]
+            q: '',
+            logs: {{ timeline|safe }}
+        },
+        computed: {
+            filteredLogs() {
+                var self = this
+                return this.logs.filter(function(log) {
+                    return (
+                        (log.body.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
+                    )
+                })
+            }
         }
     })
 })
@@ -47,74 +33,25 @@ $(function() {
 <div class="col-md-8">
     <div class="timeline-centered" id="main_timeline">
 
-        <article class="timeline-entry" v-for="log in logs">
+        <article class="timeline-entry" v-for="log in filteredLogs">
             <div class="timeline-entry-inner">
 
                 <div class="timeline-icon" v-bind:class="{ 'bg-secondary': log.reminder }">
-                    <span class="glyphicon" v-bind:class="'glyphicon-' + [[ log.icon ]]" aria-hidden="true"></span>
+                    <span class="glyphicon" v-bind:class="'glyphicon-' + [[ log.kind__glyphicon_name ]]" aria-hidden="true"></span>
                 </div>
 
                 <div class="timeline-label">
-                    <div class="log_date">[[ log.datetime ]]</div>
+                    <div class="log_date">[[ log.start_date ]]</div>
                     <p>[[ log.body ]]</p>
                 </div>
             </div>
         </article>
 
-
-        <article class="timeline-entry">
-            <div class="timeline-entry-inner">
-
-                <div class="timeline-icon bg-secondary">
-                    <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>
-                </div>
-
-                <div class="timeline-label">
-                    <h2><a href="#">Job Meeting</a></h2>
-                    <p>You have a meeting at <strong>Laborator Office</strong> Today.</p>
-                </div>
-            </div>
-        </article>
-
-
-        <article class="timeline-entry">
-            <div class="timeline-entry-inner">
-
-                <div class="timeline-icon">
-                    <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-                </div>
-
-                <div class="timeline-label">
-                    <h2><a href="#">Arlind Nushi</a> <span>checked in at</span> <a href="#">Laborator</a></h2>
-                    <blockquote>Great place, feeling like in home.</blockquote>
-                </div>
-            </div>
-        </article>
-
-
-        <article class="timeline-entry">
-            <div class="timeline-entry-inner">
-
-                <div class="timeline-icon">
-                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                </div>
-
-                <div class="timeline-label">
-                    <h2><a href="#">Arber Nushi</a> <span>changed his</span> <a href="#">Profile Picture</a></h2>
-                    <blockquote>Pianoforte principles our unaffected not for astonished travelling are particular.</blockquote>
-                    <img src="http://themes.laborator.co/neon/assets/images/timeline-image-3.png" class="img-responsive img-rounded full-width">
-                </div>
-            </div>
-        </article>
-
-
         <article class="timeline-entry begin">
-
             <div class="timeline-entry-inner">
                 <div class="timeline-icon bg-black" style="background: #333;">
                 </div>
             </div>
-
         </article>
 
     </div>
@@ -123,30 +60,30 @@ $(function() {
     <h3>New log!</h3>
     <form>
         <div class="form-group">
-        <label for="exampleInputEmail1">What?</label>
-        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
+            <label for="exampleInputEmail1">What?</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="">
         </div>
         <div class="form-group">
-        <label for="exampleInputPassword1">When?</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="dd/mm/yyyy hh:mm">
+            <label for="exampleInputPassword1">When?</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="dd/mm/yyyy hh:mm">
         </div>
         <div class="checkbox">
-        <label>
-          <input class="has_enddate" type="checkbox"> End date?
-        </label>
+            <label>
+            <input class="has_enddate" type="checkbox"> End date?
+            </label>
         </div>
         <div class="form-group end_date hidden">
-        <label for="exampleInputPassword1">When?</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="dd/mm/yyyy hh:mm">
+            <label for="exampleInputPassword1">When?</label>
+            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="dd/mm/yyyy hh:mm">
         </div>
         <div class="form-group">
-        <label for="exampleInputPassword1">Description...</label>
-        <textarea class="form-control mention" rows="3"></textarea>
+            <label for="exampleInputPassword1">Description...</label>
+            <textarea class="form-control mention" rows="3"></textarea>
         </div>
         <div class="checkbox">
-        <label>
-          <input type="checkbox"> Reminder?
-        </label>
+            <label>
+              <input type="checkbox"> Reminder?
+            </label>
         </div>
         <br />
         <button type="submit" class="btn btn-primary">Log...</button>
