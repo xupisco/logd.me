@@ -15,19 +15,22 @@ class Role(models.Model):
 
 
 class Person(models.Model):
-    company = models.ForeignKey(Company)
-    role = models.ForeignKey(Role)
+    company = models.ForeignKey(Company, null=True, blank=True)
+    role = models.ForeignKey(Role, null=True, blank=True)
     name = models.CharField(_('name'), max_length=255)
-    email = models.CharField(_('email'), max_length=255)
+    email = models.CharField(_('email'), max_length=255, blank=True)
 
-    mobile = models.CharField(_('mobile'), max_length=32)
-    landline = models.CharField(_('landline'), max_length=32)
+    mobile = models.CharField(_('mobile'), max_length=32, blank=True)
+    landline = models.CharField(_('landline'), max_length=32, blank=True)
 
     created_on = models.DateTimeField(_('created on'), auto_now_add=True)
     updated_on = models.DateTimeField(_('updated on'), auto_now=True)
 
     def __unicode__(self):
-        return "{0} - {1} @ {2}".format(self.name, self.role, self.company)
+        if self.company:
+            return "{0} - {1} @ {2}".format(self.name, self.role, self.company)
+        else:
+            return self.name
 
     class Meta:
         verbose_name = _('person')

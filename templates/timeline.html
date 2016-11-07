@@ -3,10 +3,6 @@
 {% block js %}
 <script type="text/javascript">
 $(function() {
-    $('.has_enddate').click(function() {
-        $('.end_date').toggleClass('hidden');
-    })
-
     var vlogs = new Vue({
         el: '#vue_app',
         delimiters: ["[[", "]]"],
@@ -21,7 +17,8 @@ $(function() {
                 return this.logs.filter(function(log) {
                     return (
                         (log.body.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
-                        (log.meta.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
+                        (log.meta.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
+                        (log.start_date.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
                     )
                 })
             }
@@ -30,6 +27,10 @@ $(function() {
 
     $.getJSON('/api/v1/logs/', function(res) {
         vlogs.logs = res;
+    });
+
+    $('.has_enddate').click(function() {
+        $('.end_date').toggleClass('hidden');
     })
 })
 </script>
@@ -48,7 +49,7 @@ $(function() {
 
                 <div class="timeline-label">
                     <div class="log_date">[[ log.start_date ]]</div>
-                    <p>[[ log.body ]]</p>
+                    <p v-html="log.body"></p>
 
                     <div class="has_companies" v-show="log.companies || log.people">
                         <span class="label label-primary" v-for="company in log.companies">[[ company.name ]]</span>
@@ -84,7 +85,7 @@ $(function() {
             </label>
         </div>
         <div class="form-group end_date hidden">
-            <label for="exampleInputPassword1">When?</label>
+            <label for="exampleInputPassword1">When is done?</label>
             <input type="text" class="form-control" id="exampleInputPassword1" placeholder="dd/mm/yyyy hh:mm">
         </div>
         <div class="form-group">
