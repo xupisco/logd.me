@@ -12,18 +12,24 @@ $(function() {
         delimiters: ["[[", "]]"],
         data: {
             q: '',
-            logs: {{ timeline|safe }}
+            logs: ''
         },
         computed: {
             filteredLogs() {
+                if (!this.logs) return;
                 var self = this
                 return this.logs.filter(function(log) {
                     return (
-                        (log.body.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
+                        (log.body.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
+                        (log.meta.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
                     )
                 })
             }
         }
+    })
+
+    $.getJSON('/api/v1/logs/', function(res) {
+        vlogs.logs = res;
     })
 })
 </script>
@@ -37,12 +43,17 @@ $(function() {
             <div class="timeline-entry-inner">
 
                 <div class="timeline-icon" v-bind:class="{ 'bg-secondary': log.reminder }">
-                    <span class="glyphicon" v-bind:class="'glyphicon-' + [[ log.kind__glyphicon_name ]]" aria-hidden="true"></span>
+                    <span class="glyphicon" v-bind:class="'glyphicon-' + [[ log.kind.glyphicon_name ]]" aria-hidden="true"></span>
                 </div>
 
                 <div class="timeline-label">
                     <div class="log_date">[[ log.start_date ]]</div>
                     <p>[[ log.body ]]</p>
+
+                    <div class="has_companies" v-show="log.companies || log.people">
+                        <span class="label label-primary" v-for="company in log.companies">[[ company.name ]]</span>
+                        <span class="label label-info" v-for="person in log.people">[[ person.name ]]</span>
+                    </div>
                 </div>
             </div>
         </article>

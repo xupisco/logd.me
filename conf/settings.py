@@ -41,9 +41,11 @@ EXTERNAL_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
+    'rest_framework',
 )
 
 PROJECT_APPS = (
+    'apps.api',
     'apps.core',
     'apps.companies',
     'apps.people',
