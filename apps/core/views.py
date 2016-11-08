@@ -3,11 +3,12 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import check_for_language, ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.views.generic import View
 from django.contrib.auth.decorators import login_required
 from django.core.serializers.json import DjangoJSONEncoder
+from django.utils import translation
 
 import json
 
@@ -21,6 +22,14 @@ class StaticView(View):
 
     def get(self, request):
         return render(request, self.template_name, { 'page_title': self.page_title })
+
+
+def set_language(request, lang_code):
+    if check_for_language(lang_code):
+        translation.activate(lang_code)
+        request.session[translation.LANGUAGE_SESSION_KEY] = lang_code
+
+    return redirect('/')
 
 
 def login(request):
