@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
 from django.views.generic import View
+from django.contrib.auth.decorators import login_required
 from django.core.serializers.json import DjangoJSONEncoder
 
 import json
@@ -22,6 +23,14 @@ class StaticView(View):
         return render(request, self.template_name, { 'page_title': self.page_title })
 
 
+def login(request):
+    context = {
+        'hello': 'world'
+    }
+    return render(request, 'login.html', context)
+
+
+@login_required
 def home(request):
     kinds = LogKind.objects.order_by('name')
 
@@ -31,6 +40,7 @@ def home(request):
     return render(request, 'timeline.html', context)
 
 
+@login_required
 def people(request):
     ppl = Person.objects.order_by('name').values('name', 'company__name', 'role__name', 'email', 'mobile', 'created_on')
     ppl_json = json.dumps(list(ppl), cls=DjangoJSONEncoder)
@@ -40,6 +50,7 @@ def people(request):
     return render(request, 'people.html', context)
 
 
+@login_required
 def companies(request):
     context = {
         'dude': 'Alaor'
@@ -47,6 +58,7 @@ def companies(request):
     return render(request, 'companies.html', context)
 
 
+@login_required
 def calendar(request):
     context = {
         'dude': 'Alaor'
