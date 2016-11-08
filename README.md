@@ -30,7 +30,8 @@ DATABASE_URL=sqlite://./conf/db.sqlite3
 
 ## TODO
 
-A lot, building a trello board...
+A lot, building a trello board...  
+Now with automatic deploy to [Heroku](http://owncrm-dev.herokuapp.com)!
 
 
 ## UNDER MIT LICENSE
