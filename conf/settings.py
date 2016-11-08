@@ -82,6 +82,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
@@ -157,8 +158,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'pt_BR'
-#LANGUAGE_CODE = 'en_US'
+LANGUAGE_CODE = 'pt-br'
+#LANGUAGE_CODE = 'en-us'
 
 SHORT_DATE_FORMAT = 'd/m/Y'
 SHORT_DATETIME_FORMAT = 'd/m/Y H:i'
@@ -179,8 +180,8 @@ USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = [
-    ('en', _('English')),
-    ('pt_BR', _('Portuguese (Brazil)')),
+    ('en-us', _('English')),
+    ('pt-br', _('Portuguese (Brazil)')),
 ]
 
 LOCALE_PATHS = [
