@@ -1,5 +1,8 @@
 # ownCRM
 
+## Screenshot
+![Home / Timeline](http://i.imgur.com/JbBo6GL.png)
+
 ## Setup
 
 1. Create a virtualenv
