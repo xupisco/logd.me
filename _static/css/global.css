@@ -66,9 +66,11 @@ img.user_avatar_menu {
     margin-left: 10px;
 }
 
-.navbar-brand {
-    font-size: 24px;
+a.navbar-brand {
+    font-size: 32px;
     letter-spacing: -1px;
+    font-family: "Ubuntu Condensed";
+    line-height: 18px;
 }
 
 .navbar {
