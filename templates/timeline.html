@@ -50,6 +50,13 @@ $(function() {
         }
     })
 
+    var simplemde = new SimpleMDE({
+        element: document.getElementById('edit'),
+        hideIcons: ["side-by-side", "italic", "heading"],
+        spellChecker: false,
+        status: false,
+        tabSize: 4
+    });
     loadLogs();
 })
 
@@ -127,7 +134,7 @@ function qs(el) {
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">{% trans "Description..." %}</label>
-                <textarea class="form-control mention" rows="4" id="new_body"></textarea>
+                <textarea id="edit" class="form-control mention" rows="4" id="new_body"></textarea>
             </div>
             <div class="checkbox">
                 <label>

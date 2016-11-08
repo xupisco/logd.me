@@ -262,7 +262,7 @@
     color: #333;
 }
 
-pre {
+.timeline-entry pre {
     margin-top: 10px !important;
 }
 

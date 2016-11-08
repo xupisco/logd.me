@@ -242,7 +242,6 @@ img.avatar_card {
     margin-left: 270px;
     margin-top: 23px;
     position: absolute;
-    z-index: 888;
 }
 
 #icon_clear:hover {
@@ -263,4 +262,16 @@ img.avatar_card {
     position: fixed;
     top: 0;
     width: 350px;
+}
+
+.editor-toolbar {
+    background-color: #f1f1f1;
+}
+
+.CodeMirror {
+    
+}
+
+.CodeMirror, .CodeMirror-scroll {
+    min-height: 200px !important;
 }
