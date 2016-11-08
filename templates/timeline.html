@@ -6,28 +6,6 @@
 var vlogs;
 
 $(function() {
-    vlogs = new Vue({
-        el: '#vue_app',
-        delimiters: ["[[", "]]"],
-        data: {
-            q: '',
-            logs: ''
-        },
-        computed: {
-            filteredLogs() {
-                if (!this.logs) return;
-                var self = this
-                return this.logs.filter(function(log) {
-                    return (
-                        (log.body.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
-                        (log.meta.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
-                        (log.start_date.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
-                    )
-                })
-            }
-        }
-    });
-
     $('.has_enddate').click(function() {
         $('.end_date').toggleClass('hidden');
     });
@@ -77,7 +55,7 @@ function qs(el) {
 <div class="col-md-8">
     <div class="timeline-centered" id="main_timeline">
 
-        <article class="timeline-entry" v-if="!1">
+        <article class="timeline-entry" v-if="!filteredLogs.length">
             <div class="timeline-entry-inner">
 
                 <div class="timeline-icon bg-danger">
@@ -183,4 +161,30 @@ function qs(el) {
         </form>
     </div>
 </div>
+{% endblock %}
+
+{% block js_footer %}
+<script type="text/javascript">
+vlogs = new Vue({
+    el: '#vue_app',
+    delimiters: ["[[", "]]"],
+    data: {
+        q: '',
+        logs: ''
+    },
+    computed: {
+        filteredLogs: function() {
+            if (!this.logs) return 0;
+            var self = this
+            return this.logs.filter(function(log) {
+                return (
+                    (log.body.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
+                    (log.meta.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
+                    (log.start_date.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
+                )
+            }.bind(this))
+        }
+    }
+});
+</script>
 {% endblock %}
