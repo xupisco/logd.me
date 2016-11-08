@@ -21,10 +21,10 @@ DB_NAME=conf/db.sqlite3
   
 4. $python manage.py migrate
 5. $python manage.py createsuperuser
-7. $python manage.py runserver
-8. Visit /admin/socialaccount/socialapp/
-9. (Create a Facebook APP)[https://developers.facebook.com/]
-11. Add a new App ID and Secret Key for facebook provider
+6. $python manage.py runserver
+7. Visit /admin/socialaccount/socialapp/
+8. [Create a Facebook APP](https://developers.facebook.com/)
+9. Add a new App ID and Secret Key for facebook provider
 10. Thank @croves...
 11. Enjoy!
 
