@@ -76,8 +76,9 @@ html {
 
 body {
     margin-bottom: 70px;
-    background-image: url("/static/images/poly_bg.jpg");
-    background-size: cover;
+    /*background-image: url("/static/images/poly_bg.jpg");*/
+    background-image: url("/static/images/pw_pattern.png");
+    background-repeat: repeat;
 }
 
 .breadcrumb {
