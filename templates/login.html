@@ -1,4 +1,5 @@
 {% extends 'includes/_base-login.html' %}
+{% load i18n %}
 {% load static %}
 {% load socialaccount %}
 
@@ -8,15 +9,15 @@
     <div class="thumbnail">
         <div class="login_header">
             ownCRM
-            <div class="about">Your personal and friendly life log.</div>
+            <div class="about">{% blocktrans %}Your personal and friendly life log.{% endblocktrans %}</div>
         </div>
-        <div class="disclaimer">Don't worry, we don't care who you are... login is just for authentication purposes.</div>
+        <div class="disclaimer">{% blocktrans %}Don't worry, we don't care who you are... login is just for authentication purposes.{% endblocktrans %}</div>
         <div class="login_providers">
             <a href="{% provider_login_url "facebook" %}" class="btn btn-info navbar-btn btn_login">Facebook</a>
             <a href="{% provider_login_url "google" %}" class="btn btn-info navbar-btn disabled btn_login" alt="Not yet!">Google</a>
             <a href="{% provider_login_url "github" %}" class="btn btn-info navbar-btn  disabled btn_login" alt="Not yet!">GitHub</a>
         </div>
-        <div class="opensource">This project is opensource, feel free to support! <a href="https://github.com/xupisco/ownCRM/">Fork me!</a></div>
+        <div class="opensource">{% blocktrans %}This project is opensource, feel free to support! <a href="https://github.com/xupisco/ownCRM/">Fork me!</a>{% endblocktrans %}</div>
     </div>
 </div>
 {% endblock %}

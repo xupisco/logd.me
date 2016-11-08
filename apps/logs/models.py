@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
 from ..companies.models import Company
@@ -8,6 +9,7 @@ from ..people.models import Person
 
 
 class LogKind(models.Model):
+    owner = models.ForeignKey(User)
     name = models.CharField(_('name'), max_length=255)
     slug = models.CharField(_('slug'), max_length=255, blank=False)
     glyphicon_name = models.CharField(_('icon'), max_length=32, blank=True, default='')
@@ -17,6 +19,7 @@ class LogKind(models.Model):
 
 
 class Log(models.Model):
+    owner = models.ForeignKey(User)
     kind = models.ForeignKey(LogKind)
     body = models.TextField()
     start_date = models.DateTimeField(_('date start'), blank=False)

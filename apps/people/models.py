@@ -1,12 +1,14 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
 from ..companies.models import Company
 
 
 class Role(models.Model):
+    owner = models.ForeignKey(User)
     name = models.CharField(_('name'), max_length=255)
     slug = models.CharField(_('slug'), max_length=255, blank=False)
 
@@ -15,6 +17,7 @@ class Role(models.Model):
 
 
 class Person(models.Model):
+    owner = models.ForeignKey(User)
     company = models.ForeignKey(Company, null=True, blank=True)
     role = models.ForeignKey(Role, null=True, blank=True)
     name = models.CharField(_('name'), max_length=255)

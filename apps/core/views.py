@@ -32,7 +32,7 @@ def login(request):
 
 @login_required
 def home(request):
-    kinds = LogKind.objects.order_by('name')
+    kinds = LogKind.objects.filter(owner=request.user).order_by('name')
 
     context = {
         'kinds': kinds
@@ -42,7 +42,7 @@ def home(request):
 
 @login_required
 def people(request):
-    ppl = Person.objects.order_by('name').values('name', 'company__name', 'role__name', 'email', 'mobile', 'created_on')
+    ppl = Person.objects.filter(owner=request.user).order_by('name').values('name', 'company__name', 'role__name', 'email', 'mobile', 'created_on')
     ppl_json = json.dumps(list(ppl), cls=DjangoJSONEncoder)
     context = {
         'people': ppl_json

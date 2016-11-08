@@ -14,6 +14,6 @@ class LogsViewSet(viewsets.ModelViewSet):
     serializer_class = LogSerializer
 
     def get_queryset(self):
-        logs = Log.objects.order_by('-start_date')
+        logs = Log.objects.filter(owner=self.request.user).order_by('-start_date')
 
         return logs

@@ -23,6 +23,11 @@ html {
     padding-top: 30px;
 }
 
+.vcenter {
+    float: none;
+    margin: 0 auto;
+}
+
 .about {
     margin-top: -15px;
     font-size: 13px;
