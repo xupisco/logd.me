@@ -21,12 +21,11 @@ Your personal and friendly CRM, cut the crap... only the essentials!
 ### conf/settings.ini
 
 ```
-[settings]  
-SECRET_KEY=<anything here>  
+[settings]
+SECRET_KEY=<anything here>
 DEBUG=True
-  
-DB_ENGINE=django.db.backends.sqlite3  
-DB_NAME=conf/db.sqlite3  
+
+DATABASE_URL=sqlite://./conf/db.sqlite3
 ```
 
 ## TODO

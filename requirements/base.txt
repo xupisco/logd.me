@@ -4,3 +4,5 @@ python-decouple==3.0
 django-allauth==0.28.0
 djangorestframework==3.5.3
 markdown==2.6.7
+whitenoise==3.2.1
+dj-database-url==0.4.1

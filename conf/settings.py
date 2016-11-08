@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 
 import os
 import pytz
-import sys
+import dj_database_url
 
 from decouple import config
 from django.utils.translation import gettext_lazy as _
@@ -132,14 +132,10 @@ WSGI_APPLICATION = 'conf.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE':   config('DB_ENGINE', default='django.db.backends.mysql', ),
-        'NAME':     config('DB_NAME', default='', ),
-        'USER':     config('DB_USER', default='', ),
-        'PASSWORD': config('DB_PASSWORD', default='', ),
-        'HOST':     config('DB_HOST', default='', ),
-        'PORT':     config('DB_PORT', default='', ),
-    }
+    'default': dj_database_url.parse(
+        url=config(
+            'DATABASE_URL', default='postgres://owncrm:1234@127.0.0.1/owncrm')
+    )
 }
 
 
