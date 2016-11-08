@@ -43,9 +43,11 @@ $(function() {
     $('#side_affix').affix({
         offset: {
             top: 100,
-            bottom: 200
-    }
-})
+            bottom: function () {
+                return (this.bottom = $('.footer').outerHeight(true))
+            }
+        }
+    })
 
     loadLogs();
 })
