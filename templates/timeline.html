@@ -19,6 +19,21 @@ $(function() {
         loadLogs();
     });
 
+    $('#new_kind').click(function() {
+        $(this).hide();
+        $('#nlog_kind').hide();
+        $('#nlog_kind_create').removeClass('hidden');
+        $('#cancel_new_kind').removeClass('hidden');
+    })
+
+    $('#cancel_new_kind').click(function() {
+        $(this).addClass('hidden');
+        $('#new_kind').show();
+        $('#nlog_kind').show();
+        $('#nlog_kind_create').addClass('hidden');
+        $('#cancel_new_kind').addClass('hidden');
+    })
+
     $('#side_affix').affix({
         offset: {
             top: 85,
@@ -29,7 +44,7 @@ $(function() {
     })
 
     var simplemde = new SimpleMDE({
-        element: document.getElementById('edit'),
+        element: document.getElementById('nlog_body'),
         hideIcons: ["side-by-side", "italic", "heading"],
         spellChecker: false,
         status: false,
@@ -127,16 +142,27 @@ function qs(el) {
         <form id="new_log">
             <div class="form-group">
                 <a id="new_kind" class="label label-warning new_kind pull-right">{% trans "+ new" %}</a>
-                <label for="exampleInputEmail1">{% trans "What?" %}</label>
-                <select class="form-control" id="exampleInputEmail1" placeholder="">
+                <a id="cancel_new_kind" class="label label-danger new_kind pull-right hidden">{% trans "cancel" %}</a>
+                <label for="nlog_kind">{% trans "What?" %}</label>
+                <select class="form-control" id="nlog_kind">
+                    <option value=0>{% trans "Select..." %}</option>
+                    <option value=0>---</option>
                     {% for kind in kinds %}
                     <option value="{{ kind.id }}">{{ kind.name }}</option>
                     {% endfor %}
                 </select>
+                <div class="form-inline hidden" id="nlog_kind_create">
+                    <div class="form-group new_kind_form">
+                        <label for="nlog_kind_text">{% trans "Name:" %} </label>
+                        <input type="text" class="form-control form-little" id="nlog_kind_text">
+                        <label for="nlog_kind_icon">&nbsp;&nbsp;{% trans "Icon:" %} </label>
+                        <input type="text" class="form-control form-little" id="nlog_kind_icon" placeholder="glyphicon class..." style="width: 110px !important;"><a href="http://getbootstrap.com/components/#glyphicons-glyphs" target="_blank"><span class="glyphicon glyphicon-question-sign glyphicon-helper"></span></a>
+                   </div>
+                </div>
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">{% trans "When?" %}</label>
-                <input type="text" class="form-control" id="new_start_date" placeholder="dd/mm/yyyy hh:mm">
+                <label for="nlog_start_date">{% trans "When?" %}</label>
+                <input type="text" class="form-control" id="nlog_start_date" placeholder="dd/mm/yyyy hh:mm">
             </div>
             <div class="checkbox">
                 <label>
@@ -144,16 +170,16 @@ function qs(el) {
                 </label>
             </div>
             <div class="form-group end_date hidden">
-                <label for="exampleInputPassword1">{% trans "When ended?" %}</label>
-                <input type="text" class="form-control" id="new_end_date" placeholder="dd/mm/yyyy hh:mm">
+                <label for="nlog_enddate">{% trans "When ended?" %}</label>
+                <input type="text" class="form-control" id="nlog_enddate" placeholder="dd/mm/yyyy hh:mm">
             </div>
             <div class="form-group">
-                <label for="exampleInputPassword1">{% trans "Description..." %}</label>
-                <textarea id="edit" class="form-control mention" rows="4" id="new_body"></textarea>
+                <label for="nlog_body">{% trans "Description..." %}</label>
+                <textarea class="form-control mention" rows="4" id="nlog_body"></textarea>
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" id="new_reminder"> {% trans "Highlight?" %}
+                    <input type="checkbox" id="nlog_highlight"> {% trans "Highlight?" %}
                 </label>
             </div>
             <br />
