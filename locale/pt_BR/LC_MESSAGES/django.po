@@ -1,0 +1,198 @@
+# Translation to pt-br.
+# Copyright (C) 2016
+# This file is distributed under the same license as the PACKAGE package.
+# Fernando Macedo <fgmacedo@gmail.com>, 2016.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-08 15:14-0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Fernando Macedo <fgmacedo@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: pt-br\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: apps/companies/apps.py:8 apps/companies/models.py:22 apps/logs/admin.py:18
+msgid "companies"
+msgstr "empresas"
+
+#: apps/companies/models.py:10 apps/logs/models.py:13 apps/people/models.py:12
+#: apps/people/models.py:23
+msgid "name"
+msgstr "nome"
+
+#: apps/companies/models.py:11 apps/logs/models.py:14 apps/people/models.py:13
+msgid "slug"
+msgstr "slug"
+
+#: apps/companies/models.py:12
+msgid "domain"
+msgstr "domínio"
+
+#: apps/companies/models.py:14 apps/logs/models.py:33 apps/people/models.py:29
+#: apps/people/models.py:47
+msgid "created on"
+msgstr "criado em"
+
+#: apps/companies/models.py:15 apps/logs/models.py:34 apps/people/models.py:30
+#: apps/people/models.py:48
+msgid "updated on"
+msgstr "atualizado em"
+
+#: apps/companies/models.py:21
+msgid "company"
+msgstr "empresa"
+
+#: apps/core/apps.py:8
+msgid "core"
+msgstr "core"
+
+#: apps/logs/admin.py:22 apps/people/apps.py:8 apps/people/models.py:40
+msgid "people"
+msgstr "pessoas"
+
+#: apps/logs/apps.py:8
+msgid "logs"
+msgstr "registros"
+
+#: apps/logs/models.py:15
+msgid "icon"
+msgstr "ícone"
+
+#: apps/logs/models.py:25
+msgid "date start"
+msgstr "data de início"
+
+#: apps/logs/models.py:26
+msgid "date end"
+msgstr "data de término"
+
+#: apps/logs/models.py:28
+msgid "reminder"
+msgstr "lembrete"
+
+#: apps/people/models.py:24
+msgid "email"
+msgstr "email"
+
+#: apps/people/models.py:26
+msgid "mobile"
+msgstr "móvel"
+
+#: apps/people/models.py:27
+msgid "landline"
+msgstr "linha fixa"
+
+#: apps/people/models.py:39
+msgid "person"
+msgstr "pessoa"
+
+#: apps/people/models.py:51
+msgid "was working at"
+msgstr "estava trabalhando em"
+
+#: conf/settings.py:182
+msgid "English"
+msgstr "Inglês"
+
+#: conf/settings.py:183
+msgid "Portuguese (Brazil)"
+msgstr "Português (Brasil)"
+
+#: templates/404.html:4
+msgid "Page not found."
+msgstr "Página não encontrada."
+
+#: templates/500.html:4
+msgid "Internal server error."
+msgstr "Erro interno no servidor."
+
+#: templates/includes/_base.html:64
+msgid "Logs"
+msgstr "Registros"
+
+#: templates/includes/_base.html:65
+msgid "People"
+msgstr "Pessoas"
+
+#: templates/includes/_base.html:66
+msgid "Companies"
+msgstr "Empresas"
+
+#: templates/includes/_base.html:67
+msgid "Calendar"
+msgstr "Calendário"
+
+#: templates/includes/_base.html:71
+msgid "Type anything..."
+msgstr "Digite qualquer coisa..."
+
+#: templates/includes/_base.html:101
+msgid "Login"
+msgstr "Entrar"
+
+#: templates/includes/_base.html:119
+#, python-format
+msgid ""
+"\n"
+"                    Política de Privacidade e Segurança - Termos e Condições "
+"de Uso | Todos os direitos reservados, @xupisco %(current_year)s©\n"
+"                "
+msgstr ""
+
+#: templates/login.html:12
+msgid "Your personal and friendly life log."
+msgstr "Seu registro de vida pessoal e amigável."
+
+#: templates/login.html:14
+msgid ""
+"Don't worry, we don't care who you are... login is just for authentication "
+"purposes."
+msgstr ""
+"Não se preocupe, não queremos suas informações...  login é apenas para fins de autenticação."
+
+#: templates/login.html:20
+msgid ""
+"This project is opensource, feel free to use and support! <a href=\"https://"
+"github.com/xupisco/ownCRM/\">Fork me!</a>"
+msgstr ""
+"Este projeto é de código aberto, sinta-se livre para usar e apoiar! <a href=\"https://"
+"github.com/xupisco/ownCRM/\">Github</a>"
+
+#: templates/timeline.html:114
+msgid "+ new"
+msgstr "+ novo"
+
+#: templates/timeline.html:115
+msgid "What?"
+msgstr "O que?"
+
+#: templates/timeline.html:123
+msgid "When?"
+msgstr "Quando?"
+
+#: templates/timeline.html:128
+msgid "Has end date?"
+msgstr "Tem data de término?"
+
+#: templates/timeline.html:132
+msgid "When ended?"
+msgstr "Quando terminou?"
+
+#: templates/timeline.html:136
+msgid "Description..."
+msgstr "Descrição..."
+
+#: templates/timeline.html:141
+msgid "Highlight?"
+msgstr "Destaque?"
+
+#: templates/timeline.html:145
+msgid "Add log..."
+msgstr "Adicionar registro..."
