@@ -1,4 +1,5 @@
 # ownCRM
+Your personal and friendly CRM, cut the crap... only the essentials!
 
 ## Screenshot
 ![Home / Timeline](http://i.imgur.com/JbBo6GL.png)
@@ -7,12 +8,13 @@
 
 1. Create a virtualenv
 2. Run: $pip install -r requirements/dev.txt
-3. Create a ```settings.ini``` file with:
+3. Create a ```conf/settings.ini``` file with:
 
 ```
 [settings]  
 SECRET_KEY=<anything here>  
-DEBUG=True  
+DEBUG=True
+  
 DB_ENGINE=django.db.backends.sqlite3  
 DB_NAME=conf/db.sqlite3  
 ```
@@ -22,6 +24,10 @@ DB_NAME=conf/db.sqlite3
 6. $python manage.py runserver
 7. Thank @croves...
 8. Enjoy!
+
+## TODO
+
+A lot, building a trello board...
 
 
 ## UNDER MIT LICENSE
