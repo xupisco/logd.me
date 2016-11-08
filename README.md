@@ -8,7 +8,17 @@ Your personal and friendly CRM, cut the crap... only the essentials!
 
 1. Create a virtualenv
 2. Run: $pip install -r requirements/dev.txt
-3. Create a ```conf/settings.ini``` file with:
+3. Create a ```conf/settings.ini``` file (contents below):
+4. $python manage.py migrate
+5. $python manage.py createsuperuser
+6. $python manage.py runserver
+7. Visit /admin/socialaccount/socialapp/
+8. [Create a Facebook APP](https://developers.facebook.com/)
+9. Add a new App ID and Secret Key for facebook provider
+10. Thank @croves...
+11. Enjoy!
+
+### conf/settings.ini
 
 ```
 [settings]  
@@ -18,15 +28,6 @@ DEBUG=True
 DB_ENGINE=django.db.backends.sqlite3  
 DB_NAME=conf/db.sqlite3  
 ```
-  
-4. $python manage.py migrate
-5. $python manage.py createsuperuser
-6. $python manage.py runserver
-7. Visit /admin/socialaccount/socialapp/
-8. [Create a Facebook APP](https://developers.facebook.com/)
-9. Add a new App ID and Secret Key for facebook provider
-10. Thank @croves...
-11. Enjoy!
 
 ## TODO
 
