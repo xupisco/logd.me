@@ -77,6 +77,24 @@ function qs(el) {
 <div class="col-md-8">
     <div class="timeline-centered" id="main_timeline">
 
+        <article class="timeline-entry" v-if="!1">
+            <div class="timeline-entry-inner">
+
+                <div class="timeline-icon bg-danger">
+                    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                </div>
+
+                <div class="timeline-label">
+                    {% blocktrans %}
+                    <p>
+                    <h3 style="margin: 3px">Oooops, nothing found!</h3>
+                    Your search criteria didn't match anything, try using another keywords...
+                    </p>
+                    {% endblocktrans %}
+                </div>
+            </div>
+        </article>
+
         <article class="timeline-entry" v-for="log in filteredLogs">
             <div class="timeline-entry-inner">
 
@@ -92,6 +110,25 @@ function qs(el) {
                         <span class="label label-primary" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span>
                         <span class="label label-success" onclick="qs(this);" v-for="person in log.people">[[ person.name ]]</span>
                     </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="timeline-entry" v-show="!logs.length">
+            <div class="timeline-entry-inner">
+
+                <div class="timeline-icon bg-danger">
+                    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                </div>
+
+                <div class="timeline-label">
+                    {% blocktrans %}
+                    <p>
+                    <h3 style="margin: 0">Ohhh no!</h3>
+                    Nothing found... start creating your life log with the form on the right!
+                    </p>
+                    <p><div style="text-align: right; padding-top: 10px; padding-bottom: 0; color: #de2a4a;"><strong>Create things here >>></strong></div></p>
+                    {% endblocktrans %}
                 </div>
             </div>
         </article>
