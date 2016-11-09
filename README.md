@@ -2,7 +2,7 @@
 Your personal and friendly CRM, cut the crap... only the essentials!
 
 ## Screenshot
-![Home / Timeline](http://i.imgur.com/JbBo6GL.png)
+![Home / Timeline](http://i.imgur.com/giStaYL.png)
 
 ## Setup
 
