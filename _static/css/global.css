@@ -293,17 +293,38 @@ img.avatar_card {
 
 .new_kind_form {
     background-color: #fff;
-    padding: 8px;
+    padding: 7px;
     width: 100%;
     font-size: 12px;
     border: 2px solid #dce4ec;
-    border-radius: 4px;
+    border-radius: 0;
 }
 
 input.form-little {
-    width: 125px !important;
+    width: 165px !important;
     height: 25px;
     font-size: 12px;
     padding: 0 4px;
     background-color: #ecf0f1;
+}
+
+.icons {
+
+}
+
+.icons li {
+
+}
+
+.custom_select {
+    border-radius: 0 !important;
+    background-color: #fff;
+    border: 2px solid #dce4ec;
+    border-radius: 0;
+    color: #333;
+}
+
+.custom_select_container .glyphicon{
+    top: 3px !important;
+    margin-right: 4px !important;
 }

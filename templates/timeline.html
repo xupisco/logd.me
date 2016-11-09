@@ -21,7 +21,7 @@ $(function() {
 
     $('#new_kind').click(function() {
         $(this).hide();
-        $('#nlog_kind').hide();
+        $('.custom_select_container').hide();
         $('#nlog_kind_create').removeClass('hidden');
         $('#cancel_new_kind').removeClass('hidden');
     })
@@ -29,7 +29,7 @@ $(function() {
     $('#cancel_new_kind').click(function() {
         $(this).addClass('hidden');
         $('#new_kind').show();
-        $('#nlog_kind').show();
+        $('.custom_select_container').show();
         $('#nlog_kind_create').addClass('hidden');
         $('#cancel_new_kind').addClass('hidden');
     })
@@ -51,6 +51,21 @@ $(function() {
         tabSize: 4
     });
     loadLogs();
+
+    $('#nlog_kind_icon').selectpicker({
+        style: 'btn-xs',
+        size: 6,
+        width: 'fit'
+    });
+
+    $('#nlog_kind').selectpicker({
+        style: 'btn-default custom_select',
+        size: 6,
+        width: '350px',
+        liveSearch: true,
+        showIcon: true
+    });
+
 })
 
 function loadLogs() {
@@ -97,7 +112,7 @@ function qs(el) {
 
                 <div class="timeline-label">
                     <div class="log_date">[[ log.start_date ]]</div>
-                    <p v-html="log.body"></p>
+                    <p v-html="log.body_md"></p>
 
                     <div class="has_companies" v-show="log.companies || log.people">
                         <span class="label label-primary" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span>
@@ -144,19 +159,23 @@ function qs(el) {
                 <a id="new_kind" class="label label-warning new_kind pull-right">{% trans "+ new" %}</a>
                 <a id="cancel_new_kind" class="label label-danger new_kind pull-right hidden">{% trans "cancel" %}</a>
                 <label for="nlog_kind">{% trans "What?" %}</label>
-                <select class="form-control" id="nlog_kind">
-                    <option value=0>{% trans "Select..." %}</option>
-                    <option value=0>---</option>
+                <div class="custom_select_container">
+                <select class="form-control" id="nlog_kind" data-style="btn-danger">
                     {% for kind in kinds %}
-                    <option value="{{ kind.id }}">{{ kind.name }}</option>
+                    <option data-icon="glyphicon-{{ kind.glyphicon_name }}">{{ kind.name }}</option>
                     {% endfor %}
                 </select>
+                </div>
                 <div class="form-inline hidden" id="nlog_kind_create">
                     <div class="form-group new_kind_form">
                         <label for="nlog_kind_text">{% trans "Name:" %} </label>
                         <input type="text" class="form-control form-little" id="nlog_kind_text">
                         <label for="nlog_kind_icon">&nbsp;&nbsp;{% trans "Icon:" %} </label>
-                        <input type="text" class="form-control form-little" id="nlog_kind_icon" placeholder="glyphicon class..." style="width: 110px !important;"><a href="http://getbootstrap.com/components/#glyphicons-glyphs" target="_blank"><span class="glyphicon glyphicon-question-sign glyphicon-helper"></span></a>
+                        {# <input type="text" class="form-control form-little" id="nlog_kind_icon" placeholder="glyphicon class..." style="width: 110px !important;"><a href="http://getbootstrap.com/components/#glyphicons-glyphs" target="_blank"><span class="glyphicon glyphicon-question-sign glyphicon-helper"></span></a> #}
+                        <select class="btn-xs" id="nlog_kind_icon">
+                        {% include "includes/bootstrap_icons.html" %}
+                        </select>
+                        <a href="http://getbootstrap.com/components/#glyphicons-glyphs" target="_blank"><span class="glyphicon glyphicon-question-sign glyphicon-helper"></span></a>
                    </div>
                 </div>
             </div>
