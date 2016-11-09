@@ -14,7 +14,9 @@ before_install:
 install: pip install -r requirements/dev.txt
 
 # command to run tests using coverage, e.g. python setup.py test
-script: pytest -v -c pytest.ini
+script:
+  - pwd
+  - pytest -v -c ./pytest.ini
 
 after_success:
   - codecov
