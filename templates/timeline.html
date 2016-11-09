@@ -42,8 +42,8 @@ $(function() {
         }
 
         $.post('{% url "core:newlog" %}', post_data, function(res) {
-            console.log(res);
             if (res.success) {
+                clearForm();
                 loadLogs();
             }
         });
@@ -170,6 +170,10 @@ function qs(el) {
                 </div>
 
                 <div class="timeline-label">
+                    <div class="log_tools">
+                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </div>
                     <div class="log_date">[[ log.start_date ]]</div>
                     <p v-html="log.body_md"></p>
 
@@ -226,7 +230,7 @@ function qs(el) {
                 </div>
                 <div class="form-inline hidden" id="nlog_kind_create">
                     <div class="form-group new_kind_form">
-                        <label for="nlog_kind_text">{% trans "Name:" %} </label>
+                        <label for="nlog_kind_text">{% trans "Name:" %}&nbsp;&nbsp;</label>
                         <input type="text" class="form-control form-little" id="nlog_kind_text">
                         <label for="nlog_kind_icon">&nbsp;&nbsp;{% trans "Icon:" %} </label>
                         {# <input type="text" class="form-control form-little" id="nlog_kind_icon" placeholder="glyphicon class..." style="width: 110px !important;"><a href="http://getbootstrap.com/components/#glyphicons-glyphs" target="_blank"><span class="glyphicon glyphicon-question-sign glyphicon-helper"></span></a> #}

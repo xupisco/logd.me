@@ -296,7 +296,7 @@ img.avatar_card {
 
 .new_kind_form {
     background-color: #fff;
-    padding: 7px;
+    padding: 7px 11px;
     width: 100%;
     font-size: 12px;
     border: 2px solid #dce4ec;
@@ -304,7 +304,7 @@ img.avatar_card {
 }
 
 input.form-little {
-    width: 165px !important;
+    width: 155px !important;
     height: 25px;
     font-size: 12px;
     padding: 0 4px;
@@ -376,4 +376,15 @@ input.form-little {
     display: none;
     font-weight: bold;
     color: firebrick;
+}
+
+.log_tools {
+    float: right;
+    background-color: #fff;
+    color: #999;
+    text-align: center;
+    margin-left: 6px;
+    font-size: 12px;
+    margin-top: 2px;
+    margin-right: -4px;
 }

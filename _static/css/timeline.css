@@ -262,8 +262,18 @@
     color: #333;
 }
 
+.timeline-centered .timeline-entry {
+    margin-bottom: 20px !important;
+}
+
 .timeline-entry pre {
     margin-top: 10px !important;
+}
+
+.timeline-label:hover {
+    -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+    -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
 }
 
 .timeline-label ul {
@@ -272,6 +282,10 @@
 
 .timeline-label h1:first-child {
     margin-top: 0 !important;
+}
+
+.timeline-label {
+    border-radius: 0 !important;
 }
 
 .timeline-label a {
