@@ -97,10 +97,10 @@ def newlog(request):
 
     if nkind_text:
         kind, created = LogKind.objects.get_or_create(
-            owner = request.user,
-            name = nkind_text,
-            slug = slugify(nkind_text),
-            glyphicon_name = nkind_icon
+            owner=request.user,
+            name=nkind_text,
+            slug=slugify(nkind_text),
+            glyphicon_name=nkind_icon
         )
     else:
         kind = LogKind.objects.get(id=nlog_kind_id)
@@ -108,14 +108,14 @@ def newlog(request):
     start_date = datetime.strptime(nlog_start_date, "%d/%m/%Y %H:%M")
     end_date = datetime.strptime(nlog_end_date, "%d/%m/%Y %H:%M") if nlog_end_date else None
 
-    nlog = Log (
-            owner=request.user,
-            kind=kind,
-            start_date=start_date,
-            end_date=end_date,
-            reminder=nlog_highlight,
-            body=nlog_body
-        )
+    nlog = Log(
+        owner=request.user,
+        kind=kind,
+        start_date=start_date,
+        end_date=end_date,
+        reminder=nlog_highlight,
+        body=nlog_body
+    )
 
     nlog.save()
 

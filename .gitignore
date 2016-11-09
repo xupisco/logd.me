@@ -3,6 +3,7 @@ _emails
 media/*
 tmp/
 backups/
+htmlcov/
 
 .cache
 .coverage*
