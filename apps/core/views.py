@@ -109,12 +109,12 @@ def newlog(request):
     end_date = datetime.strptime(nlog_end_date, "%d/%m/%Y %H:%M") if nlog_end_date else None
 
     nlog = Log (
-            owner = request.user,
-            kind = kind,
-            start_date = start_date,
-            end_date = end_date,
-            reminder = nlog_highlight,
-            body = nlog_body
+            owner=request.user,
+            kind=kind,
+            start_date=start_date,
+            end_date=end_date,
+            reminder=nlog_highlight,
+            body=nlog_body
         )
 
     nlog.save()
