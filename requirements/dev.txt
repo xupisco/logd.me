@@ -12,6 +12,4 @@ pytest-mock==1.4.0
 pytest-cov==2.4.0
 pytest-sugar==0.7.1
 pytest-pep8==1.0.6
-mock==2.0.0
 mixer==5.5.8
-ipdb==0.10.1
