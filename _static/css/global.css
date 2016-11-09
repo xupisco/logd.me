@@ -3,6 +3,7 @@
 html {
     position: relative;
     min-height: 100%;
+    overflow-y: scroll;
 }
 
 .footer {
@@ -271,6 +272,7 @@ img.avatar_card {
     position: static;
     margin-top: 0;
     width: 350px;
+    margin-bottom: 20px;
 }
 
 #side_affix.affix {
