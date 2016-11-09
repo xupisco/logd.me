@@ -10,6 +10,6 @@ pytest-django==3.0.0
 pytest-watch==4.1.0
 pytest-mock==1.4.0
 pytest-cov==2.4.0
-# pytest-sugar==0.7.1
+pytest-sugar==0.7.1
 pytest-pep8==1.0.6
 mixer==5.5.8
