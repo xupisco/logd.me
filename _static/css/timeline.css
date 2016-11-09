@@ -270,6 +270,10 @@
     margin-top: 10px !important;
 }
 
+.timeline-label h1:first-child {
+    margin-top: 0 !important;
+}
+
 .timeline-label a {
     color: dodgerblue !important;
 }

@@ -50,6 +50,7 @@ $(function() {
         status: false,
         tabSize: 4
     });
+
     loadLogs();
 
     $('#nlog_kind_icon').selectpicker({
@@ -64,6 +65,20 @@ $(function() {
         width: '350px',
         liveSearch: true,
         showIcon: true
+    });
+
+    jQuery.datetimepicker.setLocale('pt-BR');
+    $('#nlog_start_date').datetimepicker({
+        format:'d/m/Y H:i',
+    });
+
+    $('#nlog_end_date').datetimepicker({
+        format:'d/m/Y H:i',
+        onShow:function(ct) {
+            this.setOptions({
+                minDate: $('#nlog_start_date').val() ? $('#nlog_start_date').val() : false
+            })
+        },
     });
 
 })
@@ -160,7 +175,7 @@ function qs(el) {
                 <a id="cancel_new_kind" class="label label-danger new_kind pull-right hidden">{% trans "cancel" %}</a>
                 <label for="nlog_kind">{% trans "What?" %}</label>
                 <div class="custom_select_container">
-                <select class="form-control" id="nlog_kind" data-style="btn-danger">
+                <select class="form-control" id="nlog_kind">
                     {% for kind in kinds %}
                     <option data-icon="glyphicon-{{ kind.glyphicon_name }}">{{ kind.name }}</option>
                     {% endfor %}
@@ -190,7 +205,7 @@ function qs(el) {
             </div>
             <div class="form-group end_date hidden">
                 <label for="nlog_enddate">{% trans "When ended?" %}</label>
-                <input type="text" class="form-control" id="nlog_enddate" placeholder="dd/mm/yyyy hh:mm">
+                <input type="text" class="form-control" id="nlog_end_date" placeholder="dd/mm/yyyy hh:mm">
             </div>
             <div class="form-group">
                 <label for="nlog_body">{% trans "Description..." %}</label>
@@ -223,7 +238,7 @@ vlogs = new Vue({
             var self = this
             return this.logs.filter(function(log) {
                 return (
-                    (log.body.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
+                    (log.body_md.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
                     (log.meta.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
                     (log.start_date.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
                 )

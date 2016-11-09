@@ -4,6 +4,7 @@ html {
     position: relative;
     min-height: 100%;
 }
+
 .footer {
     position: absolute;
     bottom: 0;
@@ -288,7 +289,7 @@ img.avatar_card {
 }
 
 .CodeMirror, .CodeMirror-scroll {
-    min-height: 200px !important;
+    min-height: 150px !important;
 }
 
 .new_kind_form {
@@ -324,7 +325,47 @@ input.form-little {
     color: #333;
 }
 
+.custom_select:hover, .custom_select:active, .custom_select:focus {
+    background-color: #fff !important;
+    border-color: #dce4ec;
+    color: #333 !important;
+    outline: none;
+}
+
+.open>.dropdown-toggle.btn-default {
+    background-color: #fff !important;
+    color: #333 !important;
+    border-color: #2c3e50 !important;
+}
+
 .custom_select_container .glyphicon{
     top: 3px !important;
     margin-right: 4px !important;
+}
+
+.custom_select_container .open {
+    border-radius: 0 !important;
+    border: 2px solid;
+    border-top: 0;
+}
+
+.custom_select_container .open .form-control {
+    border: 0;
+    background-color: #f1f1f1;
+    padding: 0 8px;
+    height: 32px;
+    margin-bottom: 4px;
+}
+
+.custom_select_container .dropdown-menu {
+    margin-top: -3px;
+}
+
+.no-results {
+    padding: 3px 8px !important;
+    background: #ee4749 !important;
+    margin: 8px !important;
+    white-space: nowrap !important;
+    margin-bottom: 5px !important;
+    color: #fff !important;
 }
