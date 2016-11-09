@@ -371,3 +371,9 @@ input.form-little {
     margin-bottom: 5px !important;
     color: #fff !important;
 }
+
+.form_error {
+    display: none;
+    font-weight: bold;
+    color: firebrick;
+}

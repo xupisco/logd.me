@@ -7,6 +7,7 @@ from django.views.generic import View
 from django.contrib.auth.decorators import login_required
 from django.core.serializers.json import DjangoJSONEncoder
 from django.utils import translation
+from django.utils.text import slugify
 
 import json
 from datetime import datetime
@@ -94,7 +95,15 @@ def newlog(request):
     nlog_end_date = nlog_end_date if len(nlog_end_date) > 1 else False
     nlog_highlight = True if nlog_highlight == 'true' else False
 
-    kind = LogKind.objects.get(id=nlog_kind_id)
+    if nkind_text:
+        kind, created = LogKind.objects.get_or_create(
+            owner = request.user,
+            name = nkind_text,
+            slug = slugify(nkind_text),
+            glyphicon_name = nkind_icon
+        )
+    else:
+        kind = LogKind.objects.get(id=nlog_kind_id)
 
     start_date = datetime.strptime(nlog_start_date, "%d/%m/%Y %H:%M")
     end_date = datetime.strptime(nlog_end_date, "%d/%m/%Y %H:%M") if nlog_end_date else None

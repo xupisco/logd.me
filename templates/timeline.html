@@ -4,6 +4,7 @@
 {% block js %}
 <script type="text/javascript">
 var vlogs;
+var simplemde;
 
 $(function() {
     $('.has_enddate').click(function() {
@@ -11,6 +12,10 @@ $(function() {
     });
 
     $('form#new_log').submit(function() {
+        var errors = false;
+        $('#error_nlog_start_date').hide();
+        $('#error_nlog_body').hide();
+
         post_data = {
             'nkind_text': $('#nlog_kind_text').val(),
             'nkind_icon': $('#nlog_kind_icon').val(),
@@ -21,7 +26,20 @@ $(function() {
             'nlog_body': simplemde.value(),
             'csrfmiddlewaretoken': '{{ csrf_token }}'
         }
-        console.log(post_data);
+
+        if (post_data.nlog_start_date.length < 10) {
+            $('#error_nlog_start_date').show();
+            errors = true;
+        }
+
+        if (post_data.nlog_body.length <= 5) {
+            $('#error_nlog_body').show();
+            errors = true;
+        }
+
+        if(errors) {
+            return false;
+        }
 
         $.post('{% url "core:newlog" %}', post_data, function(res) {
             console.log(res);
@@ -61,7 +79,7 @@ $(function() {
         }
     })
 
-    var simplemde = new SimpleMDE({
+    simplemde = new SimpleMDE({
         element: document.getElementById('nlog_body'),
         hideIcons: ["side-by-side", "italic", "heading"],
         spellChecker: false,
@@ -88,6 +106,7 @@ $(function() {
     jQuery.datetimepicker.setLocale('pt-BR');
     $('#nlog_start_date').datetimepicker({
         format:'d/m/Y H:i',
+        step: 30
     });
 
     $('#nlog_end_date').datetimepicker({
@@ -106,6 +125,13 @@ function loadLogs() {
         vlogs.logs = res;
         $('#fake_loading').removeClass('icon-spin');
     });
+}
+
+function clearForm() {
+    $('#new_log')[0].reset();
+    $('#error_nlog_start_date').hide();
+    $('#error_nlog_body').hide();
+    simplemde.value('');
 }
 
 function qs(el) {
@@ -206,14 +232,16 @@ function qs(el) {
                         <label for="nlog_kind_icon">&nbsp;&nbsp;{% trans "Icon:" %} </label>
                         {# <input type="text" class="form-control form-little" id="nlog_kind_icon" placeholder="glyphicon class..." style="width: 110px !important;"><a href="http://getbootstrap.com/components/#glyphicons-glyphs" target="_blank"><span class="glyphicon glyphicon-question-sign glyphicon-helper"></span></a> #}
                         <select class="btn-xs" id="nlog_kind_icon">
-                        {% include "includes/bootstrap_icons.html" %}
+                            {% for icon in glyphicon_classes %}
+                            <option data-content="<i class='glyphicon glyphicon-{{ icon }}'></i>" value="{{ icon }}"></option>
+                            {% endfor %}
                         </select>
                         <a href="http://getbootstrap.com/components/#glyphicons-glyphs" target="_blank"><span class="glyphicon glyphicon-question-sign glyphicon-helper"></span></a>
                    </div>
                 </div>
             </div>
             <div class="form-group">
-                <label for="nlog_start_date">{% trans "When?" %}</label>
+                <label for="nlog_start_date">{% trans "When?" %}</label><div class="form_error pull-right" id="error_nlog_start_date"> {% trans 'Required' %}</div>
                 <input type="text" class="form-control" id="nlog_start_date" placeholder="dd/mm/yyyy hh:mm">
             </div>
             <div class="checkbox">
@@ -226,7 +254,7 @@ function qs(el) {
                 <input type="text" class="form-control" id="nlog_end_date" placeholder="dd/mm/yyyy hh:mm">
             </div>
             <div class="form-group">
-                <label for="nlog_body">{% trans "Description..." %}</label>
+                <label for="nlog_body">{% trans "Description..." %}</label><div class="form_error pull-right" id="error_nlog_body"> {% trans 'Type at least 5 characters' %}</div>
                 <textarea class="form-control mention" rows="4" id="nlog_body"></textarea>
             </div>
             <div class="checkbox">
