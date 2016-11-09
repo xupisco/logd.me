@@ -48,7 +48,6 @@ class Log(models.Model):
     def hashtags(self):
         return re.findall(r"#(\w+)", self.body)
 
-
     @body_md.setter
     def body_md(self, value):
         self.body = value
