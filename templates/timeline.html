@@ -165,7 +165,7 @@ function qs(el) {
         <article class="timeline-entry" v-for="log in filteredLogs">
             <div class="timeline-entry-inner">
 
-                <div class="timeline-icon" v-bind:class="{ 'bg-secondary': log.reminder }">
+                <div class="timeline-icon" v-bind:class="{ 'bg-secondary': log.reminder }" v-bind:title="log.kind.name">
                     <span class="glyphicon" v-bind:class="'glyphicon-' + [[ log.kind.glyphicon_name ]]" aria-hidden="true"></span>
                 </div>
 
@@ -173,9 +173,8 @@ function qs(el) {
                     <div class="log_date">[[ log.start_date ]]</div>
                     <p v-html="log.body_md"></p>
 
-                    <div class="has_companies" v-show="log.companies || log.people">
-                        <span class="label label-primary" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span>
-                        <span class="label label-success" onclick="qs(this);" v-for="person in log.people">[[ person.name ]]</span>
+                    <div class="has_labels" v-show="log.companies.length || log.people.length || log.hashtags.length">
+                        <span class="label label-primary" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span><span class="label label-success" onclick="qs(this);" v-for="person in log.people">[[ person.name ]]</span><span class="label label-default" onclick="qs(this);" v-for="tag in log.hashtags">#[[ tag ]]</span>
                     </div>
                 </div>
             </div>
@@ -282,11 +281,12 @@ vlogs = new Vue({
         filteredLogs: function() {
             if (!this.logs) return 0;
             var self = this
+            var localq = self.q.replace('#', '');
             return this.logs.filter(function(log) {
                 return (
-                    (log.body_md.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
-                    (log.meta.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
-                    (log.start_date.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
+                    (log.body_md.toLowerCase().indexOf(localq.toLowerCase()) > -1) ||
+                    (log.meta.toLowerCase().indexOf(localq.toLowerCase()) > -1) ||
+                    (log.start_date.toLowerCase().indexOf(localq.toLowerCase()) > -1)
                 )
             }.bind(this))
         }

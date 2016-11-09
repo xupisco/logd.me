@@ -21,6 +21,7 @@ class KindSerializer(serializers.ModelSerializer):
 class LogSerializer(serializers.ModelSerializer):
     kind = KindSerializer()
     body_md = serializers.CharField()
+    hashtags = serializers.JSONField()
     companies = CompanySerializer(read_only=True, many=True)
     people = PersonSerializer(read_only=True, many=True)
     meta = serializers.SerializerMethodField()
@@ -28,7 +29,7 @@ class LogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Log
         fields = (
-            'id', 'kind', 'body_md', 'companies', 'people',
+            'id', 'kind', 'body_md', 'hashtags', 'companies', 'people',
             'start_date', 'end_date', 'reminder', 'created_on',
             'updated_on', 'meta'
         )
@@ -37,4 +38,8 @@ class LogSerializer(serializers.ModelSerializer):
     def get_meta(self, obj):
         people = ', '.join(str(val) for val in obj.people.values_list('name', 'email', ))
         companies = ', '.join(str(val) for val in obj.companies.values_list('name', ))
-        return '{0}, {1}'.format(people, companies)
+
+        res = list(obj.people.values_list('name', 'email')) + \
+            list(obj.companies.values_list('name'))
+
+        return ', '.join(tuple([x[0] for x in res]) + tuple(obj.hashtags))

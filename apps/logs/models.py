@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
 from markdown import markdown
+import re
+import json
 
 from ..companies.models import Company
 from ..people.models import Person
@@ -40,7 +42,12 @@ class Log(models.Model):
 
     @property
     def body_md(self):
-        return markdown(self.body)
+        return markdown(re.sub(r"#(\w+)", '', self.body))
+
+    @property
+    def hashtags(self):
+        return re.findall(r"#(\w+)", self.body)
+
 
     @body_md.setter
     def body_md(self, value):
