@@ -15,4 +15,7 @@ urlpatterns = [
     url(r'^people$', views.people, name='people',),
     url(r'^companies$', views.companies, name='companies',),
     url(r'^calendar$', views.calendar, name='calendar',),
+
+    # Temp stuff
+    url(r'^ajax/new_log$', views.newlog, name='newlog',),
 ]

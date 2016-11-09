@@ -11,6 +11,24 @@ $(function() {
     });
 
     $('form#new_log').submit(function() {
+        post_data = {
+            'nkind_text': $('#nlog_kind_text').val(),
+            'nkind_icon': $('#nlog_kind_icon').val(),
+            'nlog_kind_id': $('#nlog_kind :selected').attr('value'),
+            'nlog_start_date': $('#nlog_start_date').val(),
+            'nlog_end_date': $('#nlog_end_date').val(),
+            'nlog_highlight': $('#nlog_highlight').is(":checked"),
+            'nlog_body': simplemde.value(),
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        }
+        console.log(post_data);
+
+        $.post('{% url "core:newlog" %}', post_data, function(res) {
+            console.log(res);
+            if (res.success) {
+                loadLogs();
+            }
+        });
         return false;
     });
 
@@ -177,7 +195,7 @@ function qs(el) {
                 <div class="custom_select_container">
                 <select class="form-control" id="nlog_kind">
                     {% for kind in kinds %}
-                    <option data-icon="glyphicon-{{ kind.glyphicon_name }}">{{ kind.name }}</option>
+                    <option data-icon="glyphicon-{{ kind.glyphicon_name }}" value="{{ kind.id }}">{{ kind.name }}</option>
                     {% endfor %}
                 </select>
                 </div>
