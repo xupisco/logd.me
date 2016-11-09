@@ -31,18 +31,18 @@ ACCOUNT_PASSWORD_MIN_LENGTH = 6
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
-SOCIALACCOUNT_PROVIDERS = \
-    { 'google':
-        { 'SCOPE': ['profile', 'email'],
-          'AUTH_PARAMS': { 'access_type': 'online' }
-        }
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': ['profile', 'email'],
+        'AUTH_PARAMS': {'access_type': 'online'}
     }
+}
 
 
 # Application definition
 DJANGO_APPS = (
-    #'grappelli',  # Thirdparty APP, but must be called before contrib.admin
-    #'filebrowser',  # Thirdparty APP, but must be called before contrib.admin
+    # 'grappelli',  # Thirdparty APP, but must be called before contrib.admin
+    # 'filebrowser',  # Thirdparty APP, but must be called before contrib.admin
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -91,8 +91,7 @@ ROOT_URLCONF = 'conf.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -144,10 +143,13 @@ DATABASES = {
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
-    { 'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator', },
-    { 'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator', 'OPTIONS': { 'min_length': 6, }},
-    { 'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', },
-    { 'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', },
+    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator', },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {'min_length': 6, }
+    },
+    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', },
+    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', },
 ]
 
 
@@ -208,15 +210,16 @@ FILEBROWSER_DIRECTORY = 'uploaded/'
 FILEBROWSER_VERSIONS_BASEDIR = '_versions/'
 
 FILEBROWSER_VERSIONS = {
-    'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'},
+    'admin_thumbnail': {
+        'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'},
     'thumbnail': {'verbose_name': 'Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'},
     'small': {'verbose_name': 'Pequeno', 'width': 140, 'height': '', 'opts': ''},
     'medium': {'verbose_name': 'Medio', 'width': 300, 'height': '', 'opts': ''},
     'big': {'verbose_name': 'Grande', 'width': 460, 'height': '', 'opts': ''},
-    'card':  {'verbose_name': 'Card', 'width': 364, 'height': 205, 'opts': 'crop'},
-    'product':  {'verbose_name': 'Product', 'width': 560, 'height': 476, 'opts': 'crop'},
-    'card_product':  {'verbose_name': 'Card Product', 'width': 364, 'height': 310, 'opts': 'crop'},
-    'store':  {'verbose_name': 'Store', 'width': 364, 'height': 195, 'opts': 'crop'},
-    'highlight':  {'verbose_name': 'Destaque', 'width': 1920, 'height': 535, 'opts': 'crop'},
+    'card': {'verbose_name': 'Card', 'width': 364, 'height': 205, 'opts': 'crop'},
+    'product': {'verbose_name': 'Product', 'width': 560, 'height': 476, 'opts': 'crop'},
+    'card_product': {'verbose_name': 'Card Product', 'width': 364, 'height': 310, 'opts': 'crop'},
+    'store': {'verbose_name': 'Store', 'width': 364, 'height': 195, 'opts': 'crop'},
+    'highlight': {'verbose_name': 'Destaque', 'width': 1920, 'height': 535, 'opts': 'crop'},
     'large': {'verbose_name': 'Gigante', 'width': 680, 'height': '', 'opts': ''},
 }

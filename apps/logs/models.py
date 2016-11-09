@@ -4,6 +4,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
+from markdown import markdown
+
 from ..companies.models import Company
 from ..people.models import Person
 
@@ -36,5 +38,10 @@ class Log(models.Model):
     def __unicode__(self):
         return self.kind.name
 
-    
-    
+    @property
+    def body_md(self):
+        return markdown(self.body)
+
+    @body_md.setter
+    def body_md(self, value):
+        self.body = value

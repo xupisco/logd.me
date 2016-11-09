@@ -45,7 +45,7 @@ class EmploymentLog(models.Model):
     last_company = models.ForeignKey(Company)
 
     created_on = models.DateTimeField(_('created on'), auto_now_add=True)
-    updated_on = models.DateTimeField(_('updated on'), auto_now=True)    
+    updated_on = models.DateTimeField(_('updated on'), auto_now=True)
 
     def __unicode__(self):
         return "{0} {1} {2}".format(self.person, _('was working at'), self.last_company)

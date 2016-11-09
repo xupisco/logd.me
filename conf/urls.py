@@ -13,7 +13,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('allauth.urls')),
     url(r'^', include('apps.core.urls', namespace='core')),
-    
+
     url(r'^api/v1/auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include('apps.api.urls', namespace='api')),
     url(r'^api/?$', RedirectView.as_view(pattern_name='api:v1:api-root')),
@@ -23,10 +23,14 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += [
-        url(r'^400/$', default_views.bad_request, kwargs={'exception': Exception('Bad Request!')}),
-        url(r'^403/$', default_views.permission_denied, kwargs={'exception': Exception('Permission Denied')}),
-        url(r'^404/$', default_views.page_not_found, kwargs={'exception': Exception('Page not Found')}),
-        url(r'^500/$', default_views.server_error),
+        url(r'^400/$',
+            default_views.bad_request, kwargs={'exception': Exception('Bad Request!')}),
+        url(r'^403/$',
+            default_views.permission_denied, kwargs={'exception': Exception('Permission Denied')}),
+        url(r'^404/$',
+            default_views.page_not_found, kwargs={'exception': Exception('Page not Found')}),
+        url(r'^500/$',
+            default_views.server_error),
     ]
     if 'debug_toolbar' in settings.INSTALLED_APPS:
         import debug_toolbar

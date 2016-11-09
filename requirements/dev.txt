@@ -4,3 +4,14 @@ django-debug-toolbar==1.6
 django-debug-toolbar-template-profiler==1.0.1
 
 django-extensions==1.6.7
+
+pytest==3.0.3
+pytest-django==3.0.0
+pytest-watch==4.1.0
+pytest-mock==1.4.0
+pytest-cov==2.4.0
+pytest-sugar==0.7.1
+pytest-pep8==1.0.6
+mock==2.0.0
+mixer==5.5.8
+ipdb==0.10.1
