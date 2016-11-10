@@ -16,7 +16,7 @@ html {
     width: 100%;
     background-color: #2c3e50;
     font-size: 12px;
-    z-index: 999;
+    z-index: -1;
 }
 
 .login_header {
@@ -308,6 +308,15 @@ img.avatar_card {
 
 .CodeMirror, .CodeMirror-scroll {
     min-height: 150px !important;
+    max-height: 320px;
+}
+
+.CodeMirror-fullscreen.CodeMirror {
+    max-height: none;
+}
+
+.CodeMirror-fullscreen .CodeMirror-scroll {
+    max-height: none;
 }
 
 .new_kind_form {
@@ -401,12 +410,13 @@ input.form-little {
     text-align: center;
     margin-left: 6px;
     font-size: 12px;
-    margin-top: 2px;
+    margin-top: -5px;
     margin-right: -4px;
 }
 
 .log_tool:hover {
     cursor: pointer;
+    color: #e6b113;
 }
 
 .log_tools span {
