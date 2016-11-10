@@ -82,8 +82,11 @@
 </head>
 <body>
 
-<div class="big_error_message_container hidden">
-<div class="big_error_message">{% trans "Ouch! Somethig went wrong..." %}</div>
+<div class="big_error_message_container">
+    <div class="big_error_message">
+        <img src="{% static 'images/sad.png' %}" />
+        {% trans "Ouch! Something went wrong..." %}
+    </div>
 </div>
 
 <div id="vue_app">
