@@ -199,7 +199,7 @@ function qs(el) {
                         <span class="glyphicon glyphicon-edit log_tool" v-on:click="editLog([[ log.id ]])" aria-hidden="true"></span></a>
                         <span class="glyphicon glyphicon-remove log_tool" aria-hidden="true"></span>
                     </div>
-                    <div class="log_date">[[ log.start_date ]]</div>
+                    <div class="log_date">[[ log.start_date | moment ]]</div>
                     <p v-html="log.body_md"></p>
 
                     <div class="has_labels" v-show="log.companies.length || log.people.length || log.hashtags.length">
@@ -336,6 +336,11 @@ vlogs = new Vue({
     methods: {
         editLog: function(id, ev) {
             loadSingleLog(id[0][0])
+        }
+    },
+    filters: {
+        moment: function (date) {
+            return moment(date).format('DD/MM/YYYY HH:mm');
         }
     }
 });
