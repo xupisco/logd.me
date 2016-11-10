@@ -53,6 +53,23 @@ $(function() {
         return false;
     });
 
+    $('#nlog_mentions').mentionsInput({
+      onDataRequest:function (mode, query, callback) {
+        var data = [
+          { id:1, name:'Kenneth Auchenberg', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+          { id:2, name:'Jon Froda', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+          { id:3, name:'Anders Pollas', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+          { id:4, name:'Kasper Hulthin', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+          { id:5, name:'Andreas Haugstrup', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
+          { id:6, name:'Pete Lacey', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' }
+        ];
+
+        data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
+
+        callback.call(this, data);
+      }
+    });
+
     $('#fake_reload').click(function() {
         $('#fake_loading').addClass('icon-spin');
         loadLogs();
@@ -327,7 +344,10 @@ function qs(el) {
             </div>
             <div class="form-group">
                 <label for="nlog_body">{% trans "Description..." %}</label><div class="form_error pull-right" id="error_nlog_body"> {% trans 'Type at least 5 characters' %}</div>
-                <textarea class="form-control mention" rows="4" id="nlog_body"></textarea>
+                <textarea class="form-control" rows="4" id="nlog_body"></textarea>
+            </div>
+            <div class="form-group">
+                <textarea class="form-control mention" rows="4" id="nlog_mentions"></textarea>
             </div>
             <div class="checkbox">
                 <label>
