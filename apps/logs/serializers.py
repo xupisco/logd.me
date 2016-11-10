@@ -45,9 +45,8 @@ class LogSerializer(serializers.ModelSerializer):
 
         highligh = "!!!" if obj.reminder else ""
 
-        res = list(obj.people.values_list('name', 'email')) + \
+        res = list(obj.people.values_list('name', 'email')) +
             list(obj.companies.values_list('name'))
 
-        return ', '.join(tuple([x[0] for x in res]) + \
-            tuple(obj.hashtags)) + \
-            ', ' + highligh
+        return ', '.join(tuple([x[0] for x in res]) +
+            tuple(obj.hashtags)) + ', ' + highligh
