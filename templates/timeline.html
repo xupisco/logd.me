@@ -118,8 +118,9 @@ $(function() {
 
 })
 
-function loadLogs() {
-    $.getJSON('/api/v1/logs/', function(res) {
+function loadLogs(id) {
+    var id = id || false;
+    $.getJSON('/api/v1/logs/' + id, function(res) {
         vlogs.logs = res;
         $('#fake_loading').removeClass('icon-spin');
     });
