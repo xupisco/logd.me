@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="{% static 'css/jquery.datetimepicker.css' %}" />
     <script src="{% static 'js/jquery.datetimepicker.full.min.js' %}"></script>
 
+    <script src="{% static 'js/mousetrap.min.js' %}"></script>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
@@ -46,6 +48,17 @@
     $(function() {
         $('#icon_clear').click(function() {
             vlogs.q = '';
+        });
+
+        Mousetrap.bind('/', function(e) {
+            e.preventDefault();
+            $('#q').focus();
+        });
+
+        Mousetrap.bind(['esc', 'escape'], function(e) {
+            e.preventDefault();
+            vlogs.q = '';
+            $('#q').blur();
         });
     })
     </script>
@@ -74,7 +87,7 @@
                 </ul>
                 <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
-                        <input id="q" type="text" v-model="q" class="form-control" placeholder="{% trans "Type anything..." %}">
+                        <input id="q" type="text" v-model="q" class="form-control mousetrap" placeholder="{% trans "Type anything..." %}">
                     </div>
                     <div id="icon_clear" class="glyphicon glyphicon-remove" aria-hidden="true"></div>
                 </form>

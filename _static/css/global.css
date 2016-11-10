@@ -255,9 +255,11 @@ img.avatar_card {
 }
 
 #icon_clear {
-    margin-left: 270px;
-    margin-top: 23px;
+    margin-left: 273px; 
+    margin-top: 18px;
     position: absolute;
+    background-color: #f3f3f3;
+    padding: 5px 4px;
 }
 
 #icon_clear:hover {
@@ -387,4 +389,8 @@ input.form-little {
     font-size: 12px;
     margin-top: 2px;
     margin-right: -4px;
+}
+
+.log_tools span {
+    margin-left: 3px;
 }

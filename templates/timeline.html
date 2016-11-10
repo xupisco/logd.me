@@ -135,7 +135,7 @@ function clearForm() {
 }
 
 function qs(el) {
-    vlogs.q = $(el).html();
+    vlogs.q = vlogs.q + " " + $(el).html();
 }
 </script>
 {% endblock %}
@@ -274,6 +274,17 @@ function qs(el) {
 
 {% block js_footer %}
 <script type="text/javascript">
+String.prototype.fuzzy = function(term, ratio) {
+    var string = this.toLowerCase();
+    var compare = term.toLowerCase();
+    var matches = 0;
+    if (string.indexOf(compare) > -1) return true; // covers basic partial matches
+    for (var i = 0; i < compare.length; i++) {
+        string.indexOf(compare[i]) > -1 ? matches += 1 : matches -=1;
+    }
+    return (matches/this.length >= ratio || term == "")
+};
+
 vlogs = new Vue({
     el: '#vue_app',
     delimiters: ["[[", "]]"],
@@ -285,12 +296,13 @@ vlogs = new Vue({
         filteredLogs: function() {
             if (!this.logs) return 0;
             var self = this
-            var localq = self.q.replace('#', '');
+            var localq = self.q.replace('#', '').toLowerCase();
+            var ratio = 0.5;
             return this.logs.filter(function(log) {
                 return (
-                    (log.body_md.toLowerCase().indexOf(localq.toLowerCase()) > -1) ||
-                    (log.meta.toLowerCase().indexOf(localq.toLowerCase()) > -1) ||
-                    (log.start_date.toLowerCase().indexOf(localq.toLowerCase()) > -1)
+                    (log.body_md.toLowerCase().fuzzy(localq, ratio)) ||
+                    (log.meta.toLowerCase().fuzzy(localq, ratio)) ||
+                    (log.start_date.toLowerCase().fuzzy(localq, ratio))
                 )
             }.bind(this))
         }
