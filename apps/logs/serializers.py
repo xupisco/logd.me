@@ -29,7 +29,7 @@ class LogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Log
         fields = (
-            'id', 'kind', 'body_md', 'hashtags', 'companies', 'people',
+            'id', 'kind', 'body', 'body_md', 'hashtags', 'companies', 'people',
             'start_date', 'end_date', 'reminder', 'created_on',
             'updated_on', 'meta'
         )

@@ -90,6 +90,7 @@ def newlog(request):
     nlog_end_date = request.POST.get('nlog_end_date')
     nlog_highlight = request.POST.get('nlog_highlight')
     nlog_body = request.POST.get('nlog_body')
+    is_update = int(request.POST.get('is_update'))
 
     nkind_text = nkind_text if len(nkind_text) > 1 else False
     nlog_end_date = nlog_end_date if len(nlog_end_date) > 1 else False
@@ -108,14 +109,22 @@ def newlog(request):
     start_date = datetime.strptime(nlog_start_date, "%d/%m/%Y %H:%M")
     end_date = datetime.strptime(nlog_end_date, "%d/%m/%Y %H:%M") if nlog_end_date else None
 
-    nlog = Log(
-        owner=request.user,
-        kind=kind,
-        start_date=start_date,
-        end_date=end_date,
-        reminder=nlog_highlight,
-        body=nlog_body
-    )
+    if not is_update:
+        nlog = Log(
+            owner=request.user,
+            kind=kind,
+            start_date=start_date,
+            end_date=end_date,
+            reminder=nlog_highlight,
+            body=nlog_body
+        )
+    else:
+        nlog = Log.objects.get(id=is_update)
+        nlog.kind = kind
+        nlog.start_date = start_date
+        nlog.end_date = end_date
+        nlog.reminder = nlog_highlight
+        nlog.body = nlog_body
 
     nlog.save()
 

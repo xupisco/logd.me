@@ -43,7 +43,6 @@ class Log(models.Model):
     @property
     def body_md(self):
         return markdown(self.body)
-        #return markdown(re.sub(r"#(\w+)", '', self.body)) # remove hashtags from body  
 
     @property
     def hashtags(self):

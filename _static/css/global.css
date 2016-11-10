@@ -405,6 +405,10 @@ input.form-little {
     margin-right: -4px;
 }
 
+.log_tool:hover {
+    cursor: pointer;
+}
+
 .log_tools span {
     margin-left: 3px;
 }

@@ -24,6 +24,7 @@ $(function() {
             'nlog_end_date': $('#nlog_end_date').val(),
             'nlog_highlight': $('#nlog_highlight').is(":checked"),
             'nlog_body': simplemde.value(),
+            'is_update': $('#update_log').val(),
             'csrfmiddlewaretoken': '{{ csrf_token }}'
         }
 
@@ -73,7 +74,7 @@ $(function() {
     $('#side_affix').affix({
         offset: {
             top: 85,
-            bottom: 85
+            bottom: 80
         }
     })
 
@@ -118,9 +119,27 @@ $(function() {
 
 })
 
-function loadLogs(id) {
-    var id = id || false;
-    $.getJSON('/api/v1/logs/' + id, function(res) {
+function loadSingleLog(log) {
+    $.getJSON('/api/v1/logs/' + log + '?raw', function(res) {
+        res_start_date = new Date(res.start_date);
+        res_end_date = new Date(res.end_date);
+
+        $("#nlog_kind").val(res.kind.id).change();
+        $('#nlog_start_date').val(moment(res_start_date).format('DD/MM/YYYY HH:mm'));
+        if(res.end_date) {
+            $('.has_enddate').attr('checked', true);
+            $('#nlog_end_date').val(moment(res_end_date).format('DD/MM/YYYY HH:mm'));
+        }
+        if(res.reminder) {
+            $('#nlog_highlight').attr('checked', true);
+        }
+        simplemde.value(res.body);
+        $('#update_log').val(res.id);
+    });
+}
+
+function loadLogs() {
+    $.getJSON('/api/v1/logs/', function(res) {
         vlogs.logs = res;
         $('#fake_loading').removeClass('icon-spin');
     });
@@ -130,6 +149,7 @@ function clearForm() {
     $('#new_log')[0].reset();
     $('#error_nlog_start_date').hide();
     $('#error_nlog_body').hide();
+    $('#update_log').val(0);
     simplemde.value('');
 }
 
@@ -176,8 +196,8 @@ function qs(el) {
 
                 <div class="timeline-label">
                     <div class="log_tools">
-                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-edit log_tool" v-on:click="editLog([[ log.id ]])" aria-hidden="true"></span></a>
+                        <span class="glyphicon glyphicon-remove log_tool" aria-hidden="true"></span>
                     </div>
                     <div class="log_date">[[ log.start_date ]]</div>
                     <p v-html="log.body_md"></p>
@@ -271,6 +291,7 @@ function qs(el) {
                 </label>
             </div>
             <br />
+            <input type="hidden" id="update_log" value="0" />
             <button type="submit" class="btn btn-warning">{% trans "Add log..." %}</button>
         </form>
     </div>
@@ -310,6 +331,11 @@ vlogs = new Vue({
                     (log.start_date.toLowerCase().fuzzy(localq, 1))
                 )
             }.bind(this))
+        }
+    },
+    methods: {
+        editLog: function(id, ev) {
+            loadSingleLog(id[0][0])
         }
     }
 });
