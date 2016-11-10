@@ -61,11 +61,30 @@
             vlogs.q = '';
             $('#q').blur();
         });
+
+        $('.big_error_message_container').click(function() {
+            $('html, body').css({
+                'overflow-y': 'scroll'
+            });
+            $(this).addClass('hidden');
+            //document.location.reload();
+        })
     })
+
+    function showError() {
+        $('html, body').css({
+            'overflow-y': 'hidden'
+        });
+        $('.big_error_message_container').removeClass('hidden');
+    }
     </script>
 
 </head>
 <body>
+
+<div class="big_error_message_container hidden">
+<div class="big_error_message">{% trans "Ouch! Somethig went wrong..." %}</div>
+</div>
 
 <div id="vue_app">
     <nav class="navbar navbar-default">

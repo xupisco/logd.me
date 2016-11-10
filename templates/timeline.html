@@ -46,6 +46,8 @@ $(function() {
             if (res.success) {
                 clearForm();
                 loadLogs();
+            } else {
+                showError();
             }
         });
         return false;
@@ -124,6 +126,17 @@ $(function() {
 
 })
 
+function showRemoveConfirmation(log) {
+    $('#confid_' + log).removeClass('hidden');
+    $('#confid_' + log).mouseleave(function() {
+        $(this).addClass('hidden');
+    });
+
+    $('#confid_' + log).click(function() {
+        removeLog(log);
+    });
+}
+
 function loadSingleLog(log) {
     clearForm(); // Confirm changes!!!
     $('#nlog_header_text').html('{% trans "Loading..." %}');
@@ -153,6 +166,20 @@ function loadLogs() {
     $.getJSON('/api/v1/logs/', function(res) {
         vlogs.logs = res;
         $('#fake_loading').removeClass('icon-spin');
+    });
+}
+
+function removeLog(id) {
+    var post_data = {
+        'log_id': id,
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+    }
+    $.post('{% url "core:removelog" %}', post_data, function(res) {
+        if (res.success) {
+            loadLogs();
+        } else {
+            showError();
+        }
     });
 }
 
@@ -209,7 +236,8 @@ function qs(el) {
                 <div class="timeline-label">
                     <div class="log_tools">
                         <span class="glyphicon glyphicon-edit log_tool" v-on:click="editLog([[ log.id ]])" aria-hidden="true"></span></a>
-                        <span class="glyphicon glyphicon-remove log_tool" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-remove log_tool tool_delete" aria-hidden="true" v-on:click="removeLog([[ log.id ]])"></span>
+                        <div class="remove_confirmation hidden" :id="'confid_' + log.id"><strong>{% trans "Sure?" %}</strong> {% trans "click again..." %}</div>
                     </div>
 
                     <div style="margin-bottom: 10px;">
@@ -356,6 +384,9 @@ vlogs = new Vue({
     methods: {
         editLog: function(id, ev) {
             loadSingleLog(id[0][0])
+        },
+        removeLog: function(id, ev) {
+            showRemoveConfirmation(id[0][0]);
         },
         hl_hashtags: function(txt) {
             var all_re = /(#[a-z0-9][a-z0-9\-_]*)/ig;

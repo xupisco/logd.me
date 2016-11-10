@@ -132,3 +132,17 @@ def newlog(request):
     response_data['success'] = True
 
     return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
+def removelog(request):
+    log_id = request.POST.get('log_id')
+    log = Log.objects.filter(owner=request.user).filter(id=log_id)
+
+    response_data = {}
+    if not log:
+        response_data['success'] = False
+    else:
+        log.delete()
+        response_data['success'] = True
+
+    return HttpResponse(json.dumps(response_data), content_type="application/json")

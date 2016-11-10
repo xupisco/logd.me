@@ -414,11 +414,58 @@ input.form-little {
     margin-right: -4px;
 }
 
+.remove_confirmation {
+    position: absolute;
+    right: 8px;
+    background-color: firebrick;
+    color: #fff;
+    padding: 0 5px;
+    top: 9px;
+}
+
+.remove_confirmation:hover {
+    cursor: pointer;
+}
+
 .log_tool:hover {
     cursor: pointer;
     color: #e6b113;
 }
 
+.tool_delete:hover {
+    color: firebrick !important;
+}
+
 .log_tools span {
     margin-left: 3px;
+}
+
+.big_error_message_container {
+    position: absolute;
+    background-color: rgba(0, 0, 0, .8);
+    width: 100%;
+    height: 100%;
+    z-index: 1001;
+}
+
+.big_error_message_container:hover {
+    cursor: pointer;
+}
+
+.big_error_message {
+    position: fixed;
+    background-color: firebrick;
+    color: #fff;
+    padding: 100px 0;
+    font-size: 36px;
+    text-align: center;
+    font-family: monospace;
+    z-index: 1002;
+    width: 100%;
+
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%); /* Yep! */
+    width: 100%;
 }
