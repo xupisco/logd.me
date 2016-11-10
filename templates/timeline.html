@@ -1,10 +1,10 @@
 {% extends 'includes/_base.html' %}
 {% load i18n %}
+{% load static %}
 
 {% block js %}
 <script type="text/javascript">
 var vlogs;
-var simplemde;
 
 $(function() {
     $('.has_enddate').click(function() {
@@ -23,7 +23,7 @@ $(function() {
             'nlog_start_date': $('#nlog_start_date').val(),
             'nlog_end_date': $('#nlog_end_date').val(),
             'nlog_highlight': $('#nlog_highlight').is(":checked"),
-            'nlog_body': simplemde.value(),
+            'nlog_body': tinymce.get('nlog_body_mce').getContent(),
             'is_update': $('#update_log').val(),
             'csrfmiddlewaretoken': '{{ csrf_token }}'
         }
@@ -53,21 +53,34 @@ $(function() {
         return false;
     });
 
-    $('#nlog_mentions').mentionsInput({
-      onDataRequest:function (mode, query, callback) {
-        var data = [
-          { id:1, name:'Kenneth Auchenberg', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-          { id:2, name:'Jon Froda', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-          { id:3, name:'Anders Pollas', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-          { id:4, name:'Kasper Hulthin', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-          { id:5, name:'Andreas Haugstrup', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' },
-          { id:6, name:'Pete Lacey', 'avatar':'http://cdn0.4dots.com/i/customavatars/avatar7112_1.gif', 'type':'contact' }
-        ];
-
-        data = _.filter(data, function(item) { return item.name.toLowerCase().indexOf(query.toLowerCase()) > -1 });
-
-        callback.call(this, data);
-      }
+    tinymce.init({
+        selector: 'textarea#nlog_body_mce',
+        plugin: 'a_tinymce_plugin',
+        plugins: ['code', 'link', 'image, mention, fullscreen'],
+        toolbar: 'bold italic | blockquote bullist numlist | link image | fullscreen',
+        menubar: false,
+        statusbar: false,
+        min_height: 200,
+        max_height: 300,
+        content_css: '{% static "css/custom_tinymce.css" %}',
+        mentions: {
+            delay: 0,
+            source: [
+                { name: 'Tyra Porcelli', type: 'person', id: 3 }, 
+                { name: 'Brigid Reddish', type: 'person', id: 1 },
+                { name: 'Ashely Buckler', type: 'person', id: 5 },
+                { name: 'Teddy Whelan', type: 'person', id: 13 },
+                { name: 'Google', type: 'company', id: 1 },
+                { name: 'Microsoft', type: 'company', id: 4 },
+            ],
+            insert: function(item) {
+                var it = "person"
+                if(item.type == 'company') {
+                    it = "company"
+                }
+                return '<span class="hl_mention_' + it + '" data-type="' + item.type + '" data-id="' + item.id + '">@' + item.name + '</span>&nbsp;';
+            }
+        }
     });
 
     $('#fake_reload').click(function() {
@@ -96,14 +109,6 @@ $(function() {
             bottom: 80
         }
     })
-
-    simplemde = new SimpleMDE({
-        element: document.getElementById('nlog_body'),
-        hideIcons: ["side-by-side", "italic", "heading"],
-        spellChecker: false,
-        status: false,
-        tabSize: 4
-    });
 
     loadLogs();
 
@@ -171,7 +176,7 @@ function loadSingleLog(log) {
         if(res.reminder) {
             $('#nlog_highlight').attr('checked', true);
         }
-        simplemde.value(res.body);
+        tinymce.get('nlog_body_mce').setContent(res.body);
         $('#update_log').val(res.id);
         $('#form_cancel_update').removeClass('hidden');
 
@@ -206,7 +211,6 @@ function clearForm() {
     $('#error_nlog_body').hide();
     $('#update_log').val(0);
     $('#nlog_header_text').html('{% trans "New log!" %}');
-    simplemde.value('');
 }
 
 function qs(el) {
@@ -260,10 +264,10 @@ function qs(el) {
                         <span class="log_date_end" v-if="log.end_date"> > [[ log.end_date | moment ]]</span>
                     </span>
                     </div>
-                    <p v-html="hl_hashtags(log.body_md)"></p>
+                    <p v-html="hl_hashtags(log.body)"></p>
 
                     <div class="has_labels" v-show="log.companies.length || log.people.length || log.hashtags.length">
-                        <span class="label label-primary" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span><span class="label label-success" onclick="qs(this);" v-for="person in log.people">[[ person.name ]]</span><span class="label label-default" onclick="qs(this);" v-for="tag in log.hashtags">#[[ tag ]]</span>
+                        <span class="label label-info" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span><span class="label label-success" onclick="qs(this);" v-for="person in log.people">[[ person.name ]]</span><span class="label label-default" onclick="qs(this);" v-for="tag in log.hashtags">#[[ tag ]]</span>
                     </div>
 
                 </div>
@@ -344,10 +348,7 @@ function qs(el) {
             </div>
             <div class="form-group">
                 <label for="nlog_body">{% trans "Description..." %}</label><div class="form_error pull-right" id="error_nlog_body"> {% trans 'Type at least 5 characters' %}</div>
-                <textarea class="form-control" rows="4" id="nlog_body"></textarea>
-            </div>
-            <div class="form-group">
-                <textarea class="form-control mention" rows="4" id="nlog_mentions"></textarea>
+                <textarea class="form-control mention" rows="4" id="nlog_body_mce"></textarea>
             </div>
             <div class="checkbox">
                 <label>
@@ -392,7 +393,7 @@ vlogs = new Vue({
             var ratio = 0.75;
             return this.logs.filter(function(log) {
                 return (
-                    (log.body_md.toLowerCase().fuzzy(localq, ratio)) ||
+                    (log.body.toLowerCase().fuzzy(localq, ratio)) ||
                     (log.meta.toLowerCase().fuzzy(localq, ratio)) ||
                     (log.start_date.toLowerCase().fuzzy(localq, 1))
                 )

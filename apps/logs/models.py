@@ -25,7 +25,7 @@ class LogKind(models.Model):
 class Log(models.Model):
     owner = models.ForeignKey(User)
     kind = models.ForeignKey(LogKind)
-    body = models.TextField()
+    body = models.TextField(null=True)
     start_date = models.DateTimeField(_('date start'), blank=False)
     end_date = models.DateTimeField(_('date end'), blank=True, null=True)
 

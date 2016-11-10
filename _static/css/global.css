@@ -476,3 +476,8 @@ input.form-little {
     margin-top: 21px;
     color: #fff;
 }
+
+
+.mce-panel {
+    border: 1px solid #dce4ec !important;
+}
