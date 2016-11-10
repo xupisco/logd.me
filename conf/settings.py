@@ -99,6 +99,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'conf.context_processors.settings_context'
             ],
         },
     },
@@ -122,6 +123,9 @@ ACCOUNT_PASSWORD_MIN_LENGTH = 6
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_LOGOUT_REDIRECT_URL = '/login'
 
+SITE_NAME = 'ownCRM'
+OG_DESCRIPTION = 'Your personal and friendly life log!'
+GTM_ID = config("GTM_ID", default='')
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = [os.path.join(BASE_DIR, '_emails')]
