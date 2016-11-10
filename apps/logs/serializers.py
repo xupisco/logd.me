@@ -36,10 +36,18 @@ class LogSerializer(serializers.ModelSerializer):
 
     # todo: fix this...
     def get_meta(self, obj):
-        people = ', '.join(str(val) for val in obj.people.values_list('name', 'email', ))
-        companies = ', '.join(str(val) for val in obj.companies.values_list('name', ))
+        people = ', '.join(
+            str(val) for val in obj.people.values_list('name', 'email', )
+        )
+        companies = ', '.join(
+            str(val) for val in obj.companies.values_list('name', )
+        )
+
+        highligh = "!!!" if obj.reminder else ""
 
         res = list(obj.people.values_list('name', 'email')) + \
             list(obj.companies.values_list('name'))
 
-        return ', '.join(tuple([x[0] for x in res]) + tuple(obj.hashtags))
+        return ', '.join(tuple([x[0] for x in res]) + \
+            tuple(obj.hashtags)) + \
+            ', ' + highligh
