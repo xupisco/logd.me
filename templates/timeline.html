@@ -206,8 +206,7 @@ function qs(el) {
 <div class="col-md-8">
     <div class="timeline-centered" id="main_timeline">
 
-        <div v-cloak class='v-cloak--hidden'>
-        <article class="timeline-entry" v-if="!filteredLogs.length">
+        <article class="timeline-entry" v-if="!filteredLogs.length && q">
             <div class="timeline-entry-inner">
 
                 <div class="timeline-icon bg-danger">
@@ -224,7 +223,6 @@ function qs(el) {
                 </div>
             </div>
         </article>
-        </div>
 
         <article class="timeline-entry" v-for="log in filteredLogs">
             <div class="timeline-entry-inner">
