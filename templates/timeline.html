@@ -217,7 +217,7 @@ function qs(el) {
                         <span class="log_date_end" v-if="log.end_date"> > [[ log.end_date | moment ]]</span>
                     </span>
                     </div>
-                    <p v-html="log.body_md"></p>
+                    <p v-html="hl_hashtags(log.body_md)"></p>
 
                     <div class="has_labels" v-show="log.companies.length || log.people.length || log.hashtags.length">
                         <span class="label label-primary" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span><span class="label label-success" onclick="qs(this);" v-for="person in log.people">[[ person.name ]]</span><span class="label label-default" onclick="qs(this);" v-for="tag in log.hashtags">#[[ tag ]]</span>
@@ -356,10 +356,14 @@ vlogs = new Vue({
     methods: {
         editLog: function(id, ev) {
             loadSingleLog(id[0][0])
+        },
+        hl_hashtags: function(txt) {
+            var all_re = /(#[a-z0-9][a-z0-9\-_]*)/ig;
+            return txt.replace(all_re, "<span class='hashtag'>$1</span>");
         }
     },
     filters: {
-        moment: function (date) {
+        moment: function(date) {
             return moment(date).format('DD/MM/YYYY HH:mm');
         }
     }

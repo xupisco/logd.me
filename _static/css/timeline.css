@@ -269,6 +269,13 @@
     margin-top: 10px !important;
 }
 
+.timeline-entry .hashtag {
+    color: #4d5414;
+    background-color: #ffffc3;
+    font-size: 13px;
+    padding: 1px 4px;
+}
+
 .timeline-label:hover {
     -webkit-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
     -moz-box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.1);
