@@ -70,7 +70,7 @@ html {
     float: right;
     font-size: 31px;
     font-family: 'Ubuntu Condensed';
-    margin-top: 5px;
+    margin-top: 6px;
     text-align: center;
 }
 
@@ -468,4 +468,11 @@ input.form-little {
     top: 50%;
     transform: translate(-50%, -50%); /* Yep! */
     width: 100%;
+}
+
+.languages {
+    float: right;
+    margin-right: 20px;
+    margin-top: 21px;
+    color: #fff;
 }
