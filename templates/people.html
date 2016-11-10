@@ -4,28 +4,6 @@
 {% block js %}
 <script type="text/javascript">
 var vlogs;
-$(function() {
-    vlogs = new Vue({
-        el: '#vue_app',
-        delimiters: ["[[", "]]"],
-        data: {
-            q: '',
-            people: {{ people|safe }}
-        },
-        computed: {
-            filteredPeople() {
-                var self = this
-                return this.people.filter(function(person) {
-                    return (
-                        (person.name.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
-                        (person.company__name.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
-                        (person.role__name.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
-                    )
-                })
-            }
-        }
-    })
-})
 </script>
 {% endblock %}
 
@@ -53,4 +31,29 @@ $(function() {
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block js_footer %}
+<script type="text/javascript">
+vlogs = new Vue({
+    el: '#vue_app',
+    delimiters: ["[[", "]]"],
+    data: {
+        q: '',
+        people: {{ people|safe }}
+    },
+    computed: {
+        filteredPeople() {
+            var self = this
+            return this.people.filter(function(person) {
+                return (
+                    (person.name.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
+                    (person.company__name.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
+                    (person.role__name.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
+                )
+            })
+        }
+    }
+})
+</script>
 {% endblock %}

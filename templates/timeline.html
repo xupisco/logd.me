@@ -73,9 +73,7 @@ $(function() {
     $('#side_affix').affix({
         offset: {
             top: 85,
-            bottom: function () {
-                return (this.bottom = $('.footer').outerHeight(true))
-            }
+            bottom: 85
         }
     })
 
@@ -135,7 +133,11 @@ function clearForm() {
 }
 
 function qs(el) {
-    vlogs.q = vlogs.q + " " + $(el).html();
+    current_content = vlogs.q
+    if(current_content.length) {
+        current_content += " "
+    }
+    vlogs.q = current_content + $(el).html();
 }
 </script>
 {% endblock %}
@@ -144,6 +146,7 @@ function qs(el) {
 <div class="col-md-8">
     <div class="timeline-centered" id="main_timeline">
 
+        <div v-cloak class='v-cloak--hidden'>
         <article class="timeline-entry" v-if="!filteredLogs.length">
             <div class="timeline-entry-inner">
 
@@ -161,6 +164,7 @@ function qs(el) {
                 </div>
             </div>
         </article>
+        </div>
 
         <article class="timeline-entry" v-for="log in filteredLogs">
             <div class="timeline-entry-inner">
@@ -297,12 +301,12 @@ vlogs = new Vue({
             if (!this.logs) return 0;
             var self = this
             var localq = self.q.replace('#', '').toLowerCase();
-            var ratio = 0.5;
+            var ratio = 0.75;
             return this.logs.filter(function(log) {
                 return (
                     (log.body_md.toLowerCase().fuzzy(localq, ratio)) ||
                     (log.meta.toLowerCase().fuzzy(localq, ratio)) ||
-                    (log.start_date.toLowerCase().fuzzy(localq, ratio))
+                    (log.start_date.toLowerCase().fuzzy(localq, 1))
                 )
             }.bind(this))
         }
