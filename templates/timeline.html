@@ -66,19 +66,32 @@ $(function() {
         mentions: {
             delay: 0,
             source: [
-                { name: 'Tyra Porcelli', type: 'person', id: 3 }, 
-                { name: 'Brigid Reddish', type: 'person', id: 1 },
-                { name: 'Ashely Buckler', type: 'person', id: 5 },
-                { name: 'Teddy Whelan', type: 'person', id: 13 },
+                { name: 'Tyra Porcelli', email: 'alaor@gomes.com', type: 'person', id: 3 }, 
+                { name: 'Brigid Reddish', email: 'john@doe.com', type: 'person', id: 1 },
+                { name: 'Ashely Buckler', email: 'buckler@yahoo.com', type: 'person', id: 5 },
+                { name: 'Teddy Whelan', email: 'teddy@facebook.com', type: 'person', id: 13 },
                 { name: 'Google', type: 'company', id: 1 },
                 { name: 'Microsoft', type: 'company', id: 4 },
             ],
             insert: function(item) {
-                var it = "person"
+                var it = "person";
                 if(item.type == 'company') {
                     it = "company"
                 }
                 return '<span class="hl_mention_' + it + '" data-type="' + item.type + '" data-id="' + item.id + '">@' + item.name + '</span>&nbsp;';
+            },
+            render: function(item) {
+                var email = "";
+                var icon = "user";
+                if(item.email) {
+                    email = ' &lt;' + item.email + '&gt;';
+                }
+                if(item.type == "company") {
+                    icon = "briefcase";
+                }
+                return '<li>' +
+                       '<a href="javascript:;"><span class="glyphicon glyphicon-' + icon + '" aria-hidden="true" style="margin-right: 5px"></span> <span>' + item.name + email + '</span></a>' +
+                       '</li>';
             }
         }
     });
