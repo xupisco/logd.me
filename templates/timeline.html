@@ -5,6 +5,7 @@
 {% block js %}
 <script type="text/javascript">
 var vlogs;
+var db_kinds = {{ kinds.count }};
 
 $(function() {
     $('.has_enddate').click(function() {
@@ -15,10 +16,23 @@ $(function() {
         $('.help_text').toggleClass('hidden');
     })
 
+    if(!db_kinds) {
+        $('#new_kind').hide();
+        $('.custom_select_container').hide();
+        $('#nlog_kind_create').removeClass('hidden');
+        $('#cancel_new_kind').hide();
+    }
+
     $('form#new_log').submit(function() {
         var errors = false;
         $('#error_nlog_start_date').hide();
         $('#error_nlog_body').hide();
+        $('#error_nlog_kind').hide();
+
+        if(!db_kinds && !$('#nlog_kind_text').val()) {
+            errors = true;
+            $('#error_nlog_kind').show();
+        }
 
         post_data = {
             'nkind_text': $('#nlog_kind_text').val(),
@@ -385,7 +399,7 @@ function qs(el) {
             <div class="form-group">
                 <a id="new_kind" class="label label-warning new_kind pull-right">{% trans "+ new" %}</a>
                 <a id="cancel_new_kind" class="label label-danger new_kind pull-right hidden">{% trans "cancel" %}</a>
-                <label for="nlog_kind">{% trans "What?" %}</label>
+                <label for="nlog_kind">{% trans "What?" %}</label><div class="form_error pull-right" id="error_nlog_kind"> {% trans 'Required' %}</div>
                 <div class="custom_select_container">
                 <select class="form-control" id="nlog_kind">
                     {% for kind in kinds %}
