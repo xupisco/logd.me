@@ -71,7 +71,7 @@ $(function() {
                 if(item.type == 'company') {
                     it = "company"
                 }
-                return '<span class="hl_mention_' + it + '" data-type="' + item.type + '" data-id="' + item.id + '">' + item.name + '</span>&nbsp;';
+                return '<span class="hl_mention_' + it + '" data-id="' + item.id + '">' + item.name + '</span>&nbsp;';
             },
             render: function(item) {
                 var email = "";

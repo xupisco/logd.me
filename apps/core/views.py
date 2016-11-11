@@ -10,6 +10,7 @@ from django.utils import translation
 from django.utils.text import slugify
 
 import json
+import re
 from datetime import datetime
 
 from ..logs.models import Log, LogKind
@@ -109,6 +110,30 @@ def newlog(request):
     nlog_body = request.POST.get('nlog_body')
     is_update = int(request.POST.get('is_update'))
 
+    mentions_re = r"<span class=\"hl_mention_([^\"]+)\".*?\"([^\"]+)\".*?<\/span>"
+    parsed_mentions = re.findall(mentions_re, nlog_body)
+
+    nlog_companies = []
+    nlog_people = []
+
+    parsed_companies = []
+    parsed_people = []
+
+    for mention in parsed_mentions:
+        if mention[0] == 'company':
+            parsed_companies.append(mention[1])
+
+        if mention[0] == 'person':
+            parsed_people.append(mention[1])
+
+    if len(parsed_companies):
+        nlog_companies = Company.objects.filter(owner=request.user) \
+            .filter(id__in=parsed_companies)
+
+    if len(parsed_people):
+        nlog_people = Person.objects.filter(owner=request.user) \
+            .filter(id__in=parsed_people)
+
     nkind_text = nkind_text if len(nkind_text) > 1 else False
     nlog_end_date = nlog_end_date if len(nlog_end_date) > 1 else False
     nlog_highlight = True if nlog_highlight == 'true' else False
@@ -133,7 +158,9 @@ def newlog(request):
             start_date=start_date,
             end_date=end_date,
             reminder=nlog_highlight,
-            body=nlog_body
+            body=nlog_body,
+            companies=nlog_companies,
+            people=nlog_people
         )
     else:
         nlog = Log.objects.get(id=is_update)
@@ -142,6 +169,8 @@ def newlog(request):
         nlog.end_date = end_date
         nlog.reminder = nlog_highlight
         nlog.body = nlog_body
+        nlog.companies = nlog_companies
+        nlog.people = nlog_people
 
     nlog.save()
 

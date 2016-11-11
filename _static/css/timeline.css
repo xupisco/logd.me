@@ -272,22 +272,25 @@
 .timeline-entry .hashtag {
     color: #4d5414;
     background-color: #ffffc3;
-    font-size: 13px;
+    font-size: 12px;
     padding: 1px 3px;
+    font-family: monospace;
 }
 
 .timeline-entry .hl_mention_person {
     color: #433e4e;
     background-color: #dff7f2;
-    font-size: 13px;
+    font-size: 12px;
     padding: 1px 3px;
+    font-family: monospace;
 }
 
 .timeline-entry .hl_mention_company {
     color: #433e4e;
     background-color:#d7ebf9;
-    font-size: 13px;
+    font-size: 12px;
     padding: 1px 3px;
+    font-family: monospace;
 }
 
 .timeline-entry blockquote {
