@@ -66,6 +66,12 @@ $(function() {
         mentions: {
             delay: 0,
             source: {{ mentions | safe }},
+            strings: {
+                'create': "{% trans "Create" %}",
+                'as': "{% trans "as" %}",
+                'person': "{% trans "Person" %}",
+                'company': "{% trans "Company" %}",
+            },
             insert: function(item) {
                 var it = "person";
                 if(item.type == 'company') {
@@ -162,6 +168,7 @@ function showRemoveConfirmation(log) {
 
     $('#confid_' + log).click(function() {
         removeLog(log);
+        $(this).hide();
     });
 }
 

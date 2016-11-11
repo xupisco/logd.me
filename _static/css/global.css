@@ -499,3 +499,26 @@ input.form-little {
 .mce-panel {
     border: 1px solid #dce4ec !important;
 }
+
+.dropdown-menu > li.inlinenew {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #7b8a8b;
+    white-space: nowrap;
+}
+
+
+.dropdown-menu .inlinenew a {
+    text-decoration: none !important;
+}
+
+.dropdown-menu .label-info:hover {
+    background-color: #196ea7 !important;
+}
+
+.dropdown-menu .label-success:hover {
+    background-color: #188e77 !important;
+}

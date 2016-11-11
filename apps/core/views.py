@@ -110,7 +110,7 @@ def newlog(request):
     nlog_body = request.POST.get('nlog_body')
     is_update = int(request.POST.get('is_update'))
 
-    mentions_re = r"<span class=\"hl_mention_([^\"]+)\".*?\"([^\"]+)\".*?<\/span>"
+    mentions_re = r"<span class=\"hl_mention_([^\"]+)\".*?\"([^\"]+)\".*?>(.*?)<\/span>"
     parsed_mentions = re.findall(mentions_re, nlog_body)
 
     nlog_companies = []
@@ -121,10 +121,43 @@ def newlog(request):
 
     for mention in parsed_mentions:
         if mention[0] == 'company':
-            parsed_companies.append(mention[1])
+            if int(mention[1]) == 0:
+                c_exists = Company.objects.filter(owner=request.user,
+                                                  name=mention[2])
+
+                if not c_exists:
+                    nlog_company = Company(owner=request.user,
+                                           name=mention[2])
+                    nlog_company.save()
+
+                    old_string = '<span class="hl_mention_company" data-id="0">{0}</span>'.format(mention[2])
+                    new_string = '<span class="hl_mention_company" data-id="{0}">{1}</span>'.format(nlog_company.pk, mention[2])
+
+                    nlog_body = nlog_body.replace(old_string, new_string)
+                    parsed_companies.append(nlog_company.pk)
+                else:
+                    parsed_companies.append(c_exists[0].id)
+            else:
+                parsed_companies.append(mention[1])
 
         if mention[0] == 'person':
-            parsed_people.append(mention[1])
+            if int(mention[1]) == 0:
+                p_exists = Person.objects.filter(owner=request.user, name=mention[2])
+
+                if not p_exists:
+                    nlog_person = Person(owner=request.user,
+                                         name=mention[2])
+                    nlog_person.save()
+
+                    old_string = '<span class="hl_mention_person" data-id="0">{0}</span>'.format(mention[2])
+                    new_string = '<span class="hl_mention_person" data-id="{0}">{1}</span>'.format(nlog_person.pk, mention[2])
+
+                    nlog_body = nlog_body.replace(old_string, new_string)
+                    parsed_people.append(nlog_person.pk)
+                else:
+                    parsed_people.append(p_exists[0].id)
+            else:
+                parsed_people.append(mention[1])
 
     if len(parsed_companies):
         nlog_companies = Company.objects.filter(owner=request.user) \
@@ -158,10 +191,9 @@ def newlog(request):
             start_date=start_date,
             end_date=end_date,
             reminder=nlog_highlight,
-            body=nlog_body,
-            companies=nlog_companies,
-            people=nlog_people
+            body=nlog_body
         )
+        nlog.save()
     else:
         nlog = Log.objects.get(id=is_update)
         nlog.kind = kind
@@ -169,9 +201,9 @@ def newlog(request):
         nlog.end_date = end_date
         nlog.reminder = nlog_highlight
         nlog.body = nlog_body
-        nlog.companies = nlog_companies
-        nlog.people = nlog_people
 
+    nlog.companies = nlog_companies
+    nlog.people = nlog_people
     nlog.save()
 
     response_data = {}
