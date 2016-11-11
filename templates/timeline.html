@@ -395,7 +395,7 @@ vlogs = new Vue({
                 return (
                     (log.body.toLowerCase().fuzzy(localq, ratio)) ||
                     (log.meta.toLowerCase().fuzzy(localq, ratio)) ||
-                    (log.start_date.toLowerCase().fuzzy(localq, 1))
+                    (moment(log.start_date).format("DD/MM/YYYY").indexOf(localq) != -1)
                 )
             }.bind(this))
         }

@@ -63,8 +63,10 @@
         });
 
         Mousetrap.bind('/', function(e) {
-            e.preventDefault();
-            $('#q').focus();
+            if($(':focus').attr('id') != "q") {
+                e.preventDefault();
+                $('#q').focus();
+            }
         });
 
         Mousetrap.bind(['esc', 'escape'], function(e) {
