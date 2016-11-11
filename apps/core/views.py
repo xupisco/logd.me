@@ -119,6 +119,8 @@ def newlog(request):
     parsed_companies = []
     parsed_people = []
 
+    base_string = '<span class="hl_mention_{0}" data-id="{1}">{2}</span>'
+
     for mention in parsed_mentions:
         if mention[0] == 'company':
             if int(mention[1]) == 0:
@@ -130,8 +132,8 @@ def newlog(request):
                                            name=mention[2])
                     nlog_company.save()
 
-                    old_string = '<span class="hl_mention_company" data-id="0">{0}</span>'.format(mention[2])
-                    new_string = '<span class="hl_mention_company" data-id="{0}">{1}</span>'.format(nlog_company.pk, mention[2])
+                    old_string = base_string.format('company', 0, mention[2])
+                    new_string = base_string.format('company', nlog_company.pk, mention[2])
 
                     nlog_body = nlog_body.replace(old_string, new_string)
                     parsed_companies.append(nlog_company.pk)
@@ -149,8 +151,8 @@ def newlog(request):
                                          name=mention[2])
                     nlog_person.save()
 
-                    old_string = '<span class="hl_mention_person" data-id="0">{0}</span>'.format(mention[2])
-                    new_string = '<span class="hl_mention_person" data-id="{0}">{1}</span>'.format(nlog_person.pk, mention[2])
+                    old_string = base_string.format('person', 0, mention[2])
+                    new_string = base_string.format('person', nlog_person.pk, mention[2])
 
                     nlog_body = nlog_body.replace(old_string, new_string)
                     parsed_people.append(nlog_person.pk)
