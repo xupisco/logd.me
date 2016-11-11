@@ -541,3 +541,8 @@ p.hint {
     padding: 2px 0px;
     color: #777;
 }
+
+li.disabled {
+    color: #73899e;
+    padding: 20px;
+}
