@@ -264,8 +264,9 @@ img.avatar_card {
     margin-top: 10px;
 }
 
-.label {
+.has_labels .label {
     margin-right: 5px;
+    display: inline-block;
 }
 
 #icon_clear {
@@ -295,6 +296,22 @@ img.avatar_card {
     position: fixed !important;
     top: 0;
     width: 350px;
+}
+
+@media (max-width: 768px) {
+    #side_affix.affix {
+        position: static !important;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .custom_select_container .btn-group {
+        width: 100% !important;
+    }
+
+    #icon_clear {
+        top: 250px !important;
+    }
 }
 
 .editor-toolbar {
@@ -329,11 +346,12 @@ img.avatar_card {
 }
 
 input.form-little {
-    width: 155px !important;
+    width: 138px !important;
     height: 25px;
     font-size: 12px;
     padding: 0 4px;
     background-color: #ecf0f1;
+    display: inline;
 }
 
 .icons {
