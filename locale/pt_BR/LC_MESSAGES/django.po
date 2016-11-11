@@ -3,49 +3,49 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Fernando Macedo <fgmacedo@gmail.com>, 2016.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-10 17:07-0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2016-11-11 17:07-0200\n"
+"PO-Revision-Date: 2016-11-11 17:09-0200\n"
 "Last-Translator: Fernando Macedo <fgmacedo@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: pt-br\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.7.1\n"
 
-#: apps/companies/apps.py:8 apps/companies/models.py:22 apps/logs/admin.py:18
+#: apps/companies/apps.py:8 apps/companies/models.py:23 apps/logs/admin.py:18
 msgid "companies"
 msgstr "empresas"
 
-#: apps/companies/models.py:10 apps/logs/models.py:17 apps/people/models.py:12
+#: apps/companies/models.py:11 apps/logs/models.py:17 apps/people/models.py:12
 #: apps/people/models.py:23
 msgid "name"
 msgstr "nome"
 
-#: apps/companies/models.py:11 apps/logs/models.py:18 apps/people/models.py:13
+#: apps/companies/models.py:12 apps/logs/models.py:18 apps/people/models.py:13
 msgid "slug"
 msgstr "slug"
 
-#: apps/companies/models.py:12
+#: apps/companies/models.py:13
 msgid "domain"
 msgstr "domínio"
 
-#: apps/companies/models.py:14 apps/logs/models.py:37 apps/people/models.py:29
+#: apps/companies/models.py:15 apps/logs/models.py:37 apps/people/models.py:29
 #: apps/people/models.py:47
 msgid "created on"
 msgstr "criado em"
 
-#: apps/companies/models.py:15 apps/logs/models.py:38 apps/people/models.py:30
+#: apps/companies/models.py:16 apps/logs/models.py:38 apps/people/models.py:30
 #: apps/people/models.py:48
 msgid "updated on"
 msgstr "atualizado em"
 
-#: apps/companies/models.py:21
+#: apps/companies/models.py:22
 msgid "company"
 msgstr "empresa"
 
@@ -97,11 +97,11 @@ msgstr "pessoa"
 msgid "was working at"
 msgstr "estava trabalhando em"
 
-#: conf/settings.py:181
+#: conf/settings.py:185
 msgid "English"
 msgstr "Inglês"
 
-#: conf/settings.py:182
+#: conf/settings.py:186
 msgid "Portuguese (Brazil)"
 msgstr "Português (Brasil)"
 
@@ -113,42 +113,45 @@ msgstr "Página não encontrada."
 msgid "Internal server error."
 msgstr "Erro interno no servidor."
 
-#: templates/includes/_base.html:88
+#: templates/includes/_base.html:104
+msgid "Log successfully saved!"
+msgstr "Registro salvo com sucesso!"
+
+#: templates/includes/_base.html:110
 msgid "Ouch! Something went wrong..."
 msgstr "Arrrgh! Algo deu errado..."
 
-#: templates/includes/_base.html:106
+#: templates/includes/_base.html:128
 msgid "Logs"
 msgstr "Registros"
 
-#: templates/includes/_base.html:107
+#: templates/includes/_base.html:129
 msgid "People"
 msgstr "Pessoas"
 
-#: templates/includes/_base.html:108
+#: templates/includes/_base.html:130
 msgid "Companies"
 msgstr "Empresas"
 
-#: templates/includes/_base.html:109
+#: templates/includes/_base.html:131
 msgid "Calendar"
 msgstr "Calendário"
 
-#: templates/includes/_base.html:113
+#: templates/includes/_base.html:135
 msgid "Type anything..."
 msgstr "Digite qualquer coisa..."
 
-#: templates/includes/_base.html:143
+#: templates/includes/_base.html:165
 msgid "Login"
 msgstr "Entrar"
 
-#: templates/includes/_base.html:161
-#, python-format
+#: templates/includes/_base.html:183 templates/login.html:20
 msgid ""
-"\n"
-"                    Política de Privacidade e Segurança - Termos e Condições "
-"de Uso | Todos os direitos reservados, @xupisco %(current_year)s©\n"
-"                "
+"This project is opensource, feel free to use and support! <a href=\"https://"
+"github.com/xupisco/ownCRM/\">Fork me!</a>"
 msgstr ""
+"Este projeto é de código aberto, sinta-se livre para usar e apoiar! <a href="
+"\"https://github.com/xupisco/ownCRM/\">Github</a>"
 
 #: templates/login.html:12
 msgid "Your personal and friendly life log."
@@ -162,27 +165,35 @@ msgstr ""
 "Não se preocupe, não queremos suas informações...  login é apenas para fins "
 "de autenticação."
 
-#: templates/login.html:20
-msgid ""
-"This project is opensource, feel free to use and support! <a href=\"https://"
-"github.com/xupisco/ownCRM/\">Fork me!</a>"
-msgstr ""
-"Este projeto é de código aberto, sinta-se livre para usar e apoiar! <a href="
-"\"https://github.com/xupisco/ownCRM/\">Github</a>"
+#: templates/timeline.html:75
+msgid "Create"
+msgstr "Criar"
 
-#: templates/timeline.html:142
+#: templates/timeline.html:76
+msgid "as"
+msgstr "como"
+
+#: templates/timeline.html:77
+msgid "Person"
+msgstr "Pessoa"
+
+#: templates/timeline.html:78
+msgid "Company"
+msgstr "Empresa"
+
+#: templates/timeline.html:182
 msgid "Loading..."
 msgstr "Carregando..."
 
-#: templates/timeline.html:161
+#: templates/timeline.html:201
 msgid "Update log!"
 msgstr "Atualizar registro!"
 
-#: templates/timeline.html:191 templates/timeline.html:287
+#: templates/timeline.html:238 templates/timeline.html:380
 msgid "New log!"
 msgstr "Novo registro!"
 
-#: templates/timeline.html:217
+#: templates/timeline.html:263
 msgid ""
 "\n"
 "                    <p>\n"
@@ -194,21 +205,66 @@ msgid ""
 msgstr ""
 "\n"
 "                    <p>\n"
-"                    <h3 style=\"margin: 3px\">Oooops, nada encontrado!</h3>\n"
+"                    <h3 style=\"margin: 3px\">Oooops, nada encontrado!</"
+"h3>\n"
 "                    Sua busca não encontrou nenhum resultado, tente usar "
 "outras palavras...\n"
 "                    </p>\n"
 "                    "
 
-#: templates/timeline.html:238
+#: templates/timeline.html:284
 msgid "Sure?"
 msgstr "Certeza?"
 
-#: templates/timeline.html:238
+#: templates/timeline.html:284
 msgid "click again..."
 msgstr "clique novamente..."
 
-#: templates/timeline.html:264
+#: templates/timeline.html:311
+msgid "First Steps"
+msgstr "Primeiros passos"
+
+#: templates/timeline.html:312
+msgid ""
+"\n"
+"                        <small>Welcome to your personal and friendly life "
+"log, let's get started!</small><br /><br />\n"
+"                        <p>\n"
+"                        <strong>First things first, what is this?</"
+"strong><br />\n"
+"                        Answer...\n"
+"                        </p>\n"
+"\n"
+"                        <p>\n"
+"                        <strong>Cool, how can I use it?</strong><br />\n"
+"                        Answer...\n"
+"                        </p>\n"
+"\n"
+"                        <p>\n"
+"                        <strong>Is it free?</strong><br />\n"
+"                        Answer...\n"
+"                        </p>\n"
+"\n"
+"                        <p>\n"
+"                        <strong>So, it's not free but I can have my own?</"
+"strong><br />\n"
+"                        Answer...\n"
+"                        </p>\n"
+"\n"
+"                        <p>\n"
+"                        <strong>Is there &lt;name your feature&gt;?</"
+"strong><br />\n"
+"                        Answer...\n"
+"                        </p>\n"
+"\n"
+"                        <p>\n"
+"                        <strong>I love you!</strong><br />\n"
+"                        We love you too!\n"
+"                        </p>\n"
+"                    "
+msgstr ""
+
+#: templates/timeline.html:357
 msgid ""
 "\n"
 "                    <p>\n"
@@ -232,58 +288,62 @@ msgstr ""
 "strong></div></p>\n"
 "                    "
 
-#: templates/timeline.html:290
+#: templates/timeline.html:383
 msgid "+ new"
 msgstr "+ novo"
 
-#: templates/timeline.html:291
+#: templates/timeline.html:384
 msgid "cancel"
 msgstr "cancelar"
 
-#: templates/timeline.html:292
+#: templates/timeline.html:385
 msgid "What?"
 msgstr "O que?"
 
-#: templates/timeline.html:302
+#: templates/timeline.html:395
 msgid "Name:"
 msgstr "Nome:"
 
-#: templates/timeline.html:304
+#: templates/timeline.html:397
 msgid "Icon:"
 msgstr "Ícone:"
 
-#: templates/timeline.html:316
+#: templates/timeline.html:409
 msgid "When?"
 msgstr "Quando?"
 
-#: templates/timeline.html:316
+#: templates/timeline.html:409
 msgid "Required"
 msgstr "Obrigatório"
 
-#: templates/timeline.html:321
+#: templates/timeline.html:414
 msgid "Has end date?"
 msgstr "Tem data de término?"
 
-#: templates/timeline.html:325
+#: templates/timeline.html:418
 msgid "When ended?"
 msgstr "Quando terminou?"
 
-#: templates/timeline.html:329
+#: templates/timeline.html:422
 msgid "Description..."
 msgstr "Descrição..."
 
-#: templates/timeline.html:329
+#: templates/timeline.html:422
 msgid "Type at least 5 characters"
 msgstr "Digite pelo menos 5 caracteres"
 
-#: templates/timeline.html:334
+#: templates/timeline.html:424
+msgid "Type '@' to mention people and companies."
+msgstr "Digite '@' para citar pessoas e empresas."
+
+#: templates/timeline.html:428
 msgid "Highlight?"
 msgstr "Destaque?"
 
-#: templates/timeline.html:339
+#: templates/timeline.html:433
 msgid "Add log..."
 msgstr "Adicionar registro..."
 
-#: templates/timeline.html:340
+#: templates/timeline.html:434
 msgid "Cancel!"
 msgstr "Cancelar!"
