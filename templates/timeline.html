@@ -11,6 +11,10 @@ $(function() {
         $('.end_date').toggleClass('hidden');
     });
 
+    $('.help_toggle').click(function() {
+        $('.help_text').toggleClass('hidden');
+    })
+
     $('form#new_log').submit(function() {
         var errors = false;
         $('#error_nlog_start_date').hide();
@@ -46,6 +50,7 @@ $(function() {
             if (res.success) {
                 clearForm();
                 loadLogs();
+                showSuccessMessage();
             } else {
                 showError();
             }
@@ -204,6 +209,13 @@ function loadLogs() {
     });
 }
 
+function showSuccessMessage() {
+    $('.msg_success_newlog').hide().removeClass('hidden')
+        .fadeIn('fast').delay(100).fadeOut('fast')
+        .fadeIn('fast').delay(100).fadeOut('fast')
+        .fadeIn('fast').delay(2000).fadeOut();
+}
+
 function removeLog(id) {
     var post_data = {
         'log_id': id,
@@ -283,6 +295,53 @@ function qs(el) {
                         <span class="label label-info" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span><span class="label label-success" onclick="qs(this);" v-for="person in log.people">[[ person.name ]]</span><span class="label label-default" onclick="qs(this);" v-for="tag in log.hashtags">#[[ tag ]]</span>
                     </div>
 
+                </div>
+            </div>
+        </article>
+
+        <article class="timeline-entry">
+            <div class="timeline-entry-inner">
+
+                <div class="timeline-icon bg-default help_toggle" style="color: #5292d2; font-size: 40px;">
+                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+                </div>
+
+                <div class="timeline-label help_text hidden">
+                    <p>
+                    <h3 style="margin: 0">{% trans "First Steps" %}</h3>
+                    {% blocktrans %}
+                        <small>Welcome to your personal and friendly life log, let's get started!</small><br /><br />
+                        <p>
+                        <strong>First things first, what is this?</strong><br />
+                        Answer...
+                        </p>
+
+                        <p>
+                        <strong>Cool, how can I use it?</strong><br />
+                        Answer...
+                        </p>
+
+                        <p>
+                        <strong>Is it free?</strong><br />
+                        Answer...
+                        </p>
+
+                        <p>
+                        <strong>So, it's not free but I can have my own?</strong><br />
+                        Answer...
+                        </p>
+
+                        <p>
+                        <strong>Is there &lt;name your feature&gt;</strong><br />
+                        Answer...
+                        </p>
+
+                        <p>
+                        <strong>I love you!</strong><br />
+                        We love you too!
+                        </p>
+                    {% endblocktrans %}
+                    </p>
                 </div>
             </div>
         </article>

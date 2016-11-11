@@ -510,6 +510,9 @@ input.form-little {
     white-space: nowrap;
 }
 
+.help_toggle {
+    cursor: pointer;
+}
 
 .dropdown-menu .inlinenew a {
     text-decoration: none !important;
@@ -521,4 +524,14 @@ input.form-little {
 
 .dropdown-menu .label-success:hover {
     background-color: #188e77 !important;
+}
+
+.msg_success_newlog {
+    position: fixed;
+    top: 76px;
+    left: 20px;
+    background-color: green;
+    color: #fff;
+    padding: 20px;
+    z-index: 100;
 }

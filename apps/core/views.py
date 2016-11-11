@@ -101,115 +101,120 @@ def calendar(request):
 
 # Temp stuff
 def newlog(request):
-    nkind_text = request.POST.get('nkind_text')
-    nkind_icon = request.POST.get('nkind_icon')
-    nlog_kind_id = request.POST.get('nlog_kind_id')
-    nlog_start_date = request.POST.get('nlog_start_date')
-    nlog_end_date = request.POST.get('nlog_end_date')
-    nlog_highlight = request.POST.get('nlog_highlight')
-    nlog_body = request.POST.get('nlog_body')
-    is_update = int(request.POST.get('is_update'))
+    # POG
+    try:
+        nkind_text = request.POST.get('nkind_text')
+        nkind_icon = request.POST.get('nkind_icon')
+        nlog_kind_id = request.POST.get('nlog_kind_id')
+        nlog_start_date = request.POST.get('nlog_start_date')
+        nlog_end_date = request.POST.get('nlog_end_date')
+        nlog_highlight = request.POST.get('nlog_highlight')
+        nlog_body = request.POST.get('nlog_body')
+        is_update = int(request.POST.get('is_update'))
 
-    mentions_re = r"<span class=\"hl_mention_([^\"]+)\".*?\"([^\"]+)\".*?>(.*?)<\/span>"
-    parsed_mentions = re.findall(mentions_re, nlog_body)
+        mentions_re = r"<span class=\"hl_mention_([^\"]+)\".*?\"([^\"]+)\".*?>(.*?)<\/span>"
+        parsed_mentions = re.findall(mentions_re, nlog_body)
 
-    nlog_companies = []
-    nlog_people = []
+        nlog_companies = []
+        nlog_people = []
 
-    parsed_companies = []
-    parsed_people = []
+        parsed_companies = []
+        parsed_people = []
 
-    base_string = '<span class="hl_mention_{0}" data-id="{1}">{2}</span>'
+        base_string = '<span class="hl_mention_{0}" data-id="{1}">{2}</span>'
 
-    for mention in parsed_mentions:
-        if mention[0] == 'company':
-            if int(mention[1]) == 0:
-                c_exists = Company.objects.filter(owner=request.user,
-                                                  name=mention[2])
+        for mention in parsed_mentions:
+            if mention[0] == 'company':
+                if int(mention[1]) == 0:
+                    c_exists = Company.objects.filter(owner=request.user,
+                                                      name=mention[2])
 
-                if not c_exists:
-                    nlog_company = Company(owner=request.user,
-                                           name=mention[2])
-                    nlog_company.save()
+                    if not c_exists:
+                        nlog_company = Company(owner=request.user,
+                                               name=mention[2])
+                        nlog_company.save()
 
-                    old_string = base_string.format('company', 0, mention[2])
-                    new_string = base_string.format('company', nlog_company.pk, mention[2])
+                        old_string = base_string.format('company', 0, mention[2])
+                        new_string = base_string.format('company', nlog_company.pk, mention[2])
 
-                    nlog_body = nlog_body.replace(old_string, new_string)
-                    parsed_companies.append(nlog_company.pk)
+                        nlog_body = nlog_body.replace(old_string, new_string)
+                        parsed_companies.append(nlog_company.pk)
+                    else:
+                        parsed_companies.append(c_exists[0].id)
                 else:
-                    parsed_companies.append(c_exists[0].id)
-            else:
-                parsed_companies.append(mention[1])
+                    parsed_companies.append(mention[1])
 
-        if mention[0] == 'person':
-            if int(mention[1]) == 0:
-                p_exists = Person.objects.filter(owner=request.user, name=mention[2])
+            if mention[0] == 'person':
+                if int(mention[1]) == 0:
+                    p_exists = Person.objects.filter(owner=request.user, name=mention[2])
 
-                if not p_exists:
-                    nlog_person = Person(owner=request.user,
-                                         name=mention[2])
-                    nlog_person.save()
+                    if not p_exists:
+                        nlog_person = Person(owner=request.user,
+                                             name=mention[2])
+                        nlog_person.save()
 
-                    old_string = base_string.format('person', 0, mention[2])
-                    new_string = base_string.format('person', nlog_person.pk, mention[2])
+                        old_string = base_string.format('person', 0, mention[2])
+                        new_string = base_string.format('person', nlog_person.pk, mention[2])
 
-                    nlog_body = nlog_body.replace(old_string, new_string)
-                    parsed_people.append(nlog_person.pk)
+                        nlog_body = nlog_body.replace(old_string, new_string)
+                        parsed_people.append(nlog_person.pk)
+                    else:
+                        parsed_people.append(p_exists[0].id)
                 else:
-                    parsed_people.append(p_exists[0].id)
-            else:
-                parsed_people.append(mention[1])
+                    parsed_people.append(mention[1])
 
-    if len(parsed_companies):
-        nlog_companies = Company.objects.filter(owner=request.user) \
-            .filter(id__in=parsed_companies)
+        if len(parsed_companies):
+            nlog_companies = Company.objects.filter(owner=request.user) \
+                .filter(id__in=parsed_companies)
 
-    if len(parsed_people):
-        nlog_people = Person.objects.filter(owner=request.user) \
-            .filter(id__in=parsed_people)
+        if len(parsed_people):
+            nlog_people = Person.objects.filter(owner=request.user) \
+                .filter(id__in=parsed_people)
 
-    nkind_text = nkind_text if len(nkind_text) > 1 else False
-    nlog_end_date = nlog_end_date if len(nlog_end_date) > 1 else False
-    nlog_highlight = True if nlog_highlight == 'true' else False
+        nkind_text = nkind_text if len(nkind_text) > 1 else False
+        nlog_end_date = nlog_end_date if len(nlog_end_date) > 1 else False
+        nlog_highlight = True if nlog_highlight == 'true' else False
 
-    if nkind_text:
-        kind, created = LogKind.objects.get_or_create(
-            owner=request.user,
-            name=nkind_text,
-            slug=slugify(nkind_text),
-            glyphicon_name=nkind_icon
-        )
-    else:
-        kind = LogKind.objects.get(id=nlog_kind_id)
+        if nkind_text:
+            kind, created = LogKind.objects.get_or_create(
+                owner=request.user,
+                name=nkind_text,
+                slug=slugify(nkind_text),
+                glyphicon_name=nkind_icon
+            )
+        else:
+            kind = LogKind.objects.get(id=nlog_kind_id)
 
-    start_date = datetime.strptime(nlog_start_date, "%d/%m/%Y %H:%M")
-    end_date = datetime.strptime(nlog_end_date, "%d/%m/%Y %H:%M") if nlog_end_date else None
+        start_date = datetime.strptime(nlog_start_date, "%d/%m/%Y %H:%M")
+        end_date = datetime.strptime(nlog_end_date, "%d/%m/%Y %H:%M") if nlog_end_date else None
 
-    if not is_update:
-        nlog = Log(
-            owner=request.user,
-            kind=kind,
-            start_date=start_date,
-            end_date=end_date,
-            reminder=nlog_highlight,
-            body=nlog_body
-        )
+        if not is_update:
+            nlog = Log(
+                owner=request.user,
+                kind=kind,
+                start_date=start_date,
+                end_date=end_date,
+                reminder=nlog_highlight,
+                body=nlog_body
+            )
+            nlog.save()
+        else:
+            nlog = Log.objects.get(id=is_update)
+            nlog.kind = kind
+            nlog.start_date = start_date
+            nlog.end_date = end_date
+            nlog.reminder = nlog_highlight
+            nlog.body = nlog_body
+
+        nlog.companies = nlog_companies
+        nlog.people = nlog_people
         nlog.save()
-    else:
-        nlog = Log.objects.get(id=is_update)
-        nlog.kind = kind
-        nlog.start_date = start_date
-        nlog.end_date = end_date
-        nlog.reminder = nlog_highlight
-        nlog.body = nlog_body
 
-    nlog.companies = nlog_companies
-    nlog.people = nlog_people
-    nlog.save()
-
-    response_data = {}
-    response_data['success'] = True
+        response_data = {}
+        response_data['success'] = True
+    except:
+        response_data = {}
+        response_data['success'] = False
 
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
