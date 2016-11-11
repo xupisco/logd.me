@@ -535,3 +535,9 @@ input.form-little {
     padding: 20px;
     z-index: 100;
 }
+
+p.hint {
+    font-size: 13px;
+    padding: 2px 0px;
+    color: #777;
+}
