@@ -65,20 +65,13 @@ $(function() {
         content_css: '{% static "css/custom_tinymce.css" %}',
         mentions: {
             delay: 0,
-            source: [
-                { name: 'Tyra Porcelli', email: 'alaor@gomes.com', type: 'person', id: 3 }, 
-                { name: 'Brigid Reddish', email: 'john@doe.com', type: 'person', id: 1 },
-                { name: 'Ashely Buckler', email: 'buckler@yahoo.com', type: 'person', id: 5 },
-                { name: 'Teddy Whelan', email: 'teddy@facebook.com', type: 'person', id: 13 },
-                { name: 'Google', type: 'company', id: 1 },
-                { name: 'Microsoft', type: 'company', id: 4 },
-            ],
+            source: {{ mentions | safe }},
             insert: function(item) {
                 var it = "person";
                 if(item.type == 'company') {
                     it = "company"
                 }
-                return '<span class="hl_mention_' + it + '" data-type="' + item.type + '" data-id="' + item.id + '">@' + item.name + '</span>&nbsp;';
+                return '<span class="hl_mention_' + it + '" data-type="' + item.type + '" data-id="' + item.id + '">' + item.name + '</span>&nbsp;';
             },
             render: function(item) {
                 var email = "";

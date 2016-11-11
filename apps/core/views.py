@@ -14,6 +14,7 @@ from datetime import datetime
 
 from ..logs.models import Log, LogKind
 from ..people.models import Person
+from ..companies.models import Company
 
 
 class StaticView(View):
@@ -34,10 +35,7 @@ def set_language(request, lang_code):
 
 
 def login(request):
-    context = {
-        'hello': 'world'
-    }
-    return render(request, 'login.html', context)
+    return render(request, 'login.html')
 
 
 @login_required
@@ -45,9 +43,24 @@ def home(request):
     from conf.utils import glyphicon_classes
     kinds = LogKind.objects.filter(owner=request.user).order_by('name')
 
+    people_mentions = Person.objects.filter(owner=request.user).order_by('name').values('id', 'name', 'email')
+    company_mentions = Company.objects.filter(owner=request.user).order_by('name').values('id', 'name')
+
+    for p in people_mentions:
+        p.update({'type': 'person'})
+
+    for c in company_mentions:
+        c.update({'email': '', 'type': 'company'})
+
+    from itertools import chain
+    combined = list(chain(people_mentions, company_mentions))
+
+    mentions = json.dumps(list(combined), cls=DjangoJSONEncoder)
+
     context = {
         'glyphicon_classes': glyphicon_classes,
-        'kinds': kinds
+        'kinds': kinds,
+        'mentions': mentions
     }
     return render(request, 'timeline.html', context)
 
