@@ -43,8 +43,12 @@ def home(request):
     from conf.utils import glyphicon_classes
     kinds = LogKind.objects.filter(owner=request.user).order_by('name')
 
-    people_mentions = Person.objects.filter(owner=request.user).order_by('name').values('id', 'name', 'email')
-    company_mentions = Company.objects.filter(owner=request.user).order_by('name').values('id', 'name')
+    people_mentions = Person.objects.filter(owner=request.user) \
+        .order_by('name') \
+        .values('id', 'name', 'email')
+    company_mentions = Company.objects.filter(owner=request.user) \
+        .order_by('name') \
+        .values('id', 'name')
 
     for p in people_mentions:
         p.update({'type': 'person'})
