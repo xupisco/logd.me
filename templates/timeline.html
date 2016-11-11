@@ -232,7 +232,10 @@ function removeLog(id) {
 
 function clearForm() {
     $('#new_log')[0].reset();
-    $('#error_nlog_start_date').hide();
+    $('#error_nlog_body').hide();
+    $('.has_enddate').attr('checked', false);
+    $('.end_date').addClass('hidden');
+    $('.nlog_highlight').attr('checked', false);
     $('#error_nlog_body').hide();
     $('#update_log').val(0);
     $('#nlog_header_text').html('{% trans "New log!" %}');
