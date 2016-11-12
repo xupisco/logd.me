@@ -29,11 +29,11 @@ def body(lang):
         '</ul>\n' \
         '</ul>\n' \
         '<p>Aqui estão algumas pessoas de exemplo, como ' \
-        '<span class="hl_mention_person" data-id="3">' \
+        '<span class="hl_mention_person" data-id="0">' \
         'John Doe</span>&nbsp;que não é ninguém e ' \
-        '<span class="hl_mention_person" data-id="5">Gill Bates' \
+        '<span class="hl_mention_person" data-id="0">Gill Bates' \
         '</span>&nbsp;que trabalha na ' \
-        '<span class="hl_mention_company" data-id="3">ACME Corporation' \
+        '<span class="hl_mention_company" data-id="0">ACME Corporation' \
         '</span>, tudo em uma categoria <span class="hashtag">#inbox</span> padrão para você ' \
         'começar. ' \
         'Você pode excluir esses caras mais tarde.</p>\n' \
@@ -69,9 +69,9 @@ def body(lang):
         '</ul>\n' \
         '</ul>\n' \
         '<p>Here are some sample people, like ' \
-        '<span class="hl_mention_person" data-id="3">John Doe</span>&nbsp;who is ' \
-        'nobody and <span class="hl_mention_person" data-id="5">Gill Bates</span>&nbsp;' \
-        'who works at <span class="hl_mention_company" data-id="3">ACME Corporation</span>, ' \
+        '<span class="hl_mention_person" data-id="0">John Doe</span>&nbsp;who is ' \
+        'nobody and <span class="hl_mention_person" data-id="0">Gill Bates</span>&nbsp;' \
+        'who works at <span class="hl_mention_company" data-id="0">ACME Corporation</span>, ' \
         'all in a default <span class="hashtag">#inbox</span> category for you to get started. ' \
         'You can delete those guys later.</p>\n' \
         '<blockquote>\n' \
