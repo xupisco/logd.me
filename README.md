@@ -1,11 +1,12 @@
-# ownCRM
+# ownCRM 
 Your personal and friendly CRM, cut the crap... only the essentials!
 
 [![Build Status](https://travis-ci.org/xupisco/ownCRM.svg?branch=master)](https://travis-ci.org/xupisco/ownCRM)
 
 
 ## Screenshot
-![Home / Timeline](http://i.imgur.com/giStaYL.png)
+[![Home / Logs](http://i.imgur.com/MdnDs9j.png)](http://i.imgur.com/MdnDs9j.png)
+
 
 ## Setup
 
@@ -21,6 +22,7 @@ Your personal and friendly CRM, cut the crap... only the essentials!
 10. Thank @croves...
 11. Enjoy!
 
+
 ### conf/settings.ini
 
 ```
@@ -28,12 +30,14 @@ Your personal and friendly CRM, cut the crap... only the essentials!
 SECRET_KEY=<anything here>
 DEBUG=True
 
+GTM_ID=<Google Tag Manager ID>  
 DATABASE_URL=sqlite://./conf/db.sqlite3
 ```
 
+
 ## TODO
 
-A lot, building a trello board...
+A lot, building a trello board...  
 Now with automatic deploy to [Heroku](http://owncrm-dev.herokuapp.com)!
 
 
