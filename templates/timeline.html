@@ -332,53 +332,6 @@ function qs(el) {
             </div>
         </article>
 
-        <article class="timeline-entry">
-            <div class="timeline-entry-inner">
-
-                <div class="timeline-icon bg-default help_toggle" style="color: #5292d2; font-size: 40px;">
-                    <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
-                </div>
-
-                <div class="timeline-label help_text hidden">
-                    <p>
-                    <h3 style="margin: 0">{% trans "First Steps" %}</h3>
-                    {% blocktrans %}
-                        <small>Welcome to your personal and friendly life log, let's get started!</small><br /><br />
-                        <p>
-                        <strong>First things first, what is this?</strong><br />
-                        Answer...
-                        </p>
-
-                        <p>
-                        <strong>Cool, how can I use it?</strong><br />
-                        Answer...
-                        </p>
-
-                        <p>
-                        <strong>Is it free?</strong><br />
-                        Answer...
-                        </p>
-
-                        <p>
-                        <strong>So, it's not free but I can have my own?</strong><br />
-                        Answer...
-                        </p>
-
-                        <p>
-                        <strong>Is there &lt;name your feature&gt;?</strong><br />
-                        Answer...
-                        </p>
-
-                        <p>
-                        <strong>I love you!</strong><br />
-                        We love you too!
-                        </p>
-                    {% endblocktrans %}
-                    </p>
-                </div>
-            </div>
-        </article>
-
         <article class="timeline-entry" v-show="!logs.length">
             <div class="timeline-entry-inner">
 
@@ -400,7 +353,7 @@ function qs(el) {
 
         <article class="timeline-entry begin">
             <div class="timeline-entry-inner">
-                <div id="fake_reload" class="timeline-icon bg-black" style="background: #333;">
+                <div id="fake_reload" class="timeline-icon bg-black" style="background: #333;" title="{% trans "Force refresh..." %}">
                     <span id="fake_loading" class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
                 </div>
             </div>

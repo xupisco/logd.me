@@ -336,12 +336,16 @@
 
 #fake_reload {
     background: #333;
-    width: 20px;
-    height: 20px;
-    margin-left: 10px;
-    font-size: 10px;
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    font-size: 14px;
     color: #eee;
-    line-height: 21px;
+    line-height: 31px;
+}
+
+#fake_reload:hover {
+    cursor: pointer;
 }
 
 .icon-spin {
