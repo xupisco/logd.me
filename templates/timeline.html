@@ -111,6 +111,21 @@ $(function() {
                        '<a href="javascript:;"><span class="glyphicon glyphicon-' + icon + '" aria-hidden="true" style="margin-right: 5px"></span> <span>' + item.name + email + '</span></a>' +
                        '</li>';
             }
+        },
+        setup: function(ed) {
+            ed.on('keydown', function(event) {
+                if (event.keyCode == 9) { // tab pressed
+                  if (event.shiftKey) {
+                    ed.execCommand('Outdent');
+                  }
+                  else {
+                    ed.execCommand('Indent');
+                  }
+
+                  event.preventDefault();
+                  return false;
+                }
+            });
         }
     });
 
@@ -206,7 +221,7 @@ function loadSingleLog(log) {
             $('#nlog_end_date').val(moment(res_end_date).format('DD/MM/YYYY HH:mm'));
         }
         if(res.reminder) {
-            $('#nlog_highlight').attr('checked', true);
+            $('#nlog_highlight').prop('checked', true);
         }
         tinymce.get('nlog_body_mce').setContent(res.body);
         $('#update_log').val(res.id);
@@ -249,7 +264,7 @@ function clearForm() {
     $('#error_nlog_body').hide();
     $('.has_enddate').attr('checked', false);
     $('.end_date').addClass('hidden');
-    $('.nlog_highlight').attr('checked', false);
+    $('#nlog_highlight').attr('checked', false);
     $('#error_nlog_body').hide();
     $('#update_log').val(0);
     $('#nlog_header_text').html('{% trans "New log!" %}');
@@ -309,7 +324,7 @@ function qs(el) {
                     <p v-html="hl_hashtags(log.body)"></p>
 
                     <div class="has_labels" v-show="log.companies.length || log.people.length || log.hashtags.length">
-                        <span class="label label-info" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span><span class="label label-success" onclick="qs(this);" v-for="person in log.people">[[ person.name ]]</span><span class="label label-default" onclick="qs(this);" v-for="tag in log.hashtags">#[[ tag ]]</span>
+                        <span class="label label-info" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span><span class="label label-success" onclick="qs(this);" v-for="person in log.people" data-toggle="tooltip" data-placement="top" data-html="true">[[ person.name ]]</span><span class="label label-default" onclick="qs(this);" v-for="tag in log.hashtags">#[[ tag ]]</span>
                     </div>
 
                 </div>

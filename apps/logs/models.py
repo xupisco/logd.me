@@ -46,7 +46,11 @@ class Log(models.Model):
 
     @property
     def hashtags(self):
-        return re.findall(r"#(\w+)", self.body)
+        hashtags = re.findall(r"#([a-z0-9][a-z0-9\-_]*)", self.body.lower())
+        if hashtags:
+            return set(hashtags)
+        else:
+            return []
 
     @body_md.setter
     def body_md(self, value):
