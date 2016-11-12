@@ -44,6 +44,10 @@ def home(request):
     from conf.utils import glyphicon_classes
     kinds = LogKind.objects.filter(owner=request.user).order_by('name')
 
+    user_log_count = Log.objects.filter(owner=request.user).count()
+    if not user_log_count:
+        create_default_log(request)
+
     people_mentions = Person.objects.filter(owner=request.user) \
         .order_by('name') \
         .values('id', 'name', 'email')
@@ -112,64 +116,7 @@ def newlog(request):
         nlog_body = request.POST.get('nlog_body')
         is_update = int(request.POST.get('is_update'))
 
-        mentions_re = r"<span class=\"hl_mention_([^\"]+)\".*?\"([^\"]+)\".*?>(.*?)<\/span>"
-        parsed_mentions = re.findall(mentions_re, nlog_body)
-
-        nlog_companies = []
-        nlog_people = []
-
-        parsed_companies = []
-        parsed_people = []
-
-        base_string = '<span class="hl_mention_{0}" data-id="{1}">{2}</span>'
-
-        for mention in parsed_mentions:
-            if mention[0] == 'company':
-                if int(mention[1]) == 0:
-                    c_exists = Company.objects.filter(owner=request.user,
-                                                      name=mention[2])
-
-                    if not c_exists:
-                        nlog_company = Company(owner=request.user,
-                                               name=mention[2])
-                        nlog_company.save()
-
-                        old_string = base_string.format('company', 0, mention[2])
-                        new_string = base_string.format('company', nlog_company.pk, mention[2])
-
-                        nlog_body = nlog_body.replace(old_string, new_string)
-                        parsed_companies.append(nlog_company.pk)
-                    else:
-                        parsed_companies.append(c_exists[0].id)
-                else:
-                    parsed_companies.append(mention[1])
-
-            if mention[0] == 'person':
-                if int(mention[1]) == 0:
-                    p_exists = Person.objects.filter(owner=request.user, name=mention[2])
-
-                    if not p_exists:
-                        nlog_person = Person(owner=request.user,
-                                             name=mention[2])
-                        nlog_person.save()
-
-                        old_string = base_string.format('person', 0, mention[2])
-                        new_string = base_string.format('person', nlog_person.pk, mention[2])
-
-                        nlog_body = nlog_body.replace(old_string, new_string)
-                        parsed_people.append(nlog_person.pk)
-                    else:
-                        parsed_people.append(p_exists[0].id)
-                else:
-                    parsed_people.append(mention[1])
-
-        if len(parsed_companies):
-            nlog_companies = Company.objects.filter(owner=request.user) \
-                .filter(id__in=parsed_companies)
-
-        if len(parsed_people):
-            nlog_people = Person.objects.filter(owner=request.user) \
-                .filter(id__in=parsed_people)
+        mentions = parse_from_string(request, nlog_body)
 
         nkind_text = nkind_text if len(nkind_text) > 1 else False
         nlog_end_date = nlog_end_date if len(nlog_end_date) > 1 else False
@@ -206,8 +153,8 @@ def newlog(request):
             nlog.reminder = nlog_highlight
             nlog.body = nlog_body
 
-        nlog.companies = nlog_companies
-        nlog.people = nlog_people
+        nlog.companies = mentions['companies']
+        nlog.people = mentions['people']
         nlog.save()
 
         response_data = {}
@@ -231,3 +178,99 @@ def removelog(request):
         response_data['success'] = True
 
     return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
+def parse_from_string(request, nlog_body):
+    companies = []
+    people = []
+
+    parsed_companies = []
+    parsed_people = []
+
+    mentions_re = r"<span class=\"hl_mention_([^\"]+)\".*?\"([^\"]+)\".*?>(.*?)<\/span>"
+    parsed_mentions = re.findall(mentions_re, nlog_body)
+
+    base_string = '<span class="hl_mention_{0}" data-id="{1}">{2}</span>'
+
+    for mention in parsed_mentions:
+        if mention[0] == 'company':
+            if int(mention[1]) == 0:
+                c_exists = Company.objects.filter(owner=request.user,
+                                                  name=mention[2])
+
+                if not c_exists:
+                    nlog_company = Company(owner=request.user,
+                                           name=mention[2])
+                    nlog_company.save()
+
+                    old_string = base_string.format('company', 0, mention[2])
+                    new_string = base_string.format('company', nlog_company.pk, mention[2])
+
+                    nlog_body = nlog_body.replace(old_string, new_string)
+                    parsed_companies.append(nlog_company.pk)
+                else:
+                    parsed_companies.append(c_exists[0].id)
+            else:
+                parsed_companies.append(mention[1])
+
+        if mention[0] == 'person':
+            if int(mention[1]) == 0:
+                p_exists = Person.objects.filter(owner=request.user, name=mention[2])
+
+                if not p_exists:
+                    nlog_person = Person(owner=request.user,
+                                         name=mention[2])
+                    nlog_person.save()
+
+                    old_string = base_string.format('person', 0, mention[2])
+                    new_string = base_string.format('person', nlog_person.pk, mention[2])
+
+                    nlog_body = nlog_body.replace(old_string, new_string)
+                    parsed_people.append(nlog_person.pk)
+                else:
+                    parsed_people.append(p_exists[0].id)
+            else:
+                parsed_people.append(mention[1])
+
+    if len(parsed_companies):
+        companies = Company.objects.filter(owner=request.user) \
+            .filter(id__in=parsed_companies)
+
+    if len(parsed_people):
+        people = Person.objects.filter(owner=request.user) \
+            .filter(id__in=parsed_people)
+
+    return {
+        'companies': companies,
+        'people': people
+    }
+
+
+def create_default_log(request):
+    from ..logs.default_log import body
+    log_body = body(translation.get_language())
+
+    mentions = parse_from_string(request, log_body)
+    start_date = datetime.now()
+
+    # Create default category
+    kind, created = LogKind.objects.get_or_create(
+        owner=request.user,
+        name='Inbox',
+        slug='inbox',
+        glyphicon_name='inbox'
+    )
+
+    nlog = Log(
+        owner=request.user,
+        kind=kind,
+        start_date=start_date,
+        end_date=None,
+        reminder=False,
+        body=log_body
+    )
+    nlog.save()
+
+    nlog.companies = mentions['companies']
+    nlog.people = mentions['people']
+    nlog.save()

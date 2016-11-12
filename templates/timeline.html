@@ -252,7 +252,8 @@ function removeLog(id) {
     }
     $.post('{% url "core:removelog" %}', post_data, function(res) {
         if (res.success) {
-            loadLogs();
+            //loadLogs();
+            $('#entry_' + id).fadeOut();
         } else {
             showError();
         }
@@ -302,7 +303,7 @@ function qs(el) {
             </div>
         </article>
 
-        <article class="timeline-entry" v-for="log in filteredLogs">
+        <article class="timeline-entry" :id="'entry_' + log.id" v-for="log in filteredLogs">
             <div class="timeline-entry-inner">
 
                 <div class="timeline-icon" v-bind:class="{ 'bg-secondary': log.reminder }" v-bind:title="log.kind.name">
