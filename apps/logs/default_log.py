@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 
 def body(lang):
-    log_pt = '<p><strong>Olá, bem-vindo ao ownCRM!</strong></p>\n' \
+    log_pt = '<p><strong>Olá, bem-vindo(a) ao ownCRM!</strong></p>\n' \
         '<p>Este é o seu diário <span class="hashtag">#pessoal</span>, onde você pode salvar as ' \
         'coisas ' \
         'que aconteceram ou ainda vão acontecer, registrar eventos importantes, reuniões, ' \
