@@ -42,12 +42,12 @@ def login(request):
 @login_required
 def home(request):
     from conf.utils import glyphicon_classes
-    kinds = LogKind.objects.filter(owner=request.user).order_by('name')
 
     user_log_count = Log.objects.filter(owner=request.user).count()
     if not user_log_count:
         create_default_log(request)
 
+    kinds = LogKind.objects.filter(owner=request.user).order_by('name')
     people_mentions = Person.objects.filter(owner=request.user) \
         .order_by('name') \
         .values('id', 'name', 'email')
