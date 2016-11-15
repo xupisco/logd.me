@@ -319,6 +319,11 @@ img.avatar_card {
     border-radius: 0 !important;
 }
 
+.tooltip-inner {
+    max-width: none;
+    white-space: nowrap;
+}
+
 .CodeMirror {
     border-radius: 0 !important;
 }
