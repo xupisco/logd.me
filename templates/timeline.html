@@ -6,6 +6,8 @@
 <script type="text/javascript">
 var vue;
 var db_kinds = {{ kinds.count }};
+var zones_created = false;
+var parsed_tooltips = false;
 
 $(function() {
     $('.has_enddate').click(function() {
@@ -312,7 +314,7 @@ function qs(el) {
                     <span class="glyphicon" v-bind:class="'glyphicon-' + [[ log.kind.glyphicon_name ]]" aria-hidden="true"></span>
                 </div>
 
-                <div class="timeline-label">
+                <div class="timeline-label dropzone">
                     <div class="log_tools">
                         <span class="glyphicon glyphicon-edit log_tool" v-on:click="editLog([[ log.id ]])" aria-hidden="true"></span></a>
                         <span class="glyphicon glyphicon-remove log_tool tool_delete" aria-hidden="true" v-on:click="removeLog([[ log.id ]])"></span>
@@ -326,10 +328,15 @@ function qs(el) {
                     </div>
                     <p v-html="hl_hashtags(log.body)"></p>
 
-                    <div class="has_labels" v-show="log.companies.length || log.people.length || log.hashtags.length">
-                        <span class="label label-info" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span><span class="label label-success" onclick="qs(this);" v-for="person in log.people" data-toggle="tooltip" data-placement="top" data-html="true">[[ person.name ]]</span><span class="label label-default" onclick="qs(this);" v-for="tag in log.hashtags">#[[ tag ]]</span>
+                    <div class="has_labels" v-show="log.companies.length || log.people.length || log.hashtags.length" v-on:mouseover="setup_tooltips()">
+                        <span class="label label-info" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span><span class="label label-success ppl_label" onclick="qs(this);" v-for="person in log.people" data-toggle="tooltip" data-placement="top" data-html="true" v-bind:title="[[ person.email ]]">[[ person.name ]]</span><span class="label label-default" onclick="qs(this);" v-for="tag in log.hashtags">#[[ tag ]]</span>
                     </div>
-
+                </div>
+                <form class="dropzone">
+                    <input type="hidden" name="log_id" v-bind:value="[[ log.id ]]">
+                </form>
+                <div class="dropconfirm hidden">
+                    {% trans "Attach to this log..." %}"
                 </div>
             </div>
         </article>
@@ -471,6 +478,13 @@ vue = new Vue({
         hl_hashtags: function(txt) {
             var all_re = /(#[a-z0-9][a-z0-9\-_]*)/ig;
             return txt.replace(all_re, "<span class='hashtag'>$1</span>");
+        },
+        setup_tooltips: function() {
+            console.log('oooo');
+            if(!parsed_tooltips) {
+                $('.ppl_label').tooltip();
+                parsed_tooltips = true;
+            }
         }
     },
     filters: {

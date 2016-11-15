@@ -334,6 +334,31 @@
     text-decoration: none;
 }
 
+.willdrop p {
+    opacity: 0.5;
+}
+
+.dropconfirm {
+    margin-right: 70px;
+    position: relative;
+    background: #fdf6ea;
+    padding: 1em;
+    margin-left: 73px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    position: absolute;
+    top: 43%;
+    text-align: center;
+    width: 88%;
+    border-radius: 0 !important;
+    border-radius: 0 !important;
+    border: 2px dashed #f79a10;
+}
+
 #fake_reload {
     background: #333;
     width: 30px;

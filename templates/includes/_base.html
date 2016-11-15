@@ -59,6 +59,7 @@
 
     <script type="text/javascript">
     var clipboard;
+    var dropzone;
 
     $(function() {
         $('#icon_clear').click(function() {
@@ -66,7 +67,6 @@
         });
 
         clipboard = new Clipboard('.clipboard');
-
         clipboard.on('success', function(e) {
             hideTooltip(e.trigger)
         });
@@ -95,7 +95,7 @@
 
     function hideTooltip(btn) {
         setTimeout(function() {
-            $(btn).tooltip('hide');
+            $('.clipboard').tooltip('hide');
         }, 1000);
     }
 
