@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^ajax/remove_log$', views.removelog, name='removelog',),
 
     url(r'^ajax/new_person$', views.newperson, name='newperson',),
+    url(r'^ajax/remove_person$', views.removeperson, name='removeperson',),
 ]

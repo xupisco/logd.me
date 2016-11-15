@@ -248,6 +248,31 @@ def removelog(request):
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
+def removeperson(request):
+    person_id = request.POST.get('person_id')
+    person = Person.objects.filter(owner=request.user).filter(id=person_id)
+
+    response_data = {}
+    if not person:
+        response_data['success'] = False
+    else:
+        dude = person[0]
+        logs = Log.objects.filter(people=dude)
+        base_string = '<span class="hl_mention_{0}" data-id="{1}">{2}</span>'
+
+        for log in logs:
+            old_string = base_string.format('person', dude.id, dude.name)
+            new_string = dude.name
+
+            log.body = log.body.replace(old_string, new_string)
+            log.save()
+
+        person.delete()
+        response_data['success'] = True
+
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
 def parse_from_string(request, nlog_body):
     companies = []
     people = []

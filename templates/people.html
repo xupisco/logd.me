@@ -135,6 +135,36 @@ function loadSinglePerson(ppl) {
     });
 }
 
+function showRemoveConfirmation(ppl) {
+    $('#actions_for_' + ppl).next('.fordelete').removeClass('hidden');
+    $('#actions_for_' + ppl).next('.fordelete').mouseleave(function() {
+        $(this).addClass('hidden');
+        $('#actions_for_' + ppl).removeClass('hidden');
+    });
+    $('#actions_for_' + ppl).addClass('hidden');
+
+    $('#actions_for_' + ppl).next('.fordelete').click(function() {
+        removePerson(ppl);
+        //$(this).addClass('hidden');
+        //$(this).prev('#actions_for_' + ppl).removeClass('hidden');
+    });
+}
+
+function removePerson(id) {
+    var post_data = {
+        'person_id': id,
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+    }
+    $.post('{% url "core:removeperson" %}', post_data, function(res) {
+        if (res.success) {
+            //loadLogs();
+            $('#person_' + id).fadeOut();
+        } else {
+            showError();
+        }
+    });
+}
+
 function clearForm() {
     $('#new_person')[0].reset();
     $('#error_nppl_name').hide();
@@ -159,7 +189,7 @@ function showSuccessMessage() {
 {% block content %}
 <div class="col-md-8">
     <div class="col-xs-18 col-sm-6 col-md-4" v-for="person in filteredPeople">
-        <div class="thumbnail">
+        <div class="thumbnail" v-bind:id="'person_' + [[ person.id ]]">
             <h4 class="person_name">
                 [[ person.name ]]<br />
                 <small v-if="person.role">[[ person.role.name ]]</small><small v-if="!person.role">---</small>
@@ -171,8 +201,13 @@ function showSuccessMessage() {
                     <li class="list-group-item croptext"><span class="glyphicon glyphicon-briefcase" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span><span v-if="person.company">[[ person.company.name ]]</span><span v-if="!person.company">---</span></span></li>
                 </ul>
                 <div style="padding: 8px;">
-                    <button class="btn btn-success btn-xs" role="button" v-on:click="editPerson([[ person.id ]])">{% trans "Edit" %}</button> <button class="btn btn-default btn-xs" role="button" v-on:click="doSearch(person.name)">{% trans "Logs..." %}</button>
-                    <button class="btn btn-danger btn-xs pull-right" role="button" v-on:click="deletePerson([[ person.id ]])">x</button>
+                    <div class="ppl_actions" v-bind:id="'actions_for_' + [[ person.id ]]">
+                        <button class="btn btn-success btn-xs" role="button" v-on:click="editPerson([[ person.id ]])">{% trans "Edit" %}</button> <button class="btn btn-default btn-xs" role="button" v-on:click="doSearch(person.name)">{% trans "Logs..." %}</button>
+                        <button class="btn btn-danger btn-xs pull-right" role="button" v-on:click="removePerson([[ person.id ]])">x</button>
+                    </div>
+                    <div class="fordelete hidden">
+                        <div class="ppl_delete_conf"><strong>{% trans "Sure?" %}</strong> {% trans "click again..." %}</div>
+                    </div>
                 </div>
             </div> 
         </div>
@@ -293,8 +328,8 @@ vue = new Vue({
         editPerson: function(id, ev) {
             loadSinglePerson(id[0][0]);
         },
-        deletePerson: function(id, ev) {
-            loadSinglePerson(id[0][0]);
+        removePerson: function(id, ev) {
+            showRemoveConfirmation(id[0][0]);
         },
         activateTooltips: function() {
             $('.clipboard').tooltip({
