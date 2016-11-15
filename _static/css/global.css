@@ -567,3 +567,14 @@ li.disabled {
     border: 0 !important;
     border-radius: 0 !important;
 }
+
+.clipboard:hover {
+    cursor: pointer;
+}
+
+li.croptext {
+    width: 210px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

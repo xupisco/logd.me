@@ -164,11 +164,11 @@ function showSuccessMessage() {
                 [[ person.name ]]<br />
                 <small v-if="person.role">[[ person.role.name ]]</small><small v-if="!person.role">---</small>
             </h4>
-            <div class="caption" style="margin-top: -20px; min-height: 183px; padding: 0;">
+            <div class="caption" style="margin-top: -20px; min-height: 183px; padding: 0;" v-on:mouseover="activateTooltips()">
                 <ul class="list-group">
-                    <li class="list-group-item"><span class="glyphicon glyphicon-envelope" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span>[[ person.email || '---' ]]</li>
-                    <li class="list-group-item"><span class="glyphicon glyphicon-earphone" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span> [[ person.mobile || '---' ]]</span></li>
-                    <li class="list-group-item"><span class="glyphicon glyphicon-briefcase" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span> <span v-if="person.company">[[ person.company.name ]]</span><span v-if="!person.company">---</span></span></li>
+                    <li class="list-group-item croptext clipboard" v-bind:data-clipboard-text="[[ person.email ]]" title="{% trans "Copied!" %}"><span class="glyphicon glyphicon-envelope" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span>[[ person.email || '---' ]]</li>
+                    <li class="list-group-item croptext"><span class="glyphicon glyphicon-earphone" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span>[[ person.mobile || '---' ]]</span></li>
+                    <li class="list-group-item croptext"><span class="glyphicon glyphicon-briefcase" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span><span v-if="person.company">[[ person.company.name ]]</span><span v-if="!person.company">---</span></span></li>
                 </ul>
                 <div style="padding: 8px;">
                     <button class="btn btn-success btn-xs" role="button" v-on:click="editPerson([[ person.id ]])">{% trans "Edit" %}</button> <button class="btn btn-default btn-xs" role="button" v-on:click="doSearch(person.name)">{% trans "Logs..." %}</button>
@@ -296,6 +296,12 @@ vue = new Vue({
         deletePerson: function(id, ev) {
             loadSinglePerson(id[0][0]);
         },
+        activateTooltips: function() {
+            $('.clipboard').tooltip({
+                trigger: 'click',
+                placement: 'bottom'
+            });
+        }
     }
 })
 </script>

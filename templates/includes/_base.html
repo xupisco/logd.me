@@ -37,6 +37,7 @@
     <script src="{% static 'js/jquery.datetimepicker.full.min.js' %}"></script>
 
     <script src="{% static 'js/mousetrap.min.js' %}"></script>
+    <script src="{% static 'js/clipboard.min.js' %}"></script>
     <script src="{% static 'js/moment-with-locales.min.js' %}"></script>
 
     <script src="{% static 'js/tinymce/tinymce.min.js' %}"></script>
@@ -57,9 +58,17 @@
     {% endblock %}
 
     <script type="text/javascript">
+    var clipboard;
+
     $(function() {
         $('#icon_clear').click(function() {
             vue.q = '';
+        });
+
+        clipboard = new Clipboard('.clipboard');
+
+        clipboard.on('success', function(e) {
+            hideTooltip(e.trigger)
         });
 
         Mousetrap.bind('/', function(e) {
@@ -83,6 +92,12 @@
             //document.location.reload();
         })
     })
+
+    function hideTooltip(btn) {
+        setTimeout(function() {
+            $(btn).tooltip('hide');
+        }, 1000);
+    }
 
     function showError() {
         $('html, body').css({
