@@ -128,7 +128,6 @@ def newcompany(request):
                 log.body = log.body.replace(old_string, new_string)
                 log.save()
 
-
     company.save()
 
     response_data = {}
