@@ -59,7 +59,7 @@
     <script type="text/javascript">
     $(function() {
         $('#icon_clear').click(function() {
-            vlogs.q = '';
+            vue.q = '';
         });
 
         Mousetrap.bind('/', function(e) {
@@ -71,7 +71,7 @@
 
         Mousetrap.bind(['esc', 'escape'], function(e) {
             e.preventDefault();
-            vlogs.q = '';
+            vue.q = '';
             $('#q').blur();
         });
 
@@ -104,6 +104,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 {% trans "Log successfully saved!" %}
 </div>
 
+<div class="msg_success_newperson hidden">
+{% trans "Person successfully saved!" %}
+</div>
+
 <div class="big_error_message_container hidden">
     <div class="big_error_message">
         <img src="{% static 'images/sad.png' %}" />
@@ -126,7 +130,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="/">{% trans "Logs" %}</a></li>
-                    <li class="disabled">{% trans "People" %}</li>
+                    <li><a href="/people">{% trans "People" %}</a></li>
                     <li class="disabled">{% trans "Companies" %}</li>
                     <li class="disabled">{% trans "Calendar" %}</li>
                 </ul>

@@ -14,7 +14,7 @@ import re
 from datetime import datetime
 
 from ..logs.models import Log, LogKind
-from ..people.models import Person
+from ..people.models import Person, Role
 from ..companies.models import Company
 
 
@@ -69,20 +69,19 @@ def home(request):
     context = {
         'glyphicon_classes': glyphicon_classes,
         'kinds': kinds,
-        'mentions': mentions
+        'mentions': mentions,
+        'q': request.GET.get('q', '')
     }
     return render(request, 'timeline.html', context)
 
 
 @login_required
 def people(request):
-    ppl = Person.objects \
-        .filter(owner=request.user) \
-        .order_by('name') \
-        .values('name', 'company__name', 'role__name', 'email', 'mobile', 'created_on')
-    ppl_json = json.dumps(list(ppl), cls=DjangoJSONEncoder)
+    companies = Company.objects.filter(owner=request.user).order_by('name')
+    roles = Role.objects.filter(owner=request.user).order_by('name')
     context = {
-        'people': ppl_json
+        'companies': companies,
+        'roles': roles
     }
     return render(request, 'people.html', context)
 
@@ -104,6 +103,75 @@ def calendar(request):
 
 
 # Temp stuff
+def newperson(request):
+    nppl_name = request.POST.get('nppl_name')
+    nppl_company = request.POST.get('nppl_company')
+    nppl_role = request.POST.get('nppl_role')
+    nppl_email = request.POST.get('nppl_email')
+    nppl_mobile = request.POST.get('nppl_mobile')
+    nppl_company_new = request.POST.get('nppl_company_new')
+    nppl_role_new = request.POST.get('nppl_role_new')
+    is_update = int(request.POST.get('is_update'))
+
+    nppl_company_text = nppl_company_new if len(nppl_company_new) > 1 else False
+    nppl_role_text = nppl_role_new if len(nppl_role_new) > 1 else False
+
+    if nppl_company_new:
+        nppl_company, created = Company.objects.get_or_create(
+            owner=request.user,
+            name=nppl_company_text)
+    else:
+        if nppl_company == "0":
+            nppl_company = None
+        else: 
+            nppl_company = Company.objects.get(id=nppl_company)
+
+    if nppl_role_new:
+        nppl_role, created = Role.objects.get_or_create(
+            owner=request.user,
+            name=nppl_role_text)
+    else:
+        if nppl_role == "0":
+            nppl_role = None
+        else:
+            nppl_role = Role.objects.get(id=nppl_role)
+
+    if not is_update:
+        ppl = Person(
+            owner=request.user,
+            name=nppl_name,
+            email=nppl_email,
+            mobile=nppl_mobile)
+        ppl.save()
+    else:
+        ppl = Person.objects.get(id=is_update)
+        old_name = ppl.name
+
+        ppl.name = nppl_name
+        ppl.email = nppl_email
+        ppl.mobile = nppl_mobile
+
+        if nppl_name != old_name:
+            logs = Log.objects.filter(people=ppl)
+            base_string = '<span class="hl_mention_{0}" data-id="{1}">{2}</span>'
+
+            for log in logs:
+                old_string = base_string.format('person', ppl.id, old_name)
+                new_string = base_string.format('person', ppl.id, nppl_name)
+
+                log.body = log.body.replace(old_string, new_string)
+                log.save()
+
+    ppl.company = nppl_company
+    ppl.role = nppl_role
+    ppl.save()
+
+    response_data = {}
+    response_data['success'] = True
+
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
 def newlog(request):
     # POG
     try:

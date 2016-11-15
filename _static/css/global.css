@@ -305,7 +305,7 @@ img.avatar_card {
         margin-bottom: 40px;
     }
 
-    .custom_select_container .btn-group {
+    .custom_select_container .btn-group, .custom_select_container_company .btn-group {
         width: 100% !important;
     }
 
@@ -354,6 +354,14 @@ input.form-little {
     display: inline;
 }
 
+input.form-little-full {
+    width: 100% !important;
+    border: 0;
+    font-size: 18px;
+    padding: 0;
+    height: 27px;
+}
+
 .icons {
 
 }
@@ -383,18 +391,18 @@ input.form-little {
     border-color: #2c3e50 !important;
 }
 
-.custom_select_container .glyphicon{
+.custom_select_container .glyphicon, .custom_select_container_company .glyphicon{
     top: 3px !important;
     margin-right: 4px !important;
 }
 
-.custom_select_container .open {
+.custom_select_container .open, .custom_select_container_company .open {
     border-radius: 0 !important;
     border: 2px solid;
     border-top: 0;
 }
 
-.custom_select_container .open .form-control {
+.custom_select_container .open .form-control, .custom_select_container_company .open .form-control {
     border: 0;
     background-color: #f1f1f1;
     padding: 0 8px;
@@ -402,7 +410,7 @@ input.form-little {
     margin-bottom: 4px;
 }
 
-.custom_select_container .dropdown-menu {
+.custom_select_container .dropdown-menu, .custom_select_container_company .dropdown-menu {
     margin-top: -3px;
 }
 
@@ -526,7 +534,7 @@ input.form-little {
     background-color: #188e77 !important;
 }
 
-.msg_success_newlog {
+.msg_success_newlog, .msg_success_newperson {
     position: fixed;
     top: 76px;
     left: 20px;
@@ -545,4 +553,17 @@ p.hint {
 li.disabled {
     color: #73899e;
     padding: 20px;
+}
+
+.person_name {
+    text-align: center;
+    margin-bottom: 25px;
+    background-color: #f1f1f1;
+    margin-top: 0px;
+    padding: 15px 0;
+}
+
+.list-group-item {
+    border: 0 !important;
+    border-radius: 0 !important;
 }

@@ -1,58 +1,301 @@
 {% extends 'includes/_base.html' %}
-{% load static from staticfiles %}
+{% load i18n %}
+{% load static %}
 
 {% block js %}
 <script type="text/javascript">
-var vlogs;
+var vue;
+loadPeople();
+
+$(function() {
+    $('#side_affix').affix({
+        offset: {
+            top: 85,
+            bottom: 80
+        }
+    });
+
+    $('#nppl_role, #nppl_company').selectpicker({
+        style: 'btn-default custom_select',
+        size: 6,
+        width: '350px',
+        liveSearch: true,
+        showIcon: true
+    });
+
+    $('#new_company').click(function() {
+        $(this).hide();
+        $('.custom_select_container_company').hide();
+        $('#nppl_company_create').removeClass('hidden');
+        $('#cancel_new_company').removeClass('hidden');
+        $('#nppl_company_new').focus();
+    })
+
+    $('#cancel_new_company').click(function() {
+        $(this).addClass('hidden');
+        $('#new_company').show();
+        $('.custom_select_container_company').show();
+        $('#nppl_company_create').addClass('hidden');
+        $('#cancel_new_company').addClass('hidden');
+    })
+
+    $('#new_role').click(function() {
+        $(this).hide();
+        $('.custom_select_container_role').hide();
+        $('#nppl_role_create').removeClass('hidden');
+        $('#cancel_new_role').removeClass('hidden');
+        $('#nppl_role_new').focus();
+    })
+
+    $('#cancel_new_role').click(function() {
+        $(this).addClass('hidden');
+        $('#new_role').show();
+        $('.custom_select_container_role').show();
+        $('#nppl_role_create').addClass('hidden');
+        $('#cancel_new_role').addClass('hidden');
+    })
+
+    $('#form_cancel_update').click(function() {
+        clearForm();
+        $(this).addClass('hidden');
+    });
+
+    $('form#new_person').submit(function() {
+        var errors = false;
+        $('#error_nppl_name').hide();
+
+        post_data = {
+            'nppl_name': $('#nppl_name').val(),
+            'nppl_company': $('#nppl_company :selected').attr('value'),
+            'nppl_role': $('#nppl_role :selected').attr('value'),
+            'nppl_email': $('#nppl_email').val(),
+            'nppl_mobile': $('#nppl_mobile').val(),
+            'nppl_company_new': $('#nppl_company_new').val(),
+            'nppl_role_new': $('#nppl_role_new').val(),
+            'is_update': $('#update_person').val(),
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        }
+
+        if (post_data.nppl_name.length < 3) {
+            $('#error_nppl_name').show();
+            errors = true;
+        }
+
+        if(errors) {
+            return false;
+        }
+
+        $.post('{% url "core:newperson" %}', post_data, function(res) {
+            if (res.success) {
+                clearForm();
+                loadPeople();
+                showSuccessMessage();
+            } else {
+                showError();
+            }
+        });
+        return false;
+
+    });
+})
+
+function loadPeople() {
+    $.getJSON('/api/v1/people/', function(res) {
+        vue.people = res;
+        $('#fake_loading').removeClass('icon-spin');
+    });
+}
+
+function loadSinglePerson(ppl) {
+    clearForm(); // Confirm changes!!!
+    $('#nlog_header_text').html('{% trans "Loading..." %}');
+
+    $.getJSON('/api/v1/people/' + ppl + '?raw', function(res) {
+
+        $("#nppl_name").val(res.name);
+
+        if(res.company) {
+            $("#nppl_company").val(res.company.id).change();
+        } else {
+            $("#nppl_company").val("0").change();
+        }
+        if(res.role) {
+            $("#nppl_role").val(res.role.id).change();
+        } else {
+            $("#nppl_role").val("0").change();
+        }
+        $('#nppl_email').val(res.email);
+        $('#nppl_mobile').val(res.mobile);
+
+        $('#update_person').val(res.id);
+        $('#form_cancel_update').removeClass('hidden');
+
+        $('#nlog_header_text').html('{% trans "Update person!" %}');
+        $('#send_form').html('{% trans "Update..." %}')
+    });
+}
+
+function clearForm() {
+    $('#new_person')[0].reset();
+    $('#error_nppl_name').hide();
+    $('#update_person').val(0);
+    $('#nppl_company').val('0').change();
+    $("#nppl_role").val("0").change();
+    $('#nppl_company_new').val('');
+    $('#nppl_role_new').val('');
+    $('#nlog_header_text').html('{% trans "New person!" %}');
+    $('#send_form').html('{% trans "Add person..." %}')
+}
+
+function showSuccessMessage() {
+    $('.msg_success_newperson').hide().removeClass('hidden')
+        .fadeIn('fast').delay(100).fadeOut('fast')
+        .fadeIn('fast').delay(100).fadeOut('fast')
+        .fadeIn('fast').delay(2000).fadeOut();
+}
 </script>
 {% endblock %}
 
 {% block content %}
-<div id="main_people">
+<div class="col-md-8">
     <div class="col-xs-18 col-sm-6 col-md-4" v-for="person in filteredPeople">
         <div class="thumbnail">
-            <img src="{% static 'images/cover_not-found-poly.jpg' %}" width="350" class="cover_card" />
-            <img src="{% static 'images/avatar_not-found.gif' %}" width="100" class="avatar_card" />
-            <div class="caption" style="margin-top: -20px; min-height: 350px;">
-                <h3 style="text-align: center; margin-bottom: 20px;">
-                    [[ person.name ]]<br />
-                    <small>[[ person.role__name ]]</small>
-                </h3>
+            <h4 class="person_name">
+                [[ person.name ]]<br />
+                <small v-if="person.role">[[ person.role.name ]]</small><small v-if="!person.role">---</small>
+            </h4>
+            <div class="caption" style="margin-top: -20px; min-height: 183px; padding: 0;">
                 <ul class="list-group">
-                    <li class="list-group-item">[[ person.email ]]</li>
-                    <li class="list-group-item"><span class="glyphicon glyphicon-earphone" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span>Mobile: <span class="pull-right">[[ person.mobile ]]</span></li>
-                    <li class="list-group-item"><span class="glyphicon glyphicon-briefcase" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span>Empresa: <span class="pull-right">[[ person.company__name ]]</span></li>
-                    <li class="list-group-item"><span class="glyphicon glyphicon-calendar" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span>Criado em: <span class="pull-right">[[ person.created_on ]]</span></li>
+                    <li class="list-group-item"><span class="glyphicon glyphicon-envelope" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span>[[ person.email || '---' ]]</li>
+                    <li class="list-group-item"><span class="glyphicon glyphicon-earphone" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span> [[ person.mobile || '---' ]]</span></li>
+                    <li class="list-group-item"><span class="glyphicon glyphicon-briefcase" style="top: 2px; padding-right: 8px;" aria-hidden="true"></span> <span v-if="person.company">[[ person.company.name ]]</span><span v-if="!person.company">---</span></span></li>
                 </ul>
-                <div class="btn-group dropup">
-                    <button href="" class="btn btn-success btn-s" role="button">Buscar logs...</button>
+                <div style="padding: 8px;">
+                    <button class="btn btn-success btn-xs" role="button" v-on:click="editPerson([[ person.id ]])">{% trans "Edit" %}</button> <button class="btn btn-default btn-xs" role="button" v-on:click="doSearch(person.name)">{% trans "Logs..." %}</button>
+                    <button class="btn btn-danger btn-xs pull-right" role="button" v-on:click="deletePerson([[ person.id ]])">x</button>
                 </div>
+            </div> 
+        </div>
+    </div>
+
+    <div class="" v-if="!filteredPeople.length && q">
+        <div class="thumbnail">
+            <div class="caption" style="padding: 10px 20px; background-color: firebrick; color: #fff;">
+                    {% blocktrans %}
+                    <p>
+                    <h3 style="margin: 3px">Oooops, nothing found!</h3>
+                    Your search criteria didn't match anything, try using another keywords...
+                    </p>
+                    {% endblocktrans %}
             </div>
         </div>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div id="side_affix" class="affix">
+        <h3 id="nlog_header_text">{% trans "New person!" %}</h3>
+        <form id="new_person">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="nppl_name">{% trans "Name" %}</label><div class="form_error pull-right" id="error_nppl_name"> {% trans 'Required' %}</div>
+                    <input type="text" class="form-control" id="nppl_name" >
+                </div>
+                <div class="form-group">
+                    <a id="new_company" class="label label-warning new_kind pull-right">{% trans "+ new" %}</a>
+                    <a id="cancel_new_company" class="label label-danger new_kind pull-right hidden">{% trans "cancel" %}</a>
+                    <label for="nppl_company">{% trans "Company" %}</label>
+                    <div class="custom_select_container_company">
+                    <select class="form-control" id="nppl_company">
+                        <option value="0">---</option>
+                        {% for company in companies %}
+                        <option data-icon="glyphicon-briefcase" value="{{ company.id }}">{{ company.name }}</option>
+                        {% endfor %}
+                    </select>
+                    </div>
+                    <div class="form-inline hidden" id="nppl_company_create">
+                        <div class="form-group new_kind_form">
+                            <input type="text" class="form-control form-little-full" style="width: 100% !important;" id="nppl_company_new">
+                       </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <a id="new_role" class="label label-warning new_kind pull-right">{% trans "+ new" %}</a>
+                    <a id="cancel_new_role" class="label label-danger new_kind pull-right hidden">{% trans "cancel" %}</a>
+                    <label for="nppl_role">{% trans "Role" %}</label>
+                    <div class="custom_select_container_role">
+                    <select class="form-control" id="nppl_role">
+                        <option value="0">---</option>
+                        {% for role in roles %}
+                        <option value="{{ role.id }}">{{ role.name }}</option>
+                        {% endfor %}
+                    </select>
+                    </div>
+                    <div class="form-inline hidden" id="nppl_role_create">
+                        <div class="form-group new_kind_form">
+                            <input type="text" class="form-control form-little-full" id="nppl_role_new">
+                       </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="nppl_email" class="col-sm-3 control-label">E-mail</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" id="nppl_email">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="nppl_mobile" class="col-sm-3 control-label">Mobile</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="nppl_mobile">
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="update_person" value="0" />
+            <div style="margin-top: 20px;">
+                <button type="submit" class="btn btn-warning" id="send_form">{% trans "Add person..." %}</button>
+                <button type="reset" id="form_cancel_update" class="btn btn-danger pull-right hidden">{% trans "Cancel!" %}</button>
+            </div>
+        </form>
     </div>
 </div>
 {% endblock %}
 
 {% block js_footer %}
 <script type="text/javascript">
-vlogs = new Vue({
+vue = new Vue({
     el: '#vue_app',
     delimiters: ["[[", "]]"],
     data: {
         q: '',
-        people: {{ people|safe }}
+        people: ''
     },
     computed: {
         filteredPeople() {
+            if (!this.people) return 0;
             var self = this
             return this.people.filter(function(person) {
                 return (
                     (person.name.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
-                    (person.company__name.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
-                    (person.role__name.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
+                    (person.email && person.email.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
+                    (person.role && person.role.name.toLowerCase().indexOf(self.q.toLowerCase()) > -1) ||
+                    (person.company && person.company.name.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
                 )
             })
         }
+    },
+    methods: {
+        doSearch: function(txt) {
+            document.location.href = '/?q=' + txt;
+        },
+        editPerson: function(id, ev) {
+            loadSinglePerson(id[0][0]);
+        },
+        deletePerson: function(id, ev) {
+            loadSinglePerson(id[0][0]);
+        },
     }
 })
 </script>

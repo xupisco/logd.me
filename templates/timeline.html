@@ -4,7 +4,7 @@
 
 {% block js %}
 <script type="text/javascript">
-var vlogs;
+var vue;
 var db_kinds = {{ kinds.count }};
 
 $(function() {
@@ -228,12 +228,13 @@ function loadSingleLog(log) {
         $('#form_cancel_update').removeClass('hidden');
 
         $('#nlog_header_text').html('{% trans "Update log!" %}');
+        $('#send_form').html('{% trans "Update..." %}')
     });
 }
 
 function loadLogs() {
     $.getJSON('/api/v1/logs/', function(res) {
-        vlogs.logs = res;
+        vue.logs = res;
         $('#fake_loading').removeClass('icon-spin');
     });
 }
@@ -269,14 +270,15 @@ function clearForm() {
     $('#error_nlog_body').hide();
     $('#update_log').val(0);
     $('#nlog_header_text').html('{% trans "New log!" %}');
+    $('#send_form').html('{% trans "Add log..." %}')
 }
 
 function qs(el) {
-    current_content = vlogs.q
+    current_content = vue.q
     if(current_content.length) {
         current_content += " "
     }
-    vlogs.q = current_content + $(el).html();
+    vue.q = current_content + $(el).html();
 }
 </script>
 {% endblock %}
@@ -416,7 +418,7 @@ function qs(el) {
             </div>
             <input type="hidden" id="update_log" value="0" />
             <div style="margin-top: 20px;">
-                <button type="submit" class="btn btn-warning">{% trans "Add log..." %}</button>
+                <button type="submit" id="send_form" class="btn btn-warning">{% trans "Add log..." %}</button>
                 <button type="reset" id="form_cancel_update" class="btn btn-danger pull-right hidden">{% trans "Cancel!" %}</button>
             </div>
         </form>
@@ -437,11 +439,11 @@ String.prototype.fuzzy = function(term, ratio) {
     return (matches/this.length >= ratio || term == "")
 };
 
-vlogs = new Vue({
+vue = new Vue({
     el: '#vue_app',
     delimiters: ["[[", "]]"],
     data: {
-        q: '',
+        q: '{{ q }}',
         logs: ''
     },
     computed: {
