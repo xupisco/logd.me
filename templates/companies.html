@@ -1,0 +1,209 @@
+{% extends 'includes/_base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block js %}
+<script type="text/javascript">
+var vue;
+loadCompanies();
+
+$(function() {
+    $('#side_affix').affix({
+        offset: {
+            top: 85,
+            bottom: 80
+        }
+    });
+
+    $('#form_cancel_update').click(function() {
+        clearForm();
+        $(this).addClass('hidden');
+    });
+
+    $('form#new_company').submit(function() {
+        var errors = false;
+        $('#error_ncompany_name').hide();
+
+        post_data = {
+            'ncompany_name': $('#ncompany_name').val(),
+            'is_update': $('#update_company').val(),
+            'csrfmiddlewaretoken': '{{ csrf_token }}'
+        }
+
+        if (post_data.ncompany_name.length < 3) {
+            $('#error_ncompany_name').show();
+            errors = true;
+        }
+
+        if(errors) {
+            return false;
+        }
+
+        $.post('{% url "core:newcompany" %}', post_data, function(res) {
+            if (res.success) {
+                clearForm();
+                loadCompanies();
+                showSuccessMessage();
+            } else {
+                showError();
+            }
+        });
+        return false;
+
+    });
+})
+
+function loadCompanies() {
+    $.getJSON('/api/v1/companies/', function(res) {
+        vue.companies = res;
+        $('#fake_loading').removeClass('icon-spin');
+    });
+}
+
+function loadSingleCompany(ppl) {
+    clearForm(); // Confirm changes!!!
+    $('#nlog_header_text').html('{% trans "Loading..." %}');
+
+    $.getJSON('/api/v1/companies/' + ppl + '?raw', function(res) {
+
+        $("#ncompany_name").val(res.name);
+        $('#update_company').val(res.id);
+        $('#form_cancel_update').removeClass('hidden');
+
+        $('#nlog_header_text').html('{% trans "Update company!" %}');
+        $('#send_form').html('{% trans "Update..." %}')
+    });
+}
+
+function showRemoveConfirmation(ppl) {
+    $('#actions_for_' + ppl).next('.fordelete').removeClass('hidden');
+    $('#actions_for_' + ppl).next('.fordelete').mouseleave(function() {
+        $(this).addClass('hidden');
+        $('#actions_for_' + ppl).removeClass('hidden');
+    });
+    $('#actions_for_' + ppl).addClass('hidden');
+
+    $('#actions_for_' + ppl).next('.fordelete').click(function() {
+        removeCompany(ppl);
+        //$(this).addClass('hidden');
+        //$(this).prev('#actions_for_' + ppl).removeClass('hidden');
+    });
+}
+
+function removeCompany(id) {
+    var post_data = {
+        'company_id': id,
+        'csrfmiddlewaretoken': '{{ csrf_token }}'
+    }
+    $.post('{% url "core:removecompany" %}', post_data, function(res) {
+        if (res.success) {
+            //loadLogs();
+            $('#company_' + id).fadeOut();
+        } else {
+            showError();
+        }
+    });
+}
+
+function clearForm() {
+    $('#new_company')[0].reset();
+    $('#update_company').val(0);
+    $('#error_ncompany_name').hide();
+    $('#nlog_header_text').html('{% trans "New company!" %}');
+    $('#send_form').html('{% trans "Add company..." %}')
+}
+
+function showSuccessMessage() {
+    $('.msg_success_newcompany').hide().removeClass('hidden')
+        .fadeIn('fast').delay(100).fadeOut('fast')
+        .fadeIn('fast').delay(100).fadeOut('fast')
+        .fadeIn('fast').delay(2000).fadeOut();
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-8">
+    <div class="col-xs-18 col-sm-6 col-md-4" v-for="company in filteredCompanies">
+        <div class="thumbnail" v-bind:id="'company_' + [[ company.id ]]">
+            <h4 class="person_name" style="margin-bottom: 5px;">
+                [[ company.name ]]<br />
+            </h4>
+            <div style="padding: 4px 2px;">
+                <div class="ppl_actions" v-bind:id="'actions_for_' + [[ company.id ]]">
+                    <button class="btn btn-success btn-xs" role="button" v-on:click="editCompany([[ company.id ]])">{% trans "Edit" %}</button> <button class="btn btn-default btn-xs" role="button" v-on:click="doSearch(company.name)">{% trans "Logs..." %}</button>
+                    <button class="btn btn-danger btn-xs pull-right" role="button" v-on:click="removeCompany([[ company.id ]])">x</button>
+                </div>
+                <div class="fordelete hidden">
+                    <div class="company_delete_conf"><strong>{% trans "Sure?" %}</strong> {% trans "click again..." %}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="" v-if="!filteredCompanies.length && q">
+        <div class="thumbnail">
+            <div class="caption" style="padding: 10px 20px; background-color: firebrick; color: #fff;">
+                    {% blocktrans %}
+                    <p>
+                    <h3 style="margin: 3px">Oooops, nothing found!</h3>
+                    Your search criteria didn't match anything, try using another keywords...
+                    </p>
+                    {% endblocktrans %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-4">
+    <div id="side_affix" class="affix">
+        <h3 id="nlog_header_text">{% trans "New company!" %}</h3>
+        <form id="new_company">
+            <div class="form-group">
+                <label for="nppl_name">{% trans "Name" %}</label><div class="form_error pull-right" id="error_ncompany_name"> {% trans 'Required' %}</div>
+                <input type="text" class="form-control" id="ncompany_name" >
+            </div>
+            <input type="hidden" id="update_company" value="0" />
+            <div style="margin-top: 20px;">
+                <button type="submit" class="btn btn-warning" id="send_form">{% trans "Add company..." %}</button>
+                <button type="reset" id="form_cancel_update" class="btn btn-danger pull-right hidden">{% trans "Cancel!" %}</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block js_footer %}
+<script type="text/javascript">
+vue = new Vue({
+    el: '#vue_app',
+    delimiters: ["[[", "]]"],
+    data: {
+        q: '',
+        companies: ''
+    },
+    computed: {
+        filteredCompanies() {
+            if (!this.companies) return 0;
+            var self = this
+            return this.companies.filter(function(company) {
+                return (
+                    (company.name.toLowerCase().indexOf(self.q.toLowerCase()) > -1)
+                )
+            })
+        }
+    },
+    methods: {
+        doSearch: function(txt) {
+            document.location.href = '/?q=' + txt;
+        },
+        editCompany: function(id, ev) {
+            loadSingleCompany(id[0][0]);
+        },
+        removeCompany: function(id, ev) {
+            showRemoveConfirmation(id[0][0]);
+        }
+    }
+})
+</script>
+{% endblock %}

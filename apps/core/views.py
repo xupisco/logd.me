@@ -88,8 +88,9 @@ def people(request):
 
 @login_required
 def companies(request):
+    companies = Company.objects.filter(owner=request.user).order_by('name')
     context = {
-        'dude': 'Alaor'
+        'companies': companies
     }
     return render(request, 'companies.html', context)
 
@@ -103,6 +104,64 @@ def calendar(request):
 
 
 # Temp stuff
+def newcompany(request):
+    ncompany_name = request.POST.get('ncompany_name')
+    is_update = int(request.POST.get('is_update'))
+
+    if not is_update:
+        company = Company(
+            owner=request.user,
+            name=ncompany_name)
+    else:
+        company = Company.objects.get(id=is_update)
+        old_name = company.name
+        company.name = ncompany_name
+
+        if ncompany_name != old_name:
+            logs = Log.objects.filter(companies=company)
+            base_string = '<span class="hl_mention_{0}" data-id="{1}">{2}</span>'
+
+            for log in logs:
+                old_string = base_string.format('company', company.id, old_name)
+                new_string = base_string.format('company', company.id, ncompany_name)
+
+                log.body = log.body.replace(old_string, new_string)
+                log.save()
+
+
+    company.save()
+
+    response_data = {}
+    response_data['success'] = True
+
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
+def removecompany(request):
+    company_id = request.POST.get('company_id')
+    company = Company.objects.filter(owner=request.user).filter(id=company_id)
+
+    response_data = {}
+    if not company:
+        response_data['success'] = False
+    else:
+        place = company[0]
+        logs = Log.objects.filter(companies=place)
+        base_string = '<span class="hl_mention_{0}" data-id="{1}">{2}</span>'
+
+        for log in logs:
+            old_string = base_string.format('company', place.id, place.name)
+            new_string = place.name
+
+            log.body = log.body.replace(old_string, new_string)
+            log.save()
+
+        company.delete()
+        response_data['success'] = True
+
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
 def newperson(request):
     nppl_name = request.POST.get('nppl_name')
     nppl_company = request.POST.get('nppl_company')

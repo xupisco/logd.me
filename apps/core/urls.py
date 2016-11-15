@@ -22,4 +22,7 @@ urlpatterns = [
 
     url(r'^ajax/new_person$', views.newperson, name='newperson',),
     url(r'^ajax/remove_person$', views.removeperson, name='removeperson',),
+
+    url(r'^ajax/new_company$', views.newcompany, name='newcompany',),
+    url(r'^ajax/remove_company$', views.removecompany, name='removecompany',),
 ]

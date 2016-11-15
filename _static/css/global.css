@@ -539,7 +539,7 @@ input.form-little-full {
     background-color: #188e77 !important;
 }
 
-.msg_success_newlog, .msg_success_newperson {
+.msg_success_newlog, .msg_success_newperson, .msg_success_newcompany {
     position: fixed;
     top: 76px;
     left: 20px;
@@ -585,7 +585,7 @@ li.croptext {
 }
 
 .fordelete {
-    position: absolute;
+    text-align: center;
     background-color: rgba(204, 0, 0, 0.9);
     padding: 4px;
     z-index: 9;

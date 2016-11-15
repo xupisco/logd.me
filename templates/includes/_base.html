@@ -123,6 +123,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 {% trans "Person successfully saved!" %}
 </div>
 
+<div class="msg_success_newcompany hidden">
+{% trans "Company successfully saved!" %}
+</div>
+
 <div class="big_error_message_container hidden">
     <div class="big_error_message">
         <img src="{% static 'images/sad.png' %}" />
@@ -167,9 +171,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <li class="dropdown-header"><img src="{% static 'images/avatar_not-found.gif' %}" class="pull-left user_avatar_menu" /></li>
                             {% endif %}
                             <li class="dropdown-header"></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;+ Log</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;+ Person</a></li>
-                            <li><a href="#"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>&nbsp;&nbsp;+ Company</a></li>
+                            <li><a href="/"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;Logs</a></li>
+                            <li><a href="/people"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;People</a></li>
+                            <li><a href="/companies"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>&nbsp;&nbsp;Companies</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/accounts/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;Sair</a></li>
                             {% if request.user.is_staff %}
