@@ -123,7 +123,7 @@ def newperson(request):
     else:
         if nppl_company == "0":
             nppl_company = None
-        else: 
+        else:
             nppl_company = Company.objects.get(id=nppl_company)
 
     if nppl_role_new:
