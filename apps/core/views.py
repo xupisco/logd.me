@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.serializers.json import DjangoJSONEncoder
 from django.utils import translation
 from django.utils.text import slugify
+from django.conf import settings
 
 import json
 import re
@@ -36,12 +37,18 @@ def set_language(request, lang_code):
 
 
 def login(request):
+    if not request.session.get(translation.LANGUAGE_SESSION_KEY):
+        return redirect('/set_language/' + settings.LANGUAGE_CODE)
+
     return render(request, 'login.html')
 
 
 @login_required
 def home(request):
     from conf.utils import glyphicon_classes
+
+    if not request.session.get(translation.LANGUAGE_SESSION_KEY):
+        return redirect('/set_language/' + settings.LANGUAGE_CODE)
 
     user_log_count = Log.objects.filter(owner=request.user).count()
     if not user_log_count:
