@@ -255,9 +255,8 @@ function removeLog(id) {
     }
     $.post('{% url "core:removelog" %}', post_data, function(res) {
         if (res.success) {
-            $('#entry_' + id).fadeOut().done(function() {
-                loadLogs();
-            });
+            $('#entry_' + id).hide();
+            loadLogs();
         } else {
             showError();
         }
@@ -491,7 +490,15 @@ vue = new Vue({
                     var v = $(this).attr('data-tton') || 0;
                     if(parseInt(v) == 0) {
 
-                        var tt_html =   '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="text-align: left;"></div></div>'
+                        var tt_html = '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="text-align: left;"></div></div>'
+
+                        $(el).attr('data-original-title', '{% trans "Loading..." %}');
+                        $(el).tooltip({
+                            template: tt_html,
+                            trigger: 'manual',
+                            placement: 'top'
+                        });
+                        $(el).tooltip('show');
 
                         $.getJSON('/api/v1/people/' + ppl + '?raw', function(res) {
                             var c_title = ''
@@ -507,14 +514,15 @@ vue = new Vue({
                             if(res.mobile) {
                                 c_title += '{% trans "Mobile" %}: ' + res.mobile + '<br />';
                             }
-                            $(el).attr('title', c_title);
-                            $(el).tooltip({
-                                template: tt_html,
-                                trigger: 'manual',
-                                placement: 'top'
-                            });
-                            $(el).tooltip('show');
-                            $(el).attr('data-tton', '1');
+
+                            if(!c_title.length) {
+                                c_title = '{% trans "No extra info!" %}';
+                                $(el).tooltip('hide');
+                            } else  {
+                                $(el).attr('data-original-title', c_title);
+                                $(el).tooltip('show');
+                                $(el).attr('data-tton', '1');
+                            }
                         });
                     } else {
                         $(el).attr('data-tton', '0')

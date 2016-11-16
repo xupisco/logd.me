@@ -367,6 +367,11 @@ def parse_from_string(request, nlog_body):
                     nlog_body = nlog_body.replace(old_string, new_string)
                     parsed_companies.append(nlog_company.pk)
                 else:
+                    place = c_exists[0]
+                    old_string = base_string.format('company', 0, mention[2])
+                    new_string = base_string.format('company', place.pk, mention[2])
+
+                    nlog_body = nlog_body.replace(old_string, new_string)
                     parsed_companies.append(c_exists[0].id)
             else:
                 parsed_companies.append(mention[1])
@@ -386,6 +391,11 @@ def parse_from_string(request, nlog_body):
                     nlog_body = nlog_body.replace(old_string, new_string)
                     parsed_people.append(nlog_person.pk)
                 else:
+                    dude = p_exists[0]
+                    old_string = base_string.format('person', 0, mention[2])
+                    new_string = base_string.format('person', dude.pk, mention[2])
+
+                    nlog_body = nlog_body.replace(old_string, new_string)
                     parsed_people.append(p_exists[0].id)
             else:
                 parsed_people.append(mention[1])
