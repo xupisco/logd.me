@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-11 17:07-0200\n"
-"PO-Revision-Date: 2016-11-11 17:09-0200\n"
+"POT-Creation-Date: 2016-11-16 10:06-0200\n"
+"PO-Revision-Date: 2016-11-16 10:08-0200\n"
 "Last-Translator: Fernando Macedo <fgmacedo@gmail.com>\n"
+"Language-Team: \n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language-Team: \n"
 "X-Generator: Poedit 1.8.7.1\n"
 
 #: apps/companies/apps.py:8 apps/companies/models.py:23 apps/logs/admin.py:18
@@ -113,39 +113,121 @@ msgstr "Página não encontrada."
 msgid "Internal server error."
 msgstr "Erro interno no servidor."
 
-#: templates/includes/_base.html:104
+#: templates/companies.html:65 templates/people.html:111
+#: templates/timeline.html:213
+msgid "Loading..."
+msgstr "Carregando..."
+
+#: templates/companies.html:73
+msgid "Update company!"
+msgstr "Atualizar empresa!"
+
+#: templates/companies.html:74 templates/people.html:134
+#: templates/timeline.html:233
+msgid "Update..."
+msgstr "Atualizar..."
+
+#: templates/companies.html:112 templates/companies.html:165
+msgid "New company!"
+msgstr "Nova empresa!"
+
+#: templates/companies.html:113 templates/companies.html:173
+msgid "Add company..."
+msgstr "Adicionar empresa..."
+
+#: templates/companies.html:134 templates/people.html:199
+msgid "Copied!"
+msgstr "Copiado!"
+
+#: templates/companies.html:139 templates/people.html:205
+msgid "Edit"
+msgstr "Editar"
+
+#: templates/companies.html:139 templates/people.html:205
+msgid "Logs..."
+msgstr "Registros..."
+
+#: templates/companies.html:143 templates/people.html:209
+#: templates/timeline.html:321
+msgid "Sure?"
+msgstr "Certeza?"
+
+#: templates/companies.html:143 templates/people.html:209
+#: templates/timeline.html:321
+msgid "click again..."
+msgstr "clique novamente..."
+
+#: templates/companies.html:152 templates/people.html:219
+#: templates/timeline.html:300
+msgid ""
+"\n"
+"                    <p>\n"
+"                    <h3 style=\"margin: 3px\">Oooops, nothing found!</h3>\n"
+"                    Your search criteria didn't match anything, try using "
+"another keywords...\n"
+"                    </p>\n"
+"                    "
+msgstr ""
+"\n"
+"                    <p>\n"
+"                    <h3 style=\"margin: 3px\">Oooops, nada encontrado!</"
+"h3>\n"
+"                    Sua busca não encontrou nenhum resultado, tente usar "
+"outras palavras...\n"
+"                    </p>\n"
+"                    "
+
+#: templates/companies.html:168 templates/people.html:236
+msgid "Name"
+msgstr "Nome"
+
+#: templates/companies.html:168 templates/people.html:236
+#: templates/timeline.html:380 templates/timeline.html:404
+msgid "Required"
+msgstr "Obrigatório"
+
+#: templates/companies.html:174 templates/people.html:294
+#: templates/timeline.html:429
+msgid "Cancel!"
+msgstr "Cancelar!"
+
+#: templates/includes/_base.html:119
 msgid "Log successfully saved!"
 msgstr "Registro salvo com sucesso!"
 
-#: templates/includes/_base.html:110
+#: templates/includes/_base.html:123
+msgid "Person successfully saved!"
+msgstr "Pessoa salva com sucesso!"
+
+#: templates/includes/_base.html:127
+msgid "Company successfully saved!"
+msgstr "Empresa salva com sucesso!"
+
+#: templates/includes/_base.html:133
 msgid "Ouch! Something went wrong..."
 msgstr "Arrrgh! Algo deu errado..."
 
-#: templates/includes/_base.html:128
+#: templates/includes/_base.html:151
 msgid "Logs"
 msgstr "Registros"
 
-#: templates/includes/_base.html:129
+#: templates/includes/_base.html:152
 msgid "People"
 msgstr "Pessoas"
 
-#: templates/includes/_base.html:130
+#: templates/includes/_base.html:153
 msgid "Companies"
 msgstr "Empresas"
 
-#: templates/includes/_base.html:131
-msgid "Calendar"
-msgstr "Calendário"
-
-#: templates/includes/_base.html:135
+#: templates/includes/_base.html:157
 msgid "Type anything..."
 msgstr "Digite qualquer coisa..."
 
-#: templates/includes/_base.html:165
+#: templates/includes/_base.html:187
 msgid "Login"
 msgstr "Entrar"
 
-#: templates/includes/_base.html:183 templates/login.html:20
+#: templates/includes/_base.html:205 templates/login.html:20
 msgid ""
 "This project is opensource, feel free to use and support! <a href=\"https://"
 "github.com/xupisco/ownCRM/\">Fork me!</a>"
@@ -165,106 +247,65 @@ msgstr ""
 "Não se preocupe, não queremos suas informações...  login é apenas para fins "
 "de autenticação."
 
-#: templates/timeline.html:75
-msgid "Create"
-msgstr "Criar"
+#: templates/people.html:133
+msgid "Update person!"
+msgstr "Atualizar pessoa!"
 
-#: templates/timeline.html:76
-msgid "as"
-msgstr "como"
+#: templates/people.html:176 templates/people.html:232
+msgid "New person!"
+msgstr "Nova pessoa!"
 
-#: templates/timeline.html:77
-msgid "Person"
-msgstr "Pessoa"
+#: templates/people.html:177 templates/people.html:293
+msgid "Add person..."
+msgstr "Adicionar pessoa..."
 
-#: templates/timeline.html:78
+#: templates/people.html:240 templates/people.html:258
+#: templates/timeline.html:378
+msgid "+ new"
+msgstr "+ novo"
+
+#: templates/people.html:241 templates/people.html:259
+#: templates/timeline.html:379
+msgid "cancel"
+msgstr "cancelar"
+
+#: templates/people.html:242 templates/timeline.html:94
 msgid "Company"
 msgstr "Empresa"
 
-#: templates/timeline.html:182
-msgid "Loading..."
-msgstr "Carregando..."
+#: templates/people.html:260
+msgid "Role"
+msgstr "Cargo"
 
-#: templates/timeline.html:201
+#: templates/timeline.html:91
+msgid "Create"
+msgstr "Criar"
+
+#: templates/timeline.html:92
+msgid "as"
+msgstr "como"
+
+#: templates/timeline.html:93
+msgid "Person"
+msgstr "Pessoa"
+
+#: templates/timeline.html:232
 msgid "Update log!"
 msgstr "Atualizar registro!"
 
-#: templates/timeline.html:238 templates/timeline.html:380
+#: templates/timeline.html:274 templates/timeline.html:375
 msgid "New log!"
 msgstr "Novo registro!"
 
-#: templates/timeline.html:263
-msgid ""
-"\n"
-"                    <p>\n"
-"                    <h3 style=\"margin: 3px\">Oooops, nothing found!</h3>\n"
-"                    Your search criteria didn't match anything, try using "
-"another keywords...\n"
-"                    </p>\n"
-"                    "
-msgstr ""
-"\n"
-"                    <p>\n"
-"                    <h3 style=\"margin: 3px\">Oooops, nada encontrado!</"
-"h3>\n"
-"                    Sua busca não encontrou nenhum resultado, tente usar "
-"outras palavras...\n"
-"                    </p>\n"
-"                    "
+#: templates/timeline.html:275 templates/timeline.html:428
+msgid "Add log..."
+msgstr "Adicionar registro..."
 
-#: templates/timeline.html:284
-msgid "Sure?"
-msgstr "Certeza?"
+#: templates/timeline.html:339
+msgid "Attach to this log..."
+msgstr "Anexar neste registro..."
 
-#: templates/timeline.html:284
-msgid "click again..."
-msgstr "clique novamente..."
-
-#: templates/timeline.html:311
-msgid "First Steps"
-msgstr "Primeiros passos"
-
-#: templates/timeline.html:312
-msgid ""
-"\n"
-"                        <small>Welcome to your personal and friendly life "
-"log, let's get started!</small><br /><br />\n"
-"                        <p>\n"
-"                        <strong>First things first, what is this?</"
-"strong><br />\n"
-"                        Answer...\n"
-"                        </p>\n"
-"\n"
-"                        <p>\n"
-"                        <strong>Cool, how can I use it?</strong><br />\n"
-"                        Answer...\n"
-"                        </p>\n"
-"\n"
-"                        <p>\n"
-"                        <strong>Is it free?</strong><br />\n"
-"                        Answer...\n"
-"                        </p>\n"
-"\n"
-"                        <p>\n"
-"                        <strong>So, it's not free but I can have my own?</"
-"strong><br />\n"
-"                        Answer...\n"
-"                        </p>\n"
-"\n"
-"                        <p>\n"
-"                        <strong>Is there &lt;name your feature&gt;?</"
-"strong><br />\n"
-"                        Answer...\n"
-"                        </p>\n"
-"\n"
-"                        <p>\n"
-"                        <strong>I love you!</strong><br />\n"
-"                        We love you too!\n"
-"                        </p>\n"
-"                    "
-msgstr ""
-
-#: templates/timeline.html:357
+#: templates/timeline.html:352
 msgid ""
 "\n"
 "                    <p>\n"
@@ -288,62 +329,52 @@ msgstr ""
 "strong></div></p>\n"
 "                    "
 
-#: templates/timeline.html:383
-msgid "+ new"
-msgstr "+ novo"
+#: templates/timeline.html:365
+msgid "Force refresh..."
+msgstr "Forçar atualização..."
 
-#: templates/timeline.html:384
-msgid "cancel"
-msgstr "cancelar"
-
-#: templates/timeline.html:385
+#: templates/timeline.html:380
 msgid "What?"
 msgstr "O que?"
 
-#: templates/timeline.html:395
+#: templates/timeline.html:390
 msgid "Name:"
 msgstr "Nome:"
 
-#: templates/timeline.html:397
+#: templates/timeline.html:392
 msgid "Icon:"
 msgstr "Ícone:"
 
-#: templates/timeline.html:409
+#: templates/timeline.html:404
 msgid "When?"
 msgstr "Quando?"
 
 #: templates/timeline.html:409
-msgid "Required"
-msgstr "Obrigatório"
-
-#: templates/timeline.html:414
 msgid "Has end date?"
 msgstr "Tem data de término?"
 
-#: templates/timeline.html:418
+#: templates/timeline.html:413
 msgid "When ended?"
 msgstr "Quando terminou?"
 
-#: templates/timeline.html:422
+#: templates/timeline.html:417
 msgid "Description..."
 msgstr "Descrição..."
 
-#: templates/timeline.html:422
+#: templates/timeline.html:417
 msgid "Type at least 5 characters"
 msgstr "Digite pelo menos 5 caracteres"
 
-#: templates/timeline.html:424
+#: templates/timeline.html:419
 msgid "Type '@' to mention people and companies."
 msgstr "Digite '@' para citar pessoas e empresas."
 
-#: templates/timeline.html:428
+#: templates/timeline.html:423
 msgid "Highlight?"
 msgstr "Destaque?"
 
-#: templates/timeline.html:433
-msgid "Add log..."
-msgstr "Adicionar registro..."
+#~ msgid "Calendar"
+#~ msgstr "Calendário"
 
-#: templates/timeline.html:434
-msgid "Cancel!"
-msgstr "Cancelar!"
+#~ msgid "First Steps"
+#~ msgstr "Primeiros passos"
