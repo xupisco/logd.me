@@ -369,6 +369,10 @@
     line-height: 31px;
 }
 
+.timeline-label .hl_mention_person:hover {
+    cursor: pointer;
+}
+
 #fake_reload:hover {
     cursor: pointer;
 }

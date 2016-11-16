@@ -255,8 +255,9 @@ function removeLog(id) {
     }
     $.post('{% url "core:removelog" %}', post_data, function(res) {
         if (res.success) {
-            //loadLogs();
-            $('#entry_' + id).fadeOut();
+            $('#entry_' + id).fadeOut().done(function() {
+                loadLogs();
+            });
         } else {
             showError();
         }
@@ -314,7 +315,7 @@ function qs(el) {
                     <span class="glyphicon" v-bind:class="'glyphicon-' + [[ log.kind.glyphicon_name ]]" aria-hidden="true"></span>
                 </div>
 
-                <div class="timeline-label dropzone">
+                <div class="timeline-label dropzone" v-on:mouseover="setup_tooltips()">
                     <div class="log_tools">
                         <span class="glyphicon glyphicon-edit log_tool" v-on:click="editLog([[ log.id ]])" aria-hidden="true"></span></a>
                         <span class="glyphicon glyphicon-remove log_tool tool_delete" aria-hidden="true" v-on:click="removeLog([[ log.id ]])"></span>
@@ -328,7 +329,7 @@ function qs(el) {
                     </div>
                     <p v-html="hl_hashtags(log.body)"></p>
 
-                    <div class="has_labels" v-show="log.companies.length || log.people.length || log.hashtags.length" v-on:mouseover="setup_tooltips()">
+                    <div class="has_labels" v-show="log.companies.length || log.people.length || log.hashtags.length">
                         <span class="label label-info" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span><span class="label label-success ppl_label" onclick="qs(this);" v-for="person in log.people" data-toggle="tooltip" data-placement="top" data-html="true" v-bind:title="[[ person.email ]]">[[ person.name ]]</span><span class="label label-default" onclick="qs(this);" v-for="tag in log.hashtags">#[[ tag ]]</span>
                     </div>
                 </div>
@@ -480,9 +481,46 @@ vue = new Vue({
             return txt.replace(all_re, "<span class='hashtag'>$1</span>");
         },
         setup_tooltips: function() {
-            console.log('oooo');
             if(!parsed_tooltips) {
                 $('.ppl_label').tooltip();
+                $('.hl_mention_person').click(function() {
+                    var ppl = $(this).attr('data-id');
+                    var el = this;
+                    $(this).attr('data-html', 'true')
+                    var v = $(this).attr('data-tton') || 0;
+                    if(parseInt(v) == 0) {
+
+                        var tt_html =   '<div class="tooltip" role="tooltip"><div class="tooltip-arrow"></div><div class="tooltip-inner" style="text-align: left;"></div></div>'
+
+                        $.getJSON('/api/v1/people/' + ppl + '?raw', function(res) {
+                            var c_title = ''
+                            if(res.company) {
+                                c_title += '{% trans "Company" %}: ' + res.company.name + '<br />';
+                            }
+                            if(res.role) {
+                                c_title += '{% trans "Role" %}: ' + res.role.name + '<br />';
+                            }
+                            if(res.email) {
+                                c_title += '{% trans "E-mail" %}: ' + res.email + '<br />';
+                            }
+                            if(res.mobile) {
+                                c_title += '{% trans "Mobile" %}: ' + res.mobile + '<br />';
+                            }
+                            $(el).attr('title', c_title);
+                            $(el).tooltip({
+                                template: tt_html,
+                                trigger: 'manual',
+                                placement: 'top'
+                            });
+                            $(el).tooltip('show');
+                            $(el).attr('data-tton', '1');
+                        });
+                    } else {
+                        $(el).attr('data-tton', '0')
+                        $(el).tooltip('hide');
+                    }
+
+                })
                 parsed_tooltips = true;
             }
         }
