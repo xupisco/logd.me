@@ -18,7 +18,7 @@ class Role(models.Model):
 
 class Person(models.Model):
     owner = models.ForeignKey(User)
-    company = models.ForeignKey(Company, null=True, blank=True)
+    company = models.ForeignKey(Company, related_name='people', null=True, blank=True)
     role = models.ForeignKey(Role, null=True, blank=True)
     name = models.CharField(_('name'), max_length=255)
     email = models.CharField(_('email'), max_length=255, blank=True)
