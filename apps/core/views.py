@@ -361,7 +361,7 @@ def parse_from_string(request, nlog_body):
                                            name=mention[2])
                     nlog_company.save()
 
-                    old_string = base_string.format('company', 0, mention[2])
+                    old_string = base_string.format('company', "0", mention[2])
                     new_string = base_string.format('company', nlog_company.pk, mention[2])
 
                     nlog_body = nlog_body.replace(old_string, new_string)
@@ -380,7 +380,7 @@ def parse_from_string(request, nlog_body):
                                          name=mention[2])
                     nlog_person.save()
 
-                    old_string = base_string.format('person', 0, mention[2])
+                    old_string = base_string.format('person', "0", mention[2])
                     new_string = base_string.format('person', nlog_person.pk, mention[2])
 
                     nlog_body = nlog_body.replace(old_string, new_string)
