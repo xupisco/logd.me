@@ -14,7 +14,7 @@ class BasicPeopleSerializer(serializers.ModelSerializer):
 
 
 class CompanySerializer(serializers.ModelSerializer):
-    people =  BasicPeopleSerializer(many=True, read_only=True)
+    people = BasicPeopleSerializer(many=True, read_only=True)
 
     class Meta:
         model = Company
