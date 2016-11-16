@@ -601,3 +601,11 @@ li.croptext {
 .btn:focus {
     outline:0 !important;
 }
+
+.company_people {
+    height: 91px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-bottom: 1px dashed #e8e8e8;
+    margin-bottom: 4px;
+}
