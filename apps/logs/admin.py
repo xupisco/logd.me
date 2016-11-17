@@ -8,6 +8,7 @@ from .models import LogKind, Log
 class LogKindAdmin(admin.ModelAdmin):
     list_display = ('owner_name', 'name', 'c_usage', )
     prepopulated_fields = {'slug': ('name',)}
+    search_fields = ('owner__first_name', 'owner__last_name', 'name', )
 
     def owner_name(self, obj):
         return obj.owner.get_full_name()
@@ -19,10 +20,11 @@ class LogKindAdmin(admin.ModelAdmin):
 
 
 class LogAdmin(admin.ModelAdmin):
-    list_display = ('owner_name', 'kind', 'short_body', 'reminder', 'start_date', 'c_companies', 'c_people', )
+    list_display = ('owner_name', 'kind', 'short_body', 'reminder',
+                    'start_date', 'c_companies', 'c_people', )
     list_filter = ('reminder', )
     list_display_links = ('kind', )
-    search_fields = ('body', 'companies__name', 'people__name', )
+    search_fields = ('owner__first_name', 'owner__last_name', 'body', 'companies__name', 'people__name', )
 
     def owner_name(self, obj):
         return obj.owner.get_full_name()
