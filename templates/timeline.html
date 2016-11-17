@@ -197,6 +197,7 @@ $(function() {
 })
 
 function showRemoveConfirmation(log) {
+    console.log(log);
     $('#confid_' + log).removeClass('hidden');
     $('#confid_' + log).mouseleave(function() {
         $(this).addClass('hidden');
@@ -217,6 +218,13 @@ function loadSingleLog(log) {
         res_end_date = new Date(res.end_date);
 
         $("#nlog_kind").val(res.kind.id).change();
+
+        if(!$("#nlog_kind").val()) {
+            $('#nlog_kind').append('<option data-icon="glyphicon-' + res.kind.glyphicon_name + '" value="' + res.kind.id + '">' + res.kind.name + '</option>')
+            $('#nlog_kind').selectpicker('refresh');
+            $("#nlog_kind").val(res.kind.id).change();
+        }
+
         $('#nlog_start_date').val(moment(res_start_date).format('DD/MM/YYYY HH:mm'));
         if(res.end_date) {
             $('.has_enddate').attr('checked', true);
@@ -237,6 +245,7 @@ function loadSingleLog(log) {
 function loadLogs() {
     $.getJSON('/api/v1/logs/', function(res) {
         vue.logs = res;
+        parsed_tooltips = false;
         $('#fake_loading').removeClass('icon-spin');
     });
 }
@@ -255,7 +264,6 @@ function removeLog(id) {
     }
     $.post('{% url "core:removelog" %}', post_data, function(res) {
         if (res.success) {
-            $('#entry_' + id).hide();
             loadLogs();
         } else {
             showError();
@@ -273,6 +281,9 @@ function clearForm() {
     $('#update_log').val(0);
     $('#nlog_header_text').html('{% trans "New log!" %}');
     $('#send_form').html('{% trans "Add log..." %}')
+
+    $('#nlog_kind_text').val('');
+    $('#cancel_new_kind').click();
 }
 
 function qs(el) {
