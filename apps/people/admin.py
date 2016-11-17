@@ -11,7 +11,8 @@ class RoleAdmin(admin.ModelAdmin):
 class PersonAdmin(admin.ModelAdmin):
     list_display = ('owner_name', 'name', 'email', 'role', 'mobile', 'company', )
     list_filter = ('role', 'company', )
-    search_fields = ('owner__first_name', 'owner__last_name', 'name', 'role__name', 'company__name', )
+    search_fields = ('owner__first_name', 'owner__last_name', 'name',
+                     'role__name', 'company__name', )
     list_display_links = ('name', )
 
     def owner_name(self, obj):

@@ -24,7 +24,8 @@ class LogAdmin(admin.ModelAdmin):
                     'start_date', 'c_companies', 'c_people', )
     list_filter = ('reminder', )
     list_display_links = ('kind', )
-    search_fields = ('owner__first_name', 'owner__last_name', 'body', 'companies__name', 'people__name', )
+    search_fields = ('owner__first_name', 'owner__last_name', 'body',
+                     'companies__name', 'people__name', )
 
     def owner_name(self, obj):
         return obj.owner.get_full_name()
