@@ -440,6 +440,23 @@ def create_default_log(request):
     )
     nlog.save()
 
+    # Update default peoplo and company
+    company = Company.objects.get(name="ACME Corporation", owner=request.user)
+    gill_bates = Person.objects.get(name="Gill Bates", owner=request.user)
+    john_doe = Person.objects.get(name="John Doe", owner=request.user)
+    default_role, created = Role.objects.get_or_create(name="CEO",
+                                                       slug='ceo',
+                                                       owner=request.user)
+
+    gill_bates.email = "gillbates@acme.org"
+    gill_bates.mobile = "555-1234"
+    gill_bates.role = default_role
+    gill_bates.company = company
+    gill_bates.save()
+
+    john_doe.email = "john@doe.net"
+    john_doe.save()
+
     nlog.companies = mentions['companies']
     nlog.people = mentions['people']
     nlog.save()

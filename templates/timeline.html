@@ -197,15 +197,16 @@ $(function() {
 })
 
 function showRemoveConfirmation(log) {
-    console.log(log);
     $('#confid_' + log).removeClass('hidden');
     $('#confid_' + log).mouseleave(function() {
         $(this).addClass('hidden');
     });
 
-    $('#confid_' + log).click(function() {
-        removeLog(log);
-        $(this).hide();
+    $('#confid_' + log).click(function(ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        $(this).addClass('hidden');
+        deleteLog(log);
     });
 }
 
@@ -257,18 +258,43 @@ function showSuccessMessage() {
         .fadeIn('fast').delay(2000).fadeOut();
 }
 
-function removeLog(id) {
+function deleteLog(id) {
     var post_data = {
         'log_id': id,
         'csrfmiddlewaretoken': '{{ csrf_token }}'
     }
+
+    if(!inVueArray(id)) {
+        return false;
+    }
+
     $.post('{% url "core:removelog" %}', post_data, function(res) {
         if (res.success) {
-            loadLogs();
+            removeMeFromVueArray(id);
+            //loadLogs();
         } else {
             showError();
         }
     });
+}
+
+function inVueArray(id) {
+    for(var i = 0;  i < vue.logs.length;  i++) {
+        if(vue.logs[i].id == id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function removeMeFromVueArray(id) {
+    new_array = []
+    for(var i = 0;  i < vue.logs.length;  i++) {
+        if(vue.logs[i].id != id) {
+            new_array.push(vue.logs[i]);
+        }
+    }
+    vue.logs = new_array;
 }
 
 function clearForm() {
@@ -328,7 +354,7 @@ function qs(el) {
                 <div class="timeline-label dropzone" v-on:mouseover="setup_tooltips()">
                     <div class="log_tools">
                         <span class="glyphicon glyphicon-edit log_tool" v-on:click="editLog([[ log.id ]])" aria-hidden="true"></span></a>
-                        <span class="glyphicon glyphicon-remove log_tool tool_delete" aria-hidden="true" v-on:click="removeLog([[ log.id ]])"></span>
+                        <span class="glyphicon glyphicon-remove log_tool tool_delete" aria-hidden="true" v-on:click.stop.prevent="removeLog([[ log.id ]], $event)"></span>
                         <div class="remove_confirmation hidden" :id="'confid_' + log.id"><strong>{% trans "Sure?" %}</strong> {% trans "click again..." %}</div>
                     </div>
 
@@ -485,6 +511,7 @@ vue = new Vue({
             loadSingleLog(id[0][0])
         },
         removeLog: function(id, ev) {
+            console.log(id[0][0]);
             showRemoveConfirmation(id[0][0]);
         },
         hl_hashtags: function(txt) {
