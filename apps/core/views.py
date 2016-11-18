@@ -50,7 +50,7 @@ def public(request, encoded):
 
     try:
         log = Log.objects.get(id=decoded[1], owner=decoded[0])
-        return render(request, 'public.html', { 'public': True, 'log': log })
+        return render(request, 'public.html', {'public': True, 'log': log})
     except:
         return redirect('/')
 

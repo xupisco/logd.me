@@ -39,7 +39,7 @@ class LogSerializer(serializers.ModelSerializer):
 
     def get_public_url(self, obj):
         hashids = Hashids(salt=settings.SECRET_KEY)
-        return hashids.encode(obj.owner.id, obj.id, random.randint(111111,999999))
+        return hashids.encode(obj.owner.id, obj.id, random.randint(111111, 999999))
 
     # todo: fix this...
     def get_meta(self, obj):
