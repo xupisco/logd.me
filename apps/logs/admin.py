@@ -21,7 +21,7 @@ class LogKindAdmin(admin.ModelAdmin):
 
 class LogAdmin(admin.ModelAdmin):
     list_display = ('owner_name', 'kind', 'short_body', 'reminder',
-                    'start_date', 'c_companies', 'c_people', )
+                    'start_date', 'c_companies', 'c_people', 'public', 'public_views')
     list_filter = ('reminder', )
     list_display_links = ('kind', )
     search_fields = ('owner__first_name', 'owner__last_name', 'body',
@@ -33,7 +33,7 @@ class LogAdmin(admin.ModelAdmin):
 
     def short_body(self, obj):
         body = strip_tags(obj.body)
-        ml = 50
+        ml = 25
         return (body[:ml] + '...') if len(body) > ml else body
     short_body.allow_tags = True
     short_body.short_description = _('preview')

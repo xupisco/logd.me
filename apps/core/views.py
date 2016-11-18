@@ -53,6 +53,9 @@ def public(request, encoded):
         if not log.public:
             return redirect('/')
 
+        log.public_views = log.public_views + 1
+        log.save()
+
         return render(request, 'public.html', {'public': True, 'log': log})
     except:
         return redirect('/')

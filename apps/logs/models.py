@@ -31,6 +31,7 @@ class Log(models.Model):
 
     reminder = models.BooleanField(_('reminder'), default=False)
     public = models.BooleanField(_('public'), default=False)
+    public_views = models.PositiveSmallIntegerField(_('public views'), default=0)
 
     companies = models.ManyToManyField(Company, related_name='companies', blank=True)
     people = models.ManyToManyField(Person, related_name='people', blank=True)
