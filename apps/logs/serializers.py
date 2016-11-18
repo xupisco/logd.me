@@ -28,14 +28,18 @@ class LogSerializer(serializers.ModelSerializer):
     people = PersonSerializer(read_only=True, many=True)
     public_url = serializers.SerializerMethodField()
     meta = serializers.SerializerMethodField()
+    secret = serializers.SerializerMethodField()
 
     class Meta:
         model = Log
         fields = (
             'id', 'kind', 'body', 'hashtags', 'companies', 'people',
             'start_date', 'end_date', 'reminder', 'created_on',
-            'updated_on', 'meta', 'public_url'
+            'updated_on', 'meta', 'public_url', 'secret'
         )
+
+    def get_secret(self, obj):
+        return settings.SECRET_KEY
 
     def get_public_url(self, obj):
         hashids = Hashids(salt=settings.SECRET_KEY)
