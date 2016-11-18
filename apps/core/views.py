@@ -52,8 +52,9 @@ def public(request, encoded):
     #return render(request, 'public.html', {'public': True, 'log': log})
 
     response_data = {}
-    response_data['salame'] = decoded
+    response_data['decoded'] = decoded
     response_data['encoded'] = encoded
+    response_data['key'] = settings.SECRET_KEY
 
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
