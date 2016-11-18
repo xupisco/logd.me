@@ -18,7 +18,7 @@
                     <img src="{{ log.owner.socialaccount_set.all.0.get_avatar_url|default:'/static/images/avatar_not-found.gif' }}" class="user_avatar_public" />
                 </div>
 
-                <div class="timeline-label" style="margin-left: 80px">
+                <div class="timeline-label public_content" style="margin-left: 80px">
 
                     <div class="author">{{ log.owner.get_full_name }}<span style="font-size: 14px;">, disse:</span></div>
 
@@ -29,7 +29,10 @@
                         {% endif %}
                     </span>
                     </div>
-                    <p>{{ log.body|safe }}</p>
+
+                    <p>
+                    {{ log.body|safe|escape }}
+                    </p>
 
                     <div class="has_labels">
                         {% for company in log.companies.all %}

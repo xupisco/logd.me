@@ -233,6 +233,14 @@
                     line-height: 1.428571429;
                 }
 
+                .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2, .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label.public_content {
+                    color: #737881;
+                    font-family: "Noto Sans",sans-serif;
+                    font-size: 14px;
+                    margin: 0;
+                    line-height: 1.428571429;
+                }
+
                     .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label p + p {
                         margin-top: 15px;
                     }
