@@ -48,13 +48,11 @@ def public(request, encoded):
     hashids = Hashids(salt=settings.SECRET_KEY)
     decoded = hashids.decode(encoded)
 
-    #log = Log.objects.get(id=decoded[1], owner=decoded[0])
-    #return render(request, 'public.html', {'public': True, 'log': log})
-
-    response_data = {}
-    response_data['decoded'] = decoded
-    response_data['encoded'] = encoded
-    response_data['key'] = settings.SECRET_KEY
+    try:
+        log = Log.objects.get(id=decoded[1], owner=decoded[0])
+        return render(request, 'public.html', {'public': True, 'log': log})
+    except:
+        return redirect('/')
 
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 

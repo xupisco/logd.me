@@ -369,7 +369,7 @@ function parseDropzones() {
                     <span class="log_date">[[ log.start_date | moment ]]
                         <span class="log_date_end" v-if="log.end_date"> > [[ log.end_date | moment ]]</span>
                     </span>
-                    <a :href="[[ log.public_url ]]" class="sharer" target="_blank"><span class="glyphicon glyphicon-link shareme helptext hidden" aria-hidden="true" title="{% trans "Public link..." %}"></span></a>
+                    <a :href="/pub/[[ log.public_url ]]" class="sharer" target="_blank"><span class="glyphicon glyphicon-link shareme helptext hidden" aria-hidden="true" title="{% trans "Public link..." %}"></span></a>
                     </div>
                     <p v-html="hl_hashtags(log.body)"></p>
 
