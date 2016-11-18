@@ -15,7 +15,7 @@
             <div class="timeline-entry-inner">
 
                 <div class="timeline-icon">
-                    <img src="{{ log.socialaccount_set.all.0.get_avatar_url }}" class="user_avatar_public" />
+                    <img src="{{ log.owner.socialaccount_set.all.0.get_avatar_url|default:'/static/images/avatar_not-found.gif' }}" class="user_avatar_public" />
                 </div>
 
                 <div class="timeline-label" style="margin-left: 80px">
