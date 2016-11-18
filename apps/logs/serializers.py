@@ -3,13 +3,13 @@ from __future__ import unicode_literals
 
 from django.utils.html import linebreaks
 from django.utils.safestring import mark_safe
+from django.conf import settings
 
 from rest_framework import serializers
 from datetime import datetime
 from hashids import Hashids
 import random
 
-from conf import settings
 from .models import Log, LogKind
 from ..companies.serializers import CompanySerializer
 from ..people.serializers import PersonSerializer
