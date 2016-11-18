@@ -9,6 +9,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.home, name='home',),
+    url(r'^(?P<encoded>[\w-]+)/?$', views.public, name='public',),
     url(r'^login$', views.login, name='login',),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^set_language/(?P<lang_code>[\w-]+)$', views.set_language, name='set_language'),

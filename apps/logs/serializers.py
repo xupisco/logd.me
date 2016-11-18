@@ -6,7 +6,10 @@ from django.utils.safestring import mark_safe
 
 from rest_framework import serializers
 from datetime import datetime
+from hashids import Hashids
+import random
 
+from conf import settings
 from .models import Log, LogKind
 from ..companies.serializers import CompanySerializer
 from ..people.serializers import PersonSerializer
@@ -23,6 +26,7 @@ class LogSerializer(serializers.ModelSerializer):
     hashtags = serializers.JSONField()
     companies = CompanySerializer(read_only=True, many=True)
     people = PersonSerializer(read_only=True, many=True)
+    public_url = serializers.SerializerMethodField()
     meta = serializers.SerializerMethodField()
 
     class Meta:
@@ -30,8 +34,12 @@ class LogSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'kind', 'body', 'hashtags', 'companies', 'people',
             'start_date', 'end_date', 'reminder', 'created_on',
-            'updated_on', 'meta'
+            'updated_on', 'meta', 'public_url'
         )
+
+    def get_public_url(self, obj):
+        hashids = Hashids(salt=settings.SECRET_KEY)
+        return hashids.encode(obj.owner.id, obj.id, random.randint(111111,999999))
 
     # todo: fix this...
     def get_meta(self, obj):

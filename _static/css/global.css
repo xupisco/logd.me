@@ -609,3 +609,32 @@ li.croptext {
     border-bottom: 1px dashed #e8e8e8;
     margin-bottom: 4px;
 }
+
+.shareme {
+    font-size: 12px;
+    color: #617488;
+    margin-left: 4px;
+}
+
+.shareme:hover {
+    color: #f39c12 !important;
+}
+
+
+a.sharer {
+    color: #617488;
+}
+
+a.sharer:hover {
+    background-color: #fff !important
+}
+
+.public {
+    margin-top: 90px !important;
+}
+
+.author {
+    position: absolute;
+    margin-top: -70px;
+    font-size: 32px;
+}

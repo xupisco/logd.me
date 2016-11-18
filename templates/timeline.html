@@ -8,6 +8,7 @@ var vue;
 var db_kinds = {{ kinds.count }};
 var zones_created = false;
 var parsed_tooltips = false;
+var parsed_dropzone = false;
 
 $(function() {
     $('.has_enddate').click(function() {
@@ -320,6 +321,12 @@ function qs(el) {
     vue.q = current_content + $(el).html();
 }
 </script>
+
+<script type="text/javascript">
+function parseDropzones() {
+    $('.dropzone').dropzone({ url: '/file' });
+}
+</script>
 {% endblock %}
 
 {% block content %}
@@ -353,7 +360,7 @@ function qs(el) {
 
                 <div class="timeline-label dropzone" v-on:mouseover="setup_tooltips()">
                     <div class="log_tools">
-                        <span class="glyphicon glyphicon-edit log_tool" v-on:click="editLog([[ log.id ]])" aria-hidden="true"></span></a>
+                        <span class="glyphicon glyphicon-edit log_tool" v-on:click="editLog([[ log.id ]])" aria-hidden="true"></span>
                         <span class="glyphicon glyphicon-remove log_tool tool_delete" aria-hidden="true" v-on:click.stop.prevent="removeLog([[ log.id ]], $event)"></span>
                         <div class="remove_confirmation hidden" :id="'confid_' + log.id"><strong>{% trans "Sure?" %}</strong> {% trans "click again..." %}</div>
                     </div>
@@ -362,6 +369,7 @@ function qs(el) {
                     <span class="log_date">[[ log.start_date | moment ]]
                         <span class="log_date_end" v-if="log.end_date"> > [[ log.end_date | moment ]]</span>
                     </span>
+                    <a :href="[[ log.public_url ]]" class="sharer" target="_blank"><span class="glyphicon glyphicon-link shareme helptext hidden" aria-hidden="true" title="{% trans "Public link..." %}"></span></a>
                     </div>
                     <p v-html="hl_hashtags(log.body)"></p>
 
@@ -369,12 +377,12 @@ function qs(el) {
                         <span class="label label-info" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span><span class="label label-success ppl_label" onclick="qs(this);" v-for="person in log.people" data-toggle="tooltip" data-placement="top" data-html="true" v-bind:title="[[ person.email ]]">[[ person.name ]]</span><span class="label label-default" onclick="qs(this);" v-for="tag in log.hashtags">#[[ tag ]]</span>
                     </div>
                 </div>
-                <form class="dropzone">
+                <div class="dropconfirm hidden">
+                    {% trans "Attach to this log..." %}
+                </div>
+                <form>
                     <input type="hidden" name="log_id" v-bind:value="[[ log.id ]]">
                 </form>
-                <div class="dropconfirm hidden">
-                    {% trans "Attach to this log..." %}"
-                </div>
             </div>
         </article>
 
@@ -511,7 +519,6 @@ vue = new Vue({
             loadSingleLog(id[0][0])
         },
         removeLog: function(id, ev) {
-            console.log(id[0][0]);
             showRemoveConfirmation(id[0][0]);
         },
         hl_hashtags: function(txt) {
@@ -519,8 +526,21 @@ vue = new Vue({
             return txt.replace(all_re, "<span class='hashtag'>$1</span>");
         },
         setup_tooltips: function() {
+            $('.timeline-label').mouseenter(function() {
+                $(this).find('.shareme').removeClass('hidden');
+            })
+            $('.timeline-label').mouseleave(function() {
+                $(this).find('.shareme').addClass('hidden');
+            })
+            if(!parsed_dropzone && 0) {
+                //parseDropzones();
+            }
             if(!parsed_tooltips) {
                 $('.ppl_label').tooltip();
+                $('.helptext').tooltip({
+                    placement: 'right',
+                    trigger: 'hover'
+                });
                 $('.hl_mention_person').click(function() {
                     var ppl = $(this).attr('data-id');
                     var el = this;
@@ -570,6 +590,12 @@ vue = new Vue({
                 })
                 parsed_tooltips = true;
             }
+        },
+        emailThis: function(b) {
+            // Won't work...
+            var gmail_link = 'https://mail.google.com/mail/?view=cm&fs=1&to=&su=&body= ' + b;
+            gmail_link = 'mailto:?body=' + b;
+            window.open(gmail_link);
         }
     },
     filters: {

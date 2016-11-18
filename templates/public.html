@@ -1,0 +1,59 @@
+{% extends 'includes/_base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block js %}
+<script type="text/javascript">
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-8 col-md-offset-2">
+    <div class="timeline-centered" id="main_timeline">
+
+        <article class="timeline-entry public">
+            <div class="timeline-entry-inner">
+
+                <div class="timeline-icon">
+                    <img src="{{ l.owner.socialaccount_set.all.0.get_avatar_url }}" />
+                </div>
+
+                <div class="timeline-label dropzone">
+
+                    <div class="author">{{ log.owner.get_full_name }}<span style="font-size: 14px;">, disse:</span></div>
+
+                    <div style="margin-bottom: 10px;">
+                    <span class="log_date">{{ log.start_date | date:"d/m/Y H:i" }}
+                        {% if log.end_date %}
+                        <span class="log_date_end"> > {{ log.end_date | date:"d/m/Y H:i" }}</span>
+                        {% endif %}
+                    </span>
+                    </div>
+                    <p>{{ log.body|safe }}</p>
+
+                    <div class="has_labels">
+                        {% for company in log.companies.all %}
+                        <span class="label label-info">{{ company.name }}</span>
+                        {% endfor %}
+                        {% for person in log.people.all %}
+                        <span class="label label-success ppl_label" data-placement="top">{{ person.name }}</span>
+                        {% endfor %}
+                        {% for tag in log.hashtags %}
+                        <span class="label label-default">#{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="timeline-entry begin">
+            <div class="timeline-entry-inner">
+                <div id="public_square" class="timeline-icon bg-success">
+                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                </div>
+            </div>
+        </article>
+
+    </div>
+</div>
+{% endblock %}
