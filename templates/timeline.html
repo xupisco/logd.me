@@ -369,7 +369,13 @@ function parseDropzones() {
                     <span class="log_date">[[ log.start_date | moment ]]
                         <span class="log_date_end" v-if="log.end_date"> > [[ log.end_date | moment ]]</span>
                     </span>
-                    <a :href="'/pub/' + [[ log.public_url ]]" class="sharer" target="_blank"><span class="glyphicon glyphicon-link shareme helptext hidden" aria-hidden="true" title="{% trans "Public link..." %}"></span></a>
+                    <span v-bind:class="{ 'hidden': log.public }" :id="'shareme_for_' + [[ log.id ]]">
+                        <span class="glyphicon glyphicon-link log_tool shareme helptext" :id="'create_link_for_' + [[ log.id ]]" title="{% trans "Create public link..." %}" v-on:click="publicLink([[ log.id ]], 1)" ></span>
+                    </span>
+                    <div class="public_link_remove" :id="'public_link_remove_for_' + [[ log.id ]]" v-on:click="publicLink([[ log.id ]], 0)" v-bind:class="{ 'hidden': !log.public }">x</div>
+                    <div class="public_link clickable helptext" :id="'public_link_for_' + [[ log.id ]]" v-on:click="openPublicLink([[ log.id ]])" v-bind:class="{ 'hidden': !log.public }" title="{% trans "This log is available to anyone with this link!" %}">
+                        /pub/[[ log.public_url ]]
+                    </div>
                     </div>
                     <p v-html="hl_hashtags(log.body)"></p>
 
@@ -525,9 +531,43 @@ vue = new Vue({
             var all_re = /(#[a-z0-9][a-z0-9\-_]*)/ig;
             return txt.replace(all_re, "<span class='hashtag'>$1</span>");
         },
+        openPublicLink: function(id) {
+            window.open($('#public_link_for_' + id[0][0]).html());
+        },
+        publicLink: function(id, status) {
+            var log = id[0][0]
+
+            var post_data = {
+                'log_id': log,
+                'status': status,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            }
+
+            $.post('{% url "core:change_visibility" %}', post_data, function(res) {
+                if(res.success)  {
+                    if(status) {
+                        $('#create_link_for_' + log).addClass('hidden');
+                        $('#create_link_for_' + log).addClass('just_added');
+                        $('#public_link_for_' + log).html(res.encoded)
+                        $('#public_link_for_' + log).removeClass('hidden');
+                        $('#public_link_remove_for_' + log).removeClass('hidden');
+                    } else {
+                        $('#shareme_for_' + log).removeClass('hidden');
+                        $('#create_link_for_' + log).removeClass('hidden');
+                        $('#create_link_for_' + log).removeClass('just_added');
+                        $('#public_link_for_' + log).addClass('hidden');
+                        $('#public_link_remove_for_' + log).addClass('hidden');
+                    }
+                } else {
+                    showError();
+                }
+            })
+        },
         setup_tooltips: function() {
             $('.timeline-label').mouseenter(function() {
-                $(this).find('.shareme').removeClass('hidden');
+                if(!$(this).find('.shareme').hasClass('just_added')) {
+                    $(this).find('.shareme').removeClass('hidden');
+                }
             })
             $('.timeline-label').mouseleave(function() {
                 $(this).find('.shareme').addClass('hidden');

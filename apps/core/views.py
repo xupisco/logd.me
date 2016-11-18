@@ -50,6 +50,9 @@ def public(request, encoded):
 
     try:
         log = Log.objects.get(id=decoded[1], owner=decoded[0])
+        if not log.public:
+            return redirect('/')
+
         return render(request, 'public.html', {'public': True, 'log': log})
     except:
         return redirect('/')
@@ -348,6 +351,34 @@ def removeperson(request):
 
         person.delete()
         response_data['success'] = True
+
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
+def changevisibility(request):
+    status = int(request.POST.get('status', 0))
+    log_id = request.POST.get('log_id')
+
+    log = Log.objects.get(id=log_id)
+    response_data = {}
+
+    if not log:
+        response_data['success'] = False
+        response_data['encoded'] = ""
+    else:
+        response_data['success'] = True
+        if status:
+            from hashids import Hashids
+            import random
+            hashids = Hashids(salt=settings.SECRET_KEY)
+            encoded = hashids.encode(request.user.id, log.id, random.randint(111111, 999999))
+            log.public = True
+            response_data['encoded'] = '/pub/' + encoded
+        else:
+            log.public = False
+            response_data['encoded'] = ""
+
+        log.save()
 
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 

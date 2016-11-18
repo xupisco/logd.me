@@ -648,3 +648,34 @@ a.sharer:hover {
     margin-bottom: 20px;
     margin-left: -20px;
 }
+
+.public_link {
+    border: 1px dashed #bbb;
+    background-color: #ffdee1;
+    font-family: MOnospace;
+    font-size: 13px;
+    padding: 1px 5px;
+    margin-left: -5px;
+    display: inline;
+}
+
+.public_link_remove {
+    display: inline;
+    margin-left: 8px;
+    background-color: firebrick;
+    color: #fff;
+    padding: 2px 6px;
+    font-size: 11px;
+    position: relative;
+    top: -1px;
+    padding-bottom: 4px;
+}
+
+.public_link_remove:hover {
+    cursor: pointer;
+    background-color: #f94040;
+}
+
+.clickable:hover {
+    cursor: pointer;
+}

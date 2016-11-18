@@ -30,6 +30,7 @@ class Log(models.Model):
     end_date = models.DateTimeField(_('date end'), blank=True, null=True)
 
     reminder = models.BooleanField(_('reminder'), default=False)
+    public = models.BooleanField(_('public'), default=False)
 
     companies = models.ManyToManyField(Company, related_name='companies', blank=True)
     people = models.ManyToManyField(Person, related_name='people', blank=True)

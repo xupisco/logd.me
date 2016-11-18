@@ -34,12 +34,15 @@ class LogSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'kind', 'body', 'hashtags', 'companies', 'people',
             'start_date', 'end_date', 'reminder', 'created_on',
-            'updated_on', 'meta', 'public_url'
+            'updated_on', 'meta', 'public_url', 'public',
         )
 
     def get_public_url(self, obj):
-        hashids = Hashids(salt=settings.SECRET_KEY)
-        return hashids.encode(obj.owner.id, obj.id, random.randint(111111, 999999))
+        if obj.public:
+            hashids = Hashids(salt=settings.SECRET_KEY)
+            return hashids.encode(obj.owner.id, obj.id, random.randint(111111, 999999))
+        else:
+            return False
 
     # todo: fix this...
     def get_meta(self, obj):

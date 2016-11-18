@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^calendar$', views.calendar, name='calendar',),
 
     # Temp stuff
+    url(r'^ajax/change_visibility$', views.changevisibility, name='change_visibility',),
     url(r'^ajax/new_log$', views.newlog, name='newlog',),
     url(r'^ajax/remove_log$', views.removelog, name='removelog',),
 
