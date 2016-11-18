@@ -48,7 +48,7 @@ def public(request, encoded):
     hashids = Hashids(salt=settings.SECRET_KEY)
     decoded = hashids.decode(encoded)
 
-    log = Log.objects.get(id=decoded[1], owner=decoded[0])
+    #log = Log.objects.get(id=decoded[1], owner=decoded[0])
     #return render(request, 'public.html', {'public': True, 'log': log})
 
     response_data = {}
