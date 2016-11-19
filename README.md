@@ -1,5 +1,6 @@
 # ownCRM 
-Your personal and friendly CRM, cut the crap... only the essentials!
+Your personal and friendly CRM, cut the crap... only the essentials!  
+[See it in action here... ](http://owncrm-dev.herokuapp.com)!
 
 [![Build Status](https://travis-ci.org/xupisco/ownCRM.svg?branch=master)](https://travis-ci.org/xupisco/ownCRM)
 
