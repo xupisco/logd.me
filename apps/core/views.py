@@ -372,9 +372,12 @@ def changevisibility(request):
         response_data['success'] = True
         if status:
             from hashids import Hashids
-            import random
+            import random, hashlib
+
             hashids = Hashids(salt=settings.SECRET_KEY)
-            encoded = hashids.encode(request.user.id, log.id, random.randint(111111, 999999))
+            fake_hash = int(filter(str.isdigit, hashlib.md5(str(123)).hexdigest())[:6])
+            encoded = hashids.encode(log.owner.id, log.id, fake_hash)
+
             log.public = True
             response_data['encoded'] = '/pub/' + encoded
         else:

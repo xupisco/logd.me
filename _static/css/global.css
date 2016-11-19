@@ -305,7 +305,20 @@ img.avatar_card {
     }
 
     #icon_clear {
-        top: 250px !important;
+        top: 208px !important;
+    }
+
+    .public_link_remove {
+        position: absolute !important;
+        margin-left: 0 !important;
+        margin-top: 43px !important;
+        padding: 4px 10px !important;
+    }
+
+    .public_link {
+        margin-left: 24px !important;
+        line-height: 35px !important;
+        padding: 3px 5px !important;
     }
 }
 

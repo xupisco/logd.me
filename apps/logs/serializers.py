@@ -9,6 +9,7 @@ from rest_framework import serializers
 from datetime import datetime
 from hashids import Hashids
 import random
+import hashlib
 
 from .models import Log, LogKind
 from ..companies.serializers import CompanySerializer
@@ -40,7 +41,8 @@ class LogSerializer(serializers.ModelSerializer):
     def get_public_url(self, obj):
         if obj.public:
             hashids = Hashids(salt=settings.SECRET_KEY)
-            return hashids.encode(obj.owner.id, obj.id, random.randint(111111, 999999))
+            fake_hash = int(filter(str.isdigit, hashlib.md5(str(123)).hexdigest())[:6])
+            return hashids.encode(obj.owner.id, obj.id, fake_hash)
         else:
             return False
 
