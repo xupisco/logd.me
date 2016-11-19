@@ -372,7 +372,8 @@ def changevisibility(request):
         response_data['success'] = True
         if status:
             from hashids import Hashids
-            import random, hashlib
+            import random
+            import hashlib
 
             hashids = Hashids(salt=settings.SECRET_KEY)
             fake_hash = int(filter(str.isdigit, hashlib.md5(str(123)).hexdigest())[:6])
