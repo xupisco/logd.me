@@ -170,11 +170,6 @@ img.main_logo {
     margin-top: -5px;
 }
 
-img.footer_logo {
-    margin-top: 11px;
-    margin-right: 100px;
-}
-
 .navbar-form .form-control {
     background-color: #f3f3f3;
     width: 300px;
@@ -678,4 +673,14 @@ a.sharer:hover {
 
 .clickable:hover {
     cursor: pointer;
+}
+
+.header_logo {
+    width: 146px;
+    margin-top: -7px;
+}
+
+.footer_logo {
+    width: 146px;
+    margin-top: 1px;
 }
