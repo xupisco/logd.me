@@ -182,10 +182,11 @@ $(function() {
     });
 
     $('#nlog_end_date').datetimepicker({
-        format:'d/m/Y H:i',
+        format: 'd/m/Y H:i',
         onShow:function(ct) {
+            var start_date = moment($('#nlog_start_date').val(), "DD/MM/YYYY HH:mm");
             this.setOptions({
-                minDate: $('#nlog_start_date').val() ? $('#nlog_start_date').val() : false
+                minDate: $('#nlog_start_date').val() ? start_date.toDate() : false
             })
         },
     });
@@ -229,7 +230,7 @@ function loadSingleLog(log) {
 
         $('#nlog_start_date').val(moment(res_start_date).format('DD/MM/YYYY HH:mm'));
         if(res.end_date) {
-            $('.has_enddate').attr('checked', true);
+            $('.has_enddate').click();
             $('#nlog_end_date').val(moment(res_end_date).format('DD/MM/YYYY HH:mm'));
         }
         if(res.reminder) {
@@ -478,7 +479,7 @@ function parseDropzones() {
             <div style="margin-top: 20px;">
                 <button type="submit" id="send_form" class="btn btn-sm btn-warning">{% trans "Add log..." %}</button>
                 <!-- <button type="button" id="save_form" class="btn btn-sm btn-default">{% trans "Save draft!" %}</button> -->
-                <button type="reset" id="form_cancel_update" class="btn btn-danger pull-right hidden">{% trans "Cancel!" %}</button>
+                <button type="reset" id="form_cancel_update" class="btn btn-sm btn-danger pull-right hidden">{% trans "Cancel!" %}</button>
             </div>
         </form>
     </div>
