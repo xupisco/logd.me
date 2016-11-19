@@ -293,35 +293,6 @@ img.avatar_card {
     width: 350px;
 }
 
-@media (max-width: 768px) {
-    #side_affix.affix {
-        position: static !important;
-        width: 100%;
-        margin-bottom: 40px;
-    }
-
-    .custom_select_container .btn-group, .custom_select_container_company .btn-group {
-        width: 100% !important;
-    }
-
-    #icon_clear {
-        top: 208px !important;
-    }
-
-    .public_link_remove {
-        position: absolute !important;
-        margin-left: 0 !important;
-        margin-top: 43px !important;
-        padding: 4px 10px !important;
-    }
-
-    .public_link {
-        margin-left: 24px !important;
-        line-height: 35px !important;
-        padding: 3px 5px !important;
-    }
-}
-
 .editor-toolbar {
     background-color: #f1f1f1;
     border-radius: 0 !important;
@@ -696,4 +667,62 @@ a.sharer:hover {
 .footer_logo {
     width: 146px;
     margin-top: 1px;
+}
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+    #side_affix.affix {
+        position: static !important;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .custom_select_container .btn-group, .custom_select_container_company .btn-group {
+        width: 100% !important;
+    }
+
+    #icon_clear {
+        top: 208px !important;
+    }
+
+    .public_link_remove {
+        position: absolute !important;
+        margin-left: 0 !important;
+        margin-top: 43px !important;
+        padding: 4px 10px !important;
+    }
+
+    .public_link {
+        margin-left: 24px !important;
+        line-height: 35px !important;
+        padding: 3px 5px !important;
+    }
+
+    .author {
+        font-size: 24px !important;
+        margin-top: -56px !important;
+    }
+
+    .user_avatar_public {
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 20px !important;
+        border: 0 !important;
+        margin-top: 0px !important;
+        margin-bottom: 20px !important;
+        margin-left: 0px !important;
+    }
+
+    .public {
+        margin-top: 60px !important;
+    }
+
+    .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label h2, .timeline-centered .timeline-entry .timeline-entry-inner .timeline-label.public_content {
+        margin-left: 60px !important;
+    }
 }
