@@ -8,7 +8,7 @@
 <div class="col-md-3 peel_like">
     <div class="thumbnail login_card">
         <div class="login_header">
-            ownCRM
+            <img src="{% static 'images/logd_logo.png' %}" class="login_logo" />
             <div class="about">{% blocktrans %}Your personal and friendly life log.{% endblocktrans %}</div>
         </div>
         <div class="disclaimer">{% blocktrans %}Don't worry, we don't care who you are... login is just for authentication purposes.{% endblocktrans %}</div>
@@ -17,7 +17,7 @@
             <a href="{% provider_login_url "google" %}" class="btn btn-info navbar-btn disabled btn_login" alt="Not yet!">Google</a>
             <a href="{% provider_login_url "github" %}" class="btn btn-info navbar-btn  disabled btn_login" alt="Not yet!">GitHub</a>
         </div>
-        <div class="opensource">{% blocktrans %}This project is opensource, feel free to use and support! <a href="https://github.com/xupisco/ownCRM/">Fork me!</a>{% endblocktrans %} at GitHub.</div>
+        <div class="opensource">{% blocktrans %}This project is opensource, feel free to use and support! <a href="https://github.com/xupisco/logd.me/">Fork me!</a>{% endblocktrans %} at GitHub.</div>
     </div>
 </div>
 <div class="login_watermark">

@@ -1,8 +1,8 @@
-# ownCRM 
-Your personal and friendly CRM, cut the crap... only the essentials!  
-[See it in action here... ](http://owncrm-dev.herokuapp.com)!
+# logd.me 
+Your personal and friendly life log, cut the crap... only the essentials!  
+[See it in action here... ](http://logd.me)!
 
-[![Build Status](https://travis-ci.org/xupisco/ownCRM.svg?branch=master)](https://travis-ci.org/xupisco/ownCRM)
+[![Build Status](https://travis-ci.org/xupisco/logd.me.svg?branch=master)](https://travis-ci.org/xupisco/logd.me)
 
 
 ## Screenshot
@@ -38,7 +38,7 @@ DATABASE_URL=sqlite://./conf/db.sqlite3
 
 ## Try it now
 
-Development preview is available on [Heroku](http://owncrm-dev.herokuapp.com)!
+logd.me is available on [Heroku](http://logd.me)!
 
 
 ## UNDER MIT LICENSE

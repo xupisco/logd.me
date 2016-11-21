@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 
 def body(lang):
-    log_pt = '<p><strong>Olá, bem-vindo(a) ao ownCRM!</strong></p>\n' \
+    log_pt = '<p><strong>Olá, bem-vindo(a) ao logd.me!</strong></p>\n' \
         '<p>Este é o seu diário <span class="hashtag">#pessoal</span>, onde você pode salvar as ' \
         'coisas ' \
         'que aconteceram ou ainda vão acontecer, registrar eventos importantes, reuniões, ' \
@@ -24,7 +24,7 @@ def body(lang):
         '<li>Datas</li>\n' \
         '<li>Destaques (pesquise por "!!!")</li>\n' \
         '<li>@citações</li>\n' \
-        '<li>Tags <span class="hashtag">#bem-vindo</span> <span class="hashtag">#owncrm</span>' \
+        '<li>Tags <span class="hashtag">#bem-vindo</span> <span class="hashtag">#logd</span>' \
         '</li>\n' \
         '</ul>\n' \
         '</ul>\n' \
@@ -45,9 +45,9 @@ def body(lang):
         'para limpar ' \
         'a pesquisa<br>Procure por \'!!!\' para filtrar registros destacados</p>' \
         '</blockquote>' \
-        '<p>Espero que você goste, aproveite!<br><strong>equipe do ownCRM</strong></p></p>'
+        '<p>Espero que você goste, aproveite!<br><strong>equipe do logd.me</strong></p></p>'
 
-    log_en = '<p><strong>Hi there, welcome to ownCRM!</strong></p>\n' \
+    log_en = '<p><strong>Hi there, welcome to logd.me!</strong></p>\n' \
         '<p>This is your <span class="hashtag">#personal</span> life log, where you can ' \
         'save things that happened or will happen, register important events, meetings, ' \
         'phone calls, anything... so you can easily remind whenever you need.</p>\n' \
@@ -65,7 +65,7 @@ def body(lang):
         '<li>Highlights (search for "!!!")</li>\n' \
         '<li>@mentions</li>\n' \
         '<li>Tags <span class="hashtag">#welcome</span> ' \
-        '<span class="hashtag">#owncrm</span></li>\n' \
+        '<span class="hashtag">#logd</span></li>\n' \
         '</ul>\n' \
         '</ul>\n' \
         '<p>Here are some sample people, like ' \
@@ -80,7 +80,7 @@ def body(lang):
         'to add a Tag<br>Type \'/\' to focus at search input<br>Type \'esc\' to clear search' \
         '<br>Search for \'!!!\' to filter highlighted logs</p>\n' \
         '</blockquote>\n' \
-        '<p>Hope you like it, enjoy!<strong><br></strong><strong>ownCRM Team</strong></p>'
+        '<p>Hope you like it, enjoy!<strong><br></strong><strong>logd.me Team</strong></p>'
 
     if lang == "pt-br":
         return log_pt

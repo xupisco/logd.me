@@ -17,7 +17,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>ownCRM{% if page_title %} - {{ page_title }}{% endif %}</title>
+    <title>logd.me{% if page_title %} - {{ page_title }}{% endif %}</title>
     <meta name="description" content="{{ OG_DESCRIPTION }}">
     <meta name="author" content="@xupisco <xupisco@gmail.com">
     <link rel="icon" type="image/png" href="{% static 'images/logo_ico.png' %}" />
@@ -149,7 +149,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/"><img src="{% static 'images/owncrm_logo.png' %}" class="header_logo" /></a>
+                <a class="navbar-brand" href="/"><img src="{% static 'images/logd_logo.png' %}" class="header_logo" /></a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 {% if request.user.is_authenticated %}
@@ -206,20 +206,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {% if not public %}
     <footer class="footer navbar-fixed-bottom">
         <div class="container">
-            <div class="logo_type"><a href="https://github.com/xupisco" target="_blank"><img src="{% static 'images/owncrm_logo.png' %}" class="footer_logo" /></a></div>
+            <div class="logo_type"><a href="https://github.com/xupisco" target="_blank"><img src="{% static 'images/logd_logo.png' %}" class="footer_logo" /></a></div>
             <div class="languages"><a href="/set_language/en-us">en-us</a> | <a href="/set_language/pt-br">pt-br</a></div>
             <p class="text-muted">
-                {% blocktrans %}This project is opensource, feel free to use and support! <a href="https://github.com/xupisco/ownCRM/">Fork me!</a>{% endblocktrans %} at GitHub.
+                {% blocktrans %}This project is opensource, feel free to use and support! <a href="https://github.com/xupisco/logd.me/">Fork me!</a>{% endblocktrans %} at GitHub.
             </p>
         </div>
     </footer>
     {% else %}
     <footer class="footer navbar-fixed-bottom">
         <div class="container">
-            <div class="logo_type"><a href="/"><img src="{% static 'images/owncrm_logo.png' %}" class="footer_logo" /></a></div>
+            <div class="logo_type"><a href="/"><img src="{% static 'images/logd_logo.png' %}" class="footer_logo" /></a></div>
             <div class="languages"><a href="/set_language/en-us">en-us</a> | <a href="/set_language/pt-br">pt-br</a></div>
             <p class="text-muted">
-                {% trans "Hi there!" %} {{ log.owner.get_full_name }} {% trans "is using ownCRM, it's free... try it today" %}.
+                {% trans "Hi there!" %} {{ log.owner.get_full_name }} {% trans "is using logd.me, it's free... try it today" %}.
             </p>
         </div>
     </footer>

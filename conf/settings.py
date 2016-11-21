@@ -9,7 +9,7 @@ from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-GRAPPELLI_ADMIN_TITLE = 'ownCRM'
+GRAPPELLI_ADMIN_TITLE = 'logd.me'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
@@ -123,7 +123,7 @@ ACCOUNT_PASSWORD_MIN_LENGTH = 6
 ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_LOGOUT_REDIRECT_URL = '/login'
 
-SITE_NAME = 'ownCRM'
+SITE_NAME = 'logd.me'
 OG_DESCRIPTION = 'Your personal and friendly life log!'
 GTM_ID = config("GTM_ID", default='')
 
