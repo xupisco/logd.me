@@ -63,8 +63,16 @@
     var dropzone;
 
     $(function() {
-        $('#icon_clear').click(function() {
-            vue.q = '';
+        $(window).scroll(function() {
+            if($(window).scrollTop() > 20) {
+                $('.navbar').addClass('nav_shadow');
+            } else {
+                $('.navbar').removeClass('nav_shadow');
+            }
+
+            $('#icon_clear').click(function() {
+                vue.q = '';
+            });
         });
 
         clipboard = new Clipboard('.clipboard');
@@ -108,6 +116,10 @@
     }
     </script>
 
+    <style type="text/css">
+        body { padding-top: 80px; }
+    </style>
+
 </head>
 <body>
 
@@ -140,7 +152,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div id="vue_app">
     {% if not public %}
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">

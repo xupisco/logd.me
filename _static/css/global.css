@@ -150,6 +150,16 @@ a.navbar-brand {
     border-radius: 0 !important;
 }
 
+.nav_shadow { 
+    -webkit-box-shadow: 0px 2px 13px -1px rgba(0,0,0,0.72);
+    -moz-box-shadow: 0px 2px 13px -1px rgba(0,0,0,0.72);
+    box-shadow: 0px 2px 13px -1px rgba(0,0,0,0.72); 
+    transition: box-shadow 0.2s ease-in-out;
+ }
+
+.nav_shadow {
+}
+
 .navbar-defaulta {
     border-color: #73d6f4;
     background-color: #fff;
@@ -279,7 +289,7 @@ img.avatar_card {
 
 #side_affix.affix {
     position: fixed !important;
-    top: 0;
+    top: 80px;
     width: 350px;
 }
 
