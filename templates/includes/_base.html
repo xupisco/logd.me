@@ -55,6 +55,15 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
     <![endif]-->
 
+    {% block opengraph %}
+    <meta property="og:url" content="http://{{ request.META.HTTP_HOST }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{% trans "logd.me" %}" />
+    <meta property="og:description" content="{% trans "Your personal and friendly life log." %}" />
+    <meta property="og:image" content="http://{{ request.META.HTTP_HOST }}/static/images/logd_og.png" />
+    <meta property="fb:app_id" content="275326609531649" />
+    {% endblock %}
+
     {% block js %}
     {% endblock %}
 

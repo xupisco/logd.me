@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-21 20:52-0200\n"
+"POT-Creation-Date: 2016-11-21 21:10-0200\n"
 "PO-Revision-Date: 2016-11-16 10:08-0200\n"
 "Last-Translator: Fernando Macedo <fgmacedo@gmail.com>\n"
 "Language-Team: \n"
@@ -221,65 +221,69 @@ msgstr "Telefone"
 msgid "Cancel!"
 msgstr "Cancelar!"
 
-#: .\templates\includes\_base.html:135
+#: .\templates\includes\_base.html:61
+msgid "logd.me"
+msgstr ""
+
+#: .\templates\includes\_base.html:62 .\templates\login.html:12
+msgid "Your personal and friendly life log."
+msgstr "Registros pessoais de forma simples."
+
+#: .\templates\includes\_base.html:144
 msgid "Log successfully saved!"
 msgstr "Registro salvo com sucesso!"
 
-#: .\templates\includes\_base.html:139
+#: .\templates\includes\_base.html:148
 msgid "Person successfully saved!"
 msgstr "Pessoa salva com sucesso!"
 
-#: .\templates\includes\_base.html:143
+#: .\templates\includes\_base.html:152
 msgid "Company successfully saved!"
 msgstr "Empresa salva com sucesso!"
 
-#: .\templates\includes\_base.html:149
+#: .\templates\includes\_base.html:158
 msgid "Ouch! Something went wrong..."
 msgstr "Arrrgh! Algo deu errado..."
 
-#: .\templates\includes\_base.html:169 .\templates\includes\_base.html:191
+#: .\templates\includes\_base.html:178 .\templates\includes\_base.html:200
 msgid "Logs"
 msgstr "Registros"
 
-#: .\templates\includes\_base.html:170 .\templates\includes\_base.html:192
+#: .\templates\includes\_base.html:179 .\templates\includes\_base.html:201
 msgid "People"
 msgstr "Pessoas"
 
-#: .\templates\includes\_base.html:171 .\templates\includes\_base.html:193
+#: .\templates\includes\_base.html:180 .\templates\includes\_base.html:202
 msgid "Companies"
 msgstr "Empresas"
 
-#: .\templates\includes\_base.html:175
+#: .\templates\includes\_base.html:184
 msgid "Type anything..."
 msgstr "Digite qualquer coisa..."
 
-#: .\templates\includes\_base.html:195
+#: .\templates\includes\_base.html:204
 msgid "Logout"
 msgstr ""
 
-#: .\templates\includes\_base.html:204
+#: .\templates\includes\_base.html:213
 msgid "Login or create your account..."
 msgstr "Faça login ou crie sua conta..."
 
-#: .\templates\includes\_base.html:224 .\templates\login.html:22
+#: .\templates\includes\_base.html:233 .\templates\login.html:22
 msgid ""
 "This project is opensource, feel free to use and support! <a href=\"https://"
 "github.com/xupisco/logd.me/\">Fork me!</a>"
 msgstr ""
-"Este projeto é de código aberto, fique a vontade para usar e colaborar! <a href="
-"\"https://github.com/xupisco/logd.me/\">Github</a>"
+"Este projeto é de código aberto, fique a vontade para usar e colaborar! <a "
+"href=\"https://github.com/xupisco/logd.me/\">Github</a>"
 
-#: .\templates\includes\_base.html:234
+#: .\templates\includes\_base.html:243
 msgid "Hi there!"
 msgstr "Olá!"
 
-#: .\templates\includes\_base.html:234
+#: .\templates\includes\_base.html:243
 msgid "is using logd.me, it's free... try it today"
 msgstr "está usando o logd.me, é grátis... crie sua conta"
-
-#: .\templates\login.html:12
-msgid "Your personal and friendly life log."
-msgstr "Registros pessoais de forma simples."
 
 #: .\templates\login.html:14
 msgid ""
@@ -324,7 +328,11 @@ msgstr "Empresa"
 msgid "Role"
 msgstr "Cargo"
 
-#: .\templates\public.html:34
+#: .\templates\public.html:9
+msgid "Hi... I just want to share something with you!"
+msgstr "Olá... gostaria de compartilhar uma coisa com vocês!"
+
+#: .\templates\public.html:46
 msgid "said"
 msgstr "disse"
 

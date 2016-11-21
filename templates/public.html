@@ -2,6 +2,15 @@
 {% load i18n %}
 {% load static %}
 
+{% block opengraph %}
+<meta property="og:url" content="http://{{ request.META.HTTP_HOST }}{{ request.get_full_path }}" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="{{ log.owner.get_full_name }} @ logd.me" />
+<meta property="og:description" content="{% trans "Hi... I just want to share something with you!" %}" />
+<meta property="og:image" content="http://{{ request.META.HTTP_HOST }}/static/images/logd_og.png" />
+<meta property="fb:app_id" content="275326609531649" />
+{% endblock %}
+
 {% block js %}
 <script type="text/javascript">
 </script>
@@ -19,6 +28,9 @@
 {% endblock %}
 
 {% block content %}
+<style type="text/css">
+    body { padding-top: 0; }
+</style>
 <div class="col-md-8 col-md-offset-2">
     <div class="timeline-centered" id="main_timeline">
 
