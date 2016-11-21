@@ -133,16 +133,19 @@ def calendar(request):
 # Temp stuff
 def newcompany(request):
     ncompany_name = request.POST.get('ncompany_name')
+    ncompany_phone = request.POST.get('ncompany_phone')
     is_update = int(request.POST.get('is_update'))
 
     if not is_update:
         company = Company(
             owner=request.user,
-            name=ncompany_name)
+            name=ncompany_name,
+            phone=ncompany_phone)
     else:
         company = Company.objects.get(id=is_update)
         old_name = company.name
         company.name = ncompany_name
+        company.phone = ncompany_phone
 
         if ncompany_name != old_name:
             logs = Log.objects.filter(companies=company)

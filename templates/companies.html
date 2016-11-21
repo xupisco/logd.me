@@ -26,6 +26,7 @@ $(function() {
 
         post_data = {
             'ncompany_name': $('#ncompany_name').val(),
+            'ncompany_phone': $('#ncompany_phone').val(),
             'is_update': $('#update_company').val(),
             'csrfmiddlewaretoken': '{{ csrf_token }}'
         }
@@ -67,6 +68,7 @@ function loadSingleCompany(ppl) {
     $.getJSON('/api/v1/companies/' + ppl + '?raw', function(res) {
 
         $("#ncompany_name").val(res.name);
+        $("#ncompany_phone").val(res.phone);
         $('#update_company').val(res.id);
         $('#form_cancel_update').removeClass('hidden');
 
@@ -128,6 +130,7 @@ function showSuccessMessage() {
         <div class="thumbnail" v-bind:id="'company_' + [[ company.id ]]">
             <h4 class="person_name" style="margin-bottom: 5px;">
                 [[ company.name ]]<br />
+                <small v-if="company.phone">[[ company.phone ]]</small><small v-if="!company.phone">---</small>
             </h4>
             <div class="company_people">
                 <ul class="list-group" style="margin-bottom: 10px; padding-bottom: 5px; position: relative; overflow-y: hidden; overflow-x: hidden;">
@@ -165,13 +168,17 @@ function showSuccessMessage() {
         <h3 id="nlog_header_text">{% trans "New company!" %}</h3>
         <form id="new_company">
             <div class="form-group">
-                <label for="nppl_name">{% trans "Name" %}</label><div class="form_error pull-right" id="error_ncompany_name"> {% trans 'Required' %}</div>
+                <label for="ncompany_name">{% trans "Name" %}</label><div class="form_error pull-right" id="error_ncompany_name"> {% trans 'Required' %}</div>
                 <input type="text" class="form-control" id="ncompany_name" >
+            </div>
+            <div class="form-group">
+                <label for="ncompany_phone">{% trans "Phone" %}</label>
+                <input type="text" class="form-control" id="ncompany_phone" >
             </div>
             <input type="hidden" id="update_company" value="0" />
             <div style="margin-top: 20px;">
-                <button type="submit" class="btn btn-warning" id="send_form">{% trans "Add company..." %}</button>
-                <button type="reset" id="form_cancel_update" class="btn btn-danger pull-right hidden">{% trans "Cancel!" %}</button>
+                <button type="submit" class="btn btn-sm btn-warning" id="send_form">{% trans "Add company..." %}</button>
+                <button type="reset" id="form_cancel_update" class="btn btn-sm btn-danger pull-right hidden">{% trans "Cancel!" %}</button>
             </div>
         </form>
     </div>

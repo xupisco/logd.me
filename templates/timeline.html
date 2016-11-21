@@ -381,7 +381,7 @@ function parseDropzones() {
                     <p v-html="hl_hashtags(log.body)"></p>
 
                     <div class="has_labels" v-show="log.companies.length || log.people.length || log.hashtags.length">
-                        <span class="label label-info" onclick="qs(this);" v-for="company in log.companies">[[ company.name ]]</span><span class="label label-success ppl_label" onclick="qs(this);" v-for="person in log.people" data-toggle="tooltip" data-placement="top" data-html="true" v-bind:title="[[ person.email ]]">[[ person.name ]]</span><span class="label label-default" onclick="qs(this);" v-for="tag in log.hashtags">#[[ tag ]]</span>
+                        <span class="label label-info company_label" onclick="qs(this);" v-for="company in log.companies" data-toggle="tooltip" data-placement="top" data-html="true" v-bind:title="[[ company.phone ]]">[[ company.name ]]</span><span class="label label-success ppl_label" onclick="qs(this);" v-for="person in log.people" data-toggle="tooltip" data-placement="top" data-html="true" v-bind:title="[[ person.email ]]">[[ person.name ]]</span><span class="label label-default" onclick="qs(this);" v-for="tag in log.hashtags">#[[ tag ]]</span>
                     </div>
                 </div>
                 <div class="dropconfirm hidden">
@@ -578,6 +578,7 @@ vue = new Vue({
             }
             if(!parsed_tooltips) {
                 $('.ppl_label').tooltip();
+                $('.company_label').tooltip();
                 $('.helptext').tooltip({
                     placement: 'right',
                     trigger: 'hover'

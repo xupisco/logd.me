@@ -10,6 +10,7 @@ class Company(models.Model):
     owner = models.ForeignKey(User)
     name = models.CharField(_('name'), max_length=128)
     slug = models.CharField(_('slug'), max_length=255, blank=False)
+    phone = models.CharField(_('phone'), max_length=32, blank=True)
     domain = models.URLField(_('domain'), blank=True)
 
     created_on = models.DateTimeField(_('created on'), auto_now_add=True)
