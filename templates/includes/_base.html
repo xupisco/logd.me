@@ -188,11 +188,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                                 <li class="dropdown-header"><img src="{% static 'images/avatar_not-found.gif' %}" class="pull-left user_avatar_menu" /></li>
                             {% endif %}
                             <li class="dropdown-header"></li>
-                            <li><a href="/"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;Logs</a></li>
-                            <li><a href="/people"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;People</a></li>
-                            <li><a href="/companies"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>&nbsp;&nbsp;Companies</a></li>
+                            <li><a href="/"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;{% trans "Logs" %}</a></li>
+                            <li><a href="/people"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;{% trans "People" %}</a></li>
+                            <li><a href="/companies"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>&nbsp;&nbsp;{% trans "Companies" %}</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="/accounts/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;Sair</a></li>
+                            <li><a href="/accounts/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;{% trans "Logout" %}...</a></li>
                             {% if request.user.is_staff %}
                                 <li role="separator" class="divider"></li>
                                 <li><a href="/admin/" target="_blank" class="text-success"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;&nbsp;Admin</a></li>
