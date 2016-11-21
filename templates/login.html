@@ -13,11 +13,13 @@
         </div>
         <div class="disclaimer">{% blocktrans %}Don't worry, we don't care who you are... login is just for authentication purposes.{% endblocktrans %}</div>
         <div class="login_providers">
-            <a href="{% provider_login_url "facebook" %}" class="btn btn-info navbar-btn btn_login">Facebook</a>
+            <a href="{% provider_login_url "facebook" %}" class="btn btn-info navbar-btn btn_login">{% trans "Connect with Facebook" %}</a>
+            <!--
             <a href="{% provider_login_url "google" %}" class="btn btn-info navbar-btn disabled btn_login" alt="Not yet!">Google</a>
             <a href="{% provider_login_url "github" %}" class="btn btn-info navbar-btn  disabled btn_login" alt="Not yet!">GitHub</a>
+            -->
         </div>
-        <div class="opensource">{% blocktrans %}This project is opensource, feel free to use and support! <a href="https://github.com/xupisco/logd.me/">Fork me!</a>{% endblocktrans %} at GitHub.</div>
+        <div class="opensource">{% blocktrans %}This project is opensource, feel free to use and support! <a href="https://github.com/xupisco/logd.me/">Fork me!</a>{% endblocktrans %}</div>
     </div>
 </div>
 <div class="login_watermark">

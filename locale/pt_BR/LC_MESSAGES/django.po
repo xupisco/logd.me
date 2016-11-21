@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-21 20:10-0200\n"
+"POT-Creation-Date: 2016-11-21 20:52-0200\n"
 "PO-Revision-Date: 2016-11-16 10:08-0200\n"
 "Last-Translator: Fernando Macedo <fgmacedo@gmail.com>\n"
 "Language-Team: \n"
@@ -237,15 +237,15 @@ msgstr "Empresa salva com sucesso!"
 msgid "Ouch! Something went wrong..."
 msgstr "Arrrgh! Algo deu errado..."
 
-#: .\templates\includes\_base.html:169
+#: .\templates\includes\_base.html:169 .\templates\includes\_base.html:191
 msgid "Logs"
 msgstr "Registros"
 
-#: .\templates\includes\_base.html:170
+#: .\templates\includes\_base.html:170 .\templates\includes\_base.html:192
 msgid "People"
 msgstr "Pessoas"
 
-#: .\templates\includes\_base.html:171
+#: .\templates\includes\_base.html:171 .\templates\includes\_base.html:193
 msgid "Companies"
 msgstr "Empresas"
 
@@ -253,21 +253,21 @@ msgstr "Empresas"
 msgid "Type anything..."
 msgstr "Digite qualquer coisa..."
 
+#: .\templates\includes\_base.html:195
+msgid "Logout"
+msgstr ""
+
 #: .\templates\includes\_base.html:204
 msgid "Login or create your account..."
 msgstr "Faça login ou crie sua conta..."
 
-#: .\templates\includes\_base.html:224 .\templates\login.html:20
-#, fuzzy
-#| msgid ""
-#| "This project is opensource, feel free to use and support! <a href="
-#| "\"https://github.com/xupisco/ownCRM/\">Fork me!</a>"
+#: .\templates\includes\_base.html:224 .\templates\login.html:22
 msgid ""
 "This project is opensource, feel free to use and support! <a href=\"https://"
 "github.com/xupisco/logd.me/\">Fork me!</a>"
 msgstr ""
-"Este projeto é de código aberto, sinta-se livre para usar e apoiar! <a href="
-"\"https://github.com/xupisco/ownCRM/\">Github</a>"
+"Este projeto é de código aberto, fique a vontade para usar e colaborar! <a href="
+"\"https://github.com/xupisco/logd.me/\">Github</a>"
 
 #: .\templates\includes\_base.html:234
 msgid "Hi there!"
@@ -279,7 +279,7 @@ msgstr "está usando o logd.me, é grátis... crie sua conta"
 
 #: .\templates\login.html:12
 msgid "Your personal and friendly life log."
-msgstr "Seu registros pessoais de forma simples."
+msgstr "Registros pessoais de forma simples."
 
 #: .\templates\login.html:14
 msgid ""
@@ -288,6 +288,10 @@ msgid ""
 msgstr ""
 "Não se preocupe, não queremos suas informações... o login é apenas para fins "
 "de autenticação."
+
+#: .\templates\login.html:16
+msgid "Connect with Facebook"
+msgstr "Entrar com o Facebook"
 
 #: .\templates\people.html:133
 msgid "Update person!"
@@ -433,12 +437,10 @@ msgid "Save draft!"
 msgstr "Salvar rascunho!"
 
 #: .\templates\timeline.html:612
-#| msgid "email"
 msgid "E-mail"
 msgstr "E-mail"
 
 #: .\templates\timeline.html:615
-#| msgid "mobile"
 msgid "Mobile"
 msgstr "Celular"
 
