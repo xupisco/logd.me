@@ -398,6 +398,8 @@ input.form-little-full {
     margin-top: -3px;
 }
 
+
+
 .no-results {
     padding: 3px 8px !important;
     background: #ee4749 !important;
@@ -685,7 +687,7 @@ a.sharer:hover {
         margin-bottom: 40px;
     }
 
-    .custom_select_container .btn-group, .custom_select_container_company .btn-group {
+    .custom_select_container .btn-group, .custom_select_container_company .btn-group, .custom_select_container_role .btn-group {
         width: 100% !important;
     }
 
