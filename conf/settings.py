@@ -124,7 +124,7 @@ ACCOUNT_LOGOUT_ON_GET = True
 ACCOUNT_LOGOUT_REDIRECT_URL = '/login'
 
 SITE_NAME = 'logd.me'
-OG_DESCRIPTION = 'Your personal and friendly life log!'
+OG_DESCRIPTION = _('Your personal and friendly life log.')
 GTM_ID = config("GTM_ID", default='')
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
