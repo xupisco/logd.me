@@ -10,10 +10,10 @@ from fabric.api import local, env, task, puts, run, cd, prefix, sudo
 from fabric.operations import get
 
 env.shell = "/bin/bash -l -i -c"
-env.hosts = ['lab@owncrm.com']
+env.hosts = ['xupisco@vps.xupisco.net']
 env.password = config('ENV_PASSWORD', default=None)
 
-PROJECT = 'owncrm'
+PROJECT = 'logd'
 PROJECT_ROOT = ''
 APP_FOLDER = ''
 APP_ROOT = PROJECT_ROOT + APP_FOLDER
@@ -21,7 +21,7 @@ FRONT_FOLDER = '_front'
 FRONT_ROOT = os.path.join(APP_ROOT, FRONT_FOLDER)
 DOWNLOAD_CACHE_DIR = '$HOME/.cache/pip'
 VIRTUALENV = ''
-MANAGE = 'python3.5 manage.py {cmd} --settings=conf.settings'
+MANAGE = 'python manage.py {cmd} --settings=conf.settings'
 ENVIRONMENT = ''
 
 
@@ -33,7 +33,7 @@ def _set_project(environment):
     global FRONT_ROOT
 
     ENVIRONMENT = environment
-    PROJECT_ROOT = '~/projects/{PROJECT}_{ENVIRONMENT}'.format(
+    PROJECT_ROOT = '~/web/{PROJECT}_{ENVIRONMENT}'.format(
         ENVIRONMENT=environment, PROJECT=PROJECT)
     VIRTUALENV = '{PROJECT}_{ENVIRONMENT}'.format(
         ENVIRONMENT=environment, PROJECT=PROJECT)
@@ -66,7 +66,7 @@ def deploy(restart='yes', requirements='yes', migration='yes', before_migrate=No
         before_migrate()
     if migration == 'yes':
         migrate()
-    front_update()
+    # front_update()
     collect_static()
     if restart == 'yes':
         restart_service(VIRTUALENV)
@@ -117,7 +117,7 @@ def update_requirements(name='prod'):
     with prefix("workon {}".format(VIRTUALENV)):
         with cd(APP_ROOT):
             run(
-                'pip3.5 install '
+                'pip install '
                 '-r requirements/{name}.txt'.format(
                     download_cache=DOWNLOAD_CACHE_DIR,
                     PROJECT=PROJECT,
@@ -159,7 +159,7 @@ def restart_service(services='uwsgi'):
     service_list = [services, ] if isinstance(services, basestring) else services
     for service in service_list:
         puts('restarting {}'.format(service))
-        sudo('sudo systemctl restart {service}.service'.format(service=service))
+        sudo('sudo service {service} restart'.format(service=service))
 
 
 @task
