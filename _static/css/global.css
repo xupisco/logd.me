@@ -675,11 +675,20 @@ a.sharer:hover {
     margin-top: 1px;
 }
 
+.public_logo_holder {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+}
+
+.public_logo {
+    width: 80px;
+}
+
 .login_logo {
     width: 163px;
     padding-bottom: 16px;
 }
-
 
 iframe {
     border: 0;
