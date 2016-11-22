@@ -299,7 +299,7 @@ def newlog(request):
                 start_date=start_date,
                 end_date=end_date,
                 reminder=nlog_highlight,
-                body=nlog_body
+                body=mentions['body']
             )
             nlog.save()
         else:
@@ -308,7 +308,7 @@ def newlog(request):
             nlog.start_date = start_date
             nlog.end_date = end_date
             nlog.reminder = nlog_highlight
-            nlog.body = nlog_body
+            nlog.body = mentions['body']
 
         nlog.companies = mentions['companies']
         nlog.people = mentions['people']
@@ -417,15 +417,15 @@ def parse_from_string(request, nlog_body):
                                            name=mention[2])
                     nlog_company.save()
 
-                    old_string = base_string.format('company', 0, mention[2])
-                    new_string = base_string.format('company', nlog_company.pk, mention[2])
+                    old_string = base_string.format('company', '0', mention[2])
+                    new_string = base_string.format('company', nlog_company.id, mention[2])
 
                     nlog_body = nlog_body.replace(old_string, new_string)
-                    parsed_companies.append(nlog_company.pk)
+                    parsed_companies.append(nlog_company.id)
                 else:
                     place = c_exists[0]
-                    old_string = base_string.format('company', 0, mention[2])
-                    new_string = base_string.format('company', place.pk, mention[2])
+                    old_string = base_string.format('company', '0', mention[2])
+                    new_string = base_string.format('company', place.id, mention[2])
 
                     nlog_body = nlog_body.replace(old_string, new_string)
                     parsed_companies.append(c_exists[0].id)
@@ -441,15 +441,15 @@ def parse_from_string(request, nlog_body):
                                          name=mention[2])
                     nlog_person.save()
 
-                    old_string = base_string.format('person', 0, mention[2])
-                    new_string = base_string.format('person', nlog_person.pk, mention[2])
+                    old_string = base_string.format('person', '0', mention[2])
+                    new_string = base_string.format('person', nlog_person.id, mention[2])
 
                     nlog_body = nlog_body.replace(old_string, new_string)
-                    parsed_people.append(nlog_person.pk)
+                    parsed_people.append(nlog_person.id)
                 else:
                     dude = p_exists[0]
-                    old_string = base_string.format('person', 0, mention[2])
-                    new_string = base_string.format('person', dude.pk, mention[2])
+                    old_string = base_string.format('person', '0', mention[2])
+                    new_string = base_string.format('person', dude.id, mention[2])
 
                     nlog_body = nlog_body.replace(old_string, new_string)
                     parsed_people.append(p_exists[0].id)
