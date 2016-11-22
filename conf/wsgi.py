@@ -20,4 +20,4 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "conf.settings")
 
 application = get_wsgi_application()
 application = DjangoWhiteNoise(application)
-application = newrelic.agent.WSGIApplicationWrapper(application)
+application = newrelic.agent.wsgi_application()(application)
