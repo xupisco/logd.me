@@ -21,7 +21,7 @@ application = DjangoWhiteNoise(application)
 try:
     from newrelic import agent
     newrelic.agent.initialize(os.path.join(settings.BASE_DIR, 'conf') + '/newrelic.ini')
-    
+
     application = newrelic.agent.wsgi_application()(application)
 except:
     pass
