@@ -150,6 +150,10 @@ a.navbar-brand {
     border-radius: 0 !important;
 }
 
+div.mce-fullscreen {
+    z-index: 1050 !important;
+}
+
 .nav_shadow { 
     -webkit-box-shadow: 0px 2px 13px -1px rgba(0,0,0,0.72);
     -moz-box-shadow: 0px 2px 13px -1px rgba(0,0,0,0.72);
@@ -677,10 +681,19 @@ a.sharer:hover {
 }
 
 
+iframe {
+    border: 0;
+    width: 100%;
+    height: 366px;
+}
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 1280px) {
+    iframe {
+        height: 137px !important;
+    }
+
     #side_affix.affix {
         position: static !important;
         width: 100%;

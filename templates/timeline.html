@@ -9,6 +9,7 @@ var db_kinds = {{ kinds.count }};
 var zones_created = false;
 var parsed_tooltips = false;
 var parsed_dropzone = false;
+var tedfs = false;
 
 $(function() {
     $('.has_enddate').click(function() {
@@ -78,12 +79,14 @@ $(function() {
     tinymce.init({
         selector: 'textarea#nlog_body_mce',
         plugin: 'a_tinymce_plugin',
-        plugins: ['code', 'link', 'image, mention, fullscreen'],
-        toolbar: 'bold italic | blockquote bullist numlist | link image | fullscreen',
+        plugins: ['code', 'autolink', 'link', 'image, mention, fullscreen, media'],
+        toolbar: 'bold italic | blockquote bullist numlist | link image media | fullscreen',
         menubar: false,
         statusbar: false,
         min_height: 200,
         max_height: 300,
+        media_live_embeds: true,
+        media_dimensions: false,
         content_css: '{% static "css/custom_tinymce.css" %}',
         mentions: {
             delay: 0,
@@ -127,6 +130,15 @@ $(function() {
 
                   event.preventDefault();
                   return false;
+                }
+            });
+            ed.on('FullscreenStateChanged', function(e) {
+                if(!tedfs) {
+                    $('.navbar').hide();
+                    tedfs = true
+                } else {
+                    tedfs = false
+                    $('.navbar').show();
                 }
             });
         }
