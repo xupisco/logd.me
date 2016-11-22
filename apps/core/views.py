@@ -61,8 +61,6 @@ def public(request, encoded):
     except:
         return redirect('/')
 
-    return HttpResponse(json.dumps(response_data), content_type="application/json")
-
 
 @login_required
 def home(request):

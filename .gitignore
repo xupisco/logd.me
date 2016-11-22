@@ -4,6 +4,7 @@ media/*
 tmp/
 backups/
 htmlcov/
+.vscode/
 
 .cache
 .coverage*
