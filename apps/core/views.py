@@ -37,9 +37,9 @@ def set_language(request, lang_code):
 
 
 def login(request):
-    if request.META['HTTP_USER_AGENT'].find('face') == -1:
-        if not request.session.get(translation.LANGUAGE_SESSION_KEY):
-            return redirect('/set_language/' + settings.LANGUAGE_CODE)
+    # if request.META['HTTP_USER_AGENT'].find('face') == -1:
+    #     if not request.session.get(translation.LANGUAGE_SESSION_KEY):
+    #         return redirect('/set_language/' + settings.LANGUAGE_CODE)
 
     return render(request, 'login.html')
 
