@@ -146,28 +146,36 @@ a.navbar-brand {
     border-radius: 0 !important;
 }
 
-div.mce-fullscreen {
-    z-index: 1050 !important;
+.mce-ico {
+    font-size: 15px !important;
+    width: 14px !important;
 }
 
-.mce-fullscreen .mce-container-body {
-    text-align: center !important;
-    margin-top: 10px;
-}
 
-.mce-fullscreen .mce-panel {
-    border: 0 !important;
-}
+@media (min-width: 1280px) {
+    div.mce-fullscreen {
+        z-index: 1050 !important;
+    }
 
-.mce-fullscreen div.mce-edit-area {
-    width: 650px !important;
-    margin: 0 auto !important;
-    margin-top: 20px !important;
-}
+    .mce-fullscreen .mce-container-body {
+        text-align: center !important;
+        margin-top: 10px;
+    }
 
-.mce-fullscreen iframe {
-    padding: 2px 5px !important;
-    width: 630px !important;
+    .mce-fullscreen .mce-panel {
+        border: 0 !important;
+    }
+
+    .mce-fullscreen div.mce-edit-area {
+        width: 650px !important;
+        margin: 0 auto !important;
+        margin-top: 20px !important;
+    }
+
+    .mce-fullscreen iframe {
+        padding: 2px 5px !important;
+        width: 630px !important;
+    }
 }
 
 .nav_shadow {
@@ -286,7 +294,7 @@ img.avatar_card {
 
 #icon_clear {
     margin-left: 273px;
-    margin-top: 18px;
+    top: -33px;
     position: absolute;
     background-color: #f3f3f3;
     padding: 5px 4px;
@@ -706,6 +714,7 @@ a.sharer:hover {
     padding-bottom: 16px;
 }
 
+
 iframe {
     border: 0;
     width: 100%;
@@ -715,7 +724,19 @@ iframe {
 
 
 @media (max-width: 1280px) {
-    iframe {
+    .mce-fullscreen {
+        height: 100% !important;
+    }
+
+    .mce-fullscreen .mce-container-body {
+        height: 100% !important;
+    }
+
+    .mce-fullscreen iframe {
+        min-height: 480px !important;
+    }
+
+    .timeline-label iframe {
         height: 137px !important;
     }
 

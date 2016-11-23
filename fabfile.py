@@ -59,13 +59,13 @@ def deploy(restart='yes', requirements='yes', migration='yes', before_migrate=No
     push()
     run('date')
     update_files()
+
     if requirements == 'yes':
         update_requirements()
 
-    if before_migrate and callable(before_migrate):
-        before_migrate()
     if migration == 'yes':
         migrate()
+
     # front_update()
     collect_static()
     if restart == 'yes':

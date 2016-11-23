@@ -43,6 +43,11 @@ span#autocomplete {
     margin: 10px 0;
 }
 
+.mce-ico {
+    font-size: 15px !important;
+    width: 14px !important;
+}
+
 iframe {
     width: 618px !important;
     height: 347px !important;

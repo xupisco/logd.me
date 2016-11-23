@@ -224,6 +224,12 @@ function showRemoveConfirmation(log) {
     });
 }
 
+function moveToForm(el) {
+    $('html, body').animate({
+        scrollTop: $(el).offset().top - 75
+    }, 1000);
+}
+
 function loadSingleLog(log) {
     clearForm(); // Confirm changes!!!
     $('#nlog_header_text').html('{% trans "Loading..." %}');
@@ -254,6 +260,8 @@ function loadSingleLog(log) {
 
         $('#nlog_header_text').html('{% trans "Update log!" %}');
         $('#send_form').html('{% trans "Update..." %}')
+
+        moveToForm('.log_form');
     });
 }
 
@@ -433,7 +441,7 @@ function parseDropzones() {
     </div>
 </div>
 <div class="col-md-4">
-    <div id="side_affix" class="affix">
+    <div id="side_affix" class="affix log_form">
         <h3 id="nlog_header_text">{% trans "New log!" %}</h3>
         <form id="new_log">
             <div class="form-group">
