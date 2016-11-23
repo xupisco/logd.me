@@ -522,6 +522,7 @@ vue = new Vue({
             var self = this
             var localq = self.q.replace('#', '').toLowerCase();
             var ratio = 0.75;
+            parsed_tooltips = false;
             return this.logs.filter(function(log) {
                 return (
                     (log.body.toLowerCase().fuzzy(localq, ratio)) ||
