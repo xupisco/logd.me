@@ -34,6 +34,20 @@ span#autocomplete {
     font-weight: bold;
 }
 
+.mce-object-iframe {
+    width: 618px !important;
+}
+
+.mce-preview-object {
+    border: 0 !important;
+    margin: 10px 0;
+}
+
+iframe {
+    width: 618px !important;
+    height: 347px !important;
+}
+
 .rte-autocomplete{
     position: absolute;
     top: 0px;
