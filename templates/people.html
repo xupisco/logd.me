@@ -188,7 +188,7 @@ function showSuccessMessage() {
 
 {% block content %}
 <div class="col-md-8">
-    <div class="col-xs-18 col-sm-6 col-md-4" v-for="person in filteredPeople">
+    <div class="col-xs-18 col-sm-6 col-md-4" v-for="person in filteredPeople" v-cloak>
         <div class="thumbnail" v-bind:id="'person_' + [[ person.id ]]">
             <h4 class="person_name">
                 [[ person.name ]]<br />
@@ -213,15 +213,28 @@ function showSuccessMessage() {
         </div>
     </div>
 
-    <div class="" v-if="!filteredPeople.length && q">
+    <div v-if="!filteredPeople.length && q" v-cloak>
         <div class="thumbnail">
             <div class="caption" style="padding: 10px 20px; background-color: firebrick; color: #fff;">
-                    {% blocktrans %}
-                    <p>
-                    <h3 style="margin: 3px">Oooops, nothing found!</h3>
-                    Your search criteria didn't match anything, try using another keywords...
-                    </p>
-                    {% endblocktrans %}
+                {% blocktrans %}
+                <p>
+                <h3 style="margin: 3px">Oooops, nothing found!</h3>
+                Your search criteria didn't match anything, try using another keywords...
+                </p>
+                {% endblocktrans %}
+            </div>
+        </div>
+    </div>
+
+    <div v-show="!people.length">
+        <div class="thumbnail">
+            <div class="caption" style="padding: 10px 20px; background-color: firebrick; color: #fff;">
+                {% blocktrans %}
+                <p>
+                <h3 style="margin: 0">Ohhh no!</h3>
+                Nothing found... start adding some people with the form on the right!
+                </p>
+                {% endblocktrans %}
             </div>
         </div>
     </div>

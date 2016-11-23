@@ -344,7 +344,7 @@ function parseDropzones() {
 <div class="col-md-8">
     <div class="timeline-centered" id="main_timeline">
 
-        <article class="timeline-entry" v-if="!filteredLogs.length && q">
+        <article class="timeline-entry" v-if="!filteredLogs.length && q" v-cloak>
             <div class="timeline-entry-inner">
 
                 <div class="timeline-icon bg-danger">
@@ -362,7 +362,7 @@ function parseDropzones() {
             </div>
         </article>
 
-        <article class="timeline-entry" :id="'entry_' + log.id" v-for="log in filteredLogs">
+        <article class="timeline-entry" :id="'entry_' + log.id" v-for="log in filteredLogs" v-cloak>
             <div class="timeline-entry-inner">
 
                 <div class="timeline-icon" v-bind:class="{ 'bg-secondary': log.reminder }" v-bind:title="log.kind.name">

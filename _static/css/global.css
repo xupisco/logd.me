@@ -6,10 +6,6 @@ html {
     overflow-y: scroll;
 }
 
-[v-cloak] .v-cloak--hidden {
-    display: none;
-}
-
 .footer {
     position: absolute;
     bottom: 0;

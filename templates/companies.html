@@ -126,7 +126,7 @@ function showSuccessMessage() {
 
 {% block content %}
 <div class="col-md-8" id="div_holder">
-    <div class="col-xs-18 col-sm-6 col-md-4" id="div_item" v-for="company in filteredCompanies" v-on:mouseover="activateTooltips()">
+    <div class="col-xs-18 col-sm-6 col-md-4" id="div_item" v-for="company in filteredCompanies" v-on:mouseover="activateTooltips()" v-cloak>
         <div class="thumbnail" v-bind:id="'company_' + [[ company.id ]]">
             <h4 class="person_name" style="margin-bottom: 5px;">
                 [[ company.name ]]<br />
@@ -149,7 +149,7 @@ function showSuccessMessage() {
         </div>
     </div>
 
-    <div class="" v-if="!filteredCompanies.length && q">
+    <div class="" v-if="!filteredCompanies.length && q" v-cloak>
         <div class="thumbnail">
             <div class="caption" style="padding: 10px 20px; background-color: firebrick; color: #fff;">
                     {% blocktrans %}
@@ -158,6 +158,19 @@ function showSuccessMessage() {
                     Your search criteria didn't match anything, try using another keywords...
                     </p>
                     {% endblocktrans %}
+            </div>
+        </div>
+    </div>
+
+    <div v-show="!companies.length">
+        <div class="thumbnail">
+            <div class="caption" style="padding: 10px 20px; background-color: firebrick; color: #fff;">
+                {% blocktrans %}
+                <p>
+                <h3 style="margin: 0">Ohhh no!</h3>
+                Nothing found... start adding some companies with the form on the right!
+                </p>
+                {% endblocktrans %}
             </div>
         </div>
     </div>
