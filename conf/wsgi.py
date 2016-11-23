@@ -19,7 +19,7 @@ application = get_wsgi_application()
 application = DjangoWhiteNoise(application)
 
 try:
-    from newrelic import agent
+    import newrelic.agent
     newrelic.agent.initialize(os.path.join(settings.BASE_DIR, 'conf') + '/newrelic.ini')
 
     application = newrelic.agent.wsgi_application()(application)
