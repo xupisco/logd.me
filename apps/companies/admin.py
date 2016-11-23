@@ -7,6 +7,7 @@ from .models import Company
 class CompanyAdmin(admin.ModelAdmin):
     list_display = ('name', 'phone', 'owner_name', )
     prepopulated_fields = {'slug': ('name',)}
+    search_fields = ('owner__first_name', 'owner__last_name', 'name', )
 
     def owner_name(self, obj):
         return obj.owner.get_full_name()
