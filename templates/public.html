@@ -21,7 +21,15 @@ $(function() {
             scrollTop: 0
         }, 1000);
     })
+
+    hl_hashtags();
 })
+
+function hl_hashtags() {
+    txt = $('.log_content').html()
+    var all_re = /(#[a-z0-9][a-z0-9\-_]*)/ig;
+    $('.log_content').html(txt.replace(all_re, "<span class='hashtag'>$1</span>"));
+}
 </script>
 {% endblock %}
 
@@ -66,7 +74,7 @@ $(function() {
                     </span>
                     </div>
 
-                    <p>
+                    <p class="log_content">
                     {{ log.body|safe|escape }}
                     </p>
 
