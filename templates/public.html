@@ -28,7 +28,7 @@ $(function() {
 function hl_hashtags() {
     txt = $('.log_content').html()
     var all_re = /(#[a-z0-9][a-z0-9\-_]*)/ig;
-    $('.log_content').html(txt.replace(all_re, "<span class='hashtag'>$1</span>"));
+    $('.log_content').html('<p>' + txt.replace(all_re, "<span class='hashtag'>$1</span>") + '</p>');
 }
 </script>
 {% endblock %}
@@ -74,9 +74,11 @@ function hl_hashtags() {
                     </span>
                     </div>
 
-                    <p class="log_content">
+                    <div class="log_content">
+                    <p>
                     {{ log.body|safe|escape }}
                     </p>
+                    </div>
 
                     <div class="has_labels">
                         {% for company in log.companies.all %}
