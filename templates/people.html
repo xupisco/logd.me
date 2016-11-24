@@ -9,12 +9,9 @@ var first_load = true;
 loadPeople();
 
 $(function() {
-    $('#side_affix').affix({
-        offset: {
-            top: 0,
-            bottom: 80
-        }
-    });
+    if($(document).width() > 1280) {
+        $('#side_affix').affix();
+    }
 
     $('#nppl_role, #nppl_company').selectpicker({
         style: 'btn-default custom_select',

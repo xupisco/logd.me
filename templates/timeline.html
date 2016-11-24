@@ -165,12 +165,9 @@ $(function() {
         $('#cancel_new_kind').addClass('hidden');
     })
 
-    $('#side_affix').affix({
-        offset: {
-            top: 0,
-            bottom: 80
-        }
-    })
+    if($(document).width() > 1280) {
+        $('#side_affix').affix();
+    }
 
     loadLogs();
 

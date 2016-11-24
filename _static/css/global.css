@@ -722,6 +722,19 @@ iframe {
 
 
 @media (max-width: 1280px) {
+    .navbar-fixed-top {
+        position: fixed;
+        top: 0;
+    }
+
+    .footer {
+        height: 60px
+    }
+
+    .footer .languages {
+        float: left !important;
+    }
+
     .mce-fullscreen {
         height: 100% !important;
     }
