@@ -188,7 +188,7 @@ $(function() {
     jQuery.datetimepicker.setLocale('pt-BR');
     $('#nlog_start_date').datetimepicker({
         format:'d/m/Y H:i',
-        step: 30
+        step: 30,
     });
 
     $('#nlog_end_date').datetimepicker({
@@ -483,18 +483,20 @@ function parseDropzones() {
                    </div>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group has-feedback has-feedback-right">
                 <label for="nlog_start_date">{% trans "When?" %}</label><div class="form_error pull-right" id="error_nlog_start_date"> {% trans 'Required' %}</div>
                 <input type="text" class="form-control" id="nlog_start_date" placeholder="dd/mm/yyyy hh:mm">
+                <i id="nlog_start_date-picker" class="form-control-feedback glyphicon glyphicon-calendar" style="color: #b9b9b9"></i>
             </div>
             <div class="checkbox">
                 <label>
                 <input class="has_enddate" type="checkbox"> {% trans "Has end date?" %}
                 </label>
             </div>
-            <div class="form-group end_date hidden">
+            <div class="form-group end_date hidden has-feedback has-feedback-right">
                 <label for="nlog_enddate">{% trans "When ended?" %}</label>
                 <input type="text" class="form-control" id="nlog_end_date" placeholder="dd/mm/yyyy hh:mm">
+                <i id="nlog_end_date-picker" class="form-control-feedback glyphicon glyphicon-calendar" style="color: #b9b9b9"></i>
             </div>
             <div class="form-group">
                 <label for="nlog_body">{% trans "Description..." %}</label><div class="form_error pull-right" id="error_nlog_body"> {% trans 'Type at least 5 characters' %}</div>
