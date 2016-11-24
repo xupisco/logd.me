@@ -720,6 +720,10 @@ iframe {
 }
 
 
+.navbar-toggle {
+    border: 0 !important;
+}
+
 
 @media (max-width: 1280px) {
     .navbar-fixed-top {
