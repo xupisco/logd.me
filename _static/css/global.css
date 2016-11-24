@@ -153,6 +153,11 @@ a.navbar-brand {
 
 
 @media (min-width: 1280px) {
+
+    body {
+        overflow-y: hidden;
+    }
+
     div.mce-fullscreen {
         z-index: 1050 !important;
     }
