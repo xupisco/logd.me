@@ -10,6 +10,7 @@ var zones_created = false;
 var parsed_tooltips = false;
 var parsed_dropzone = false;
 var tedfs = false;
+var first_load = true;
 
 $(function() {
     $('.has_enddate').click(function() {
@@ -225,6 +226,9 @@ function showRemoveConfirmation(log) {
 }
 
 function moveToForm(el) {
+    if($(document).width() > 1280) {
+        return true;
+    }
     $('html, body').animate({
         scrollTop: $(el).offset().top - 75
     }, 1000);
@@ -270,6 +274,12 @@ function loadLogs() {
         vue.logs = res;
         parsed_tooltips = false;
         $('#fake_loading').removeClass('icon-spin');
+        if(first_load) {
+            $('.loader').hide();
+            $('.nothing_found').show();
+            $('.begin').removeClass('hidden');
+            first_load = false;
+        }
     });
 }
 
@@ -349,7 +359,8 @@ function parseDropzones() {
 {% endblock %}
 
 {% block content %}
-<div class="col-md-8">
+<div class="col-md-8" style="min-height: 150px">
+    <div class="loader">{% trans "Loading" %}...</div>
     <div class="timeline-centered" id="main_timeline">
 
         <article class="timeline-entry" v-if="!filteredLogs.length && q" v-cloak>
@@ -379,8 +390,8 @@ function parseDropzones() {
 
                 <div class="timeline-label dropzone" v-on:mouseover="setup_tooltips()">
                     <div class="log_tools">
-                        <span class="glyphicon glyphicon-edit log_tool" v-on:click="editLog([[ log.id ]])" aria-hidden="true"></span>
-                        <span class="glyphicon glyphicon-remove log_tool tool_delete" aria-hidden="true" v-on:click.stop.prevent="removeLog([[ log.id ]], $event)"></span>
+                        <span class="glyphicon glyphicon-edit log_tool" v-on:click="editLog([[ log.id ]])" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{% trans "Edit this log..." %}"></span>
+                        <span class="glyphicon glyphicon-remove log_tool tool_delete" aria-hidden="true" v-on:click.stop.prevent="removeLog([[ log.id ]], $event)" data-toggle="tooltip" data-placement="top" title="{% trans "Remove this log..." %}"></span>
                         <div class="remove_confirmation hidden" :id="'confid_' + log.id"><strong>{% trans "Sure?" %}</strong> {% trans "click again..." %}</div>
                     </div>
 
@@ -411,7 +422,7 @@ function parseDropzones() {
             </div>
         </article>
 
-        <article class="timeline-entry" v-show="!logs.length">
+        <article class="timeline-entry hidden nothing_found" v-show="!logs.length">
             <div class="timeline-entry-inner">
 
                 <div class="timeline-icon bg-danger">
@@ -430,7 +441,7 @@ function parseDropzones() {
             </div>
         </article>
 
-        <article class="timeline-entry begin">
+        <article class="timeline-entry begin hidden nothing_found">
             <div class="timeline-entry-inner">
                 <div id="fake_reload" class="timeline-icon bg-black" style="background: #333;" title="{% trans "Force refresh..." %}">
                     <span id="fake_loading" class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
@@ -585,11 +596,13 @@ vue = new Vue({
         },
         setup_tooltips: function() {
             $('.timeline-label').mouseenter(function() {
+                $(this).find('.log_tools').removeClass('hidden');
                 if(!$(this).find('.shareme').hasClass('just_added')) {
                     $(this).find('.shareme').removeClass('hidden');
                 }
             })
             $('.timeline-label').mouseleave(function() {
+                $(this).find('.log_tools').addClass('hidden');
                 $(this).find('.shareme').addClass('hidden');
             })
             if(!parsed_dropzone && 0) {
@@ -598,6 +611,7 @@ vue = new Vue({
             if(!parsed_tooltips) {
                 $('.ppl_label').tooltip();
                 $('.company_label').tooltip();
+                $('.log_tool').tooltip();
                 $('.helptext').tooltip({
                     placement: 'right',
                     trigger: 'hover'

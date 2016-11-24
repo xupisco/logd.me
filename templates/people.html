@@ -5,6 +5,7 @@
 {% block js %}
 <script type="text/javascript">
 var vue;
+var first_load = true;
 loadPeople();
 
 $(function() {
@@ -103,6 +104,12 @@ function loadPeople() {
     $.getJSON('/api/v1/people/', function(res) {
         vue.people = res;
         $('#fake_loading').removeClass('icon-spin');
+
+        if(first_load) {
+            $('.loader').hide();
+            $('.nothing_found').show();
+            first_load = false;
+        }
     });
 }
 
@@ -187,7 +194,8 @@ function showSuccessMessage() {
 {% endblock %}
 
 {% block content %}
-<div class="col-md-8">
+<div class="col-md-8" style="min-height: 150px">
+    <div class="loader">{% trans "Loading" %}...</div>
     <div class="col-xs-18 col-sm-6 col-md-4" v-for="person in filteredPeople" v-cloak>
         <div class="thumbnail" v-bind:id="'person_' + [[ person.id ]]">
             <h4 class="person_name">
@@ -226,7 +234,7 @@ function showSuccessMessage() {
         </div>
     </div>
 
-    <div v-show="!people.length">
+    <div class="hidden nothing_found" v-show="!people.length">
         <div class="thumbnail">
             <div class="caption" style="padding: 10px 20px; background-color: firebrick; color: #fff;">
                 {% blocktrans %}
