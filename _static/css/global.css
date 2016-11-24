@@ -459,11 +459,11 @@ input.form-little-full {
 
 .remove_confirmation {
     position: absolute;
-    right: 8px;
+    right: 11px;
     background-color: firebrick;
     color: #fff;
-    padding: 0 5px;
-    top: 9px;
+    padding: 2px 8px;
+    top: 12px;
 }
 
 .remove_confirmation:hover {
