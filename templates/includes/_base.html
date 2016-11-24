@@ -95,7 +95,8 @@
             }
         });
 
-        $('#icon_clear').click(function() {
+        $('#icon_clear').click(function(e) {
+            e.preventDefault();
             vue.q = '';
         });
 

@@ -193,6 +193,11 @@ function showSuccessMessage() {
 {% block content %}
 <div class="col-md-8" style="min-height: 150px">
     <div class="loader">{% trans "Loading" %}...</div>
+
+    <div class="filtered_results_others" v-show="filteredPeople.length > 0 && q" v-cloak>
+    {% trans "Showing" %} <span class="filtered_count">[[ filteredPeople.length ]]</span> {% trans "of" %} <span class="total_count">[[ people.length ]]</span> | <span class="info_clear" v-on:click="{ q = ''; }">{% trans "Reset" %}...</span>
+    </div>
+
     <div class="col-xs-18 col-sm-6 col-md-4" v-for="person in filteredPeople" v-cloak>
         <div class="thumbnail" v-bind:id="'person_' + [[ person.id ]]">
             <h4 class="person_name">

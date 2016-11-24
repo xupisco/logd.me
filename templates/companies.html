@@ -131,6 +131,11 @@ function showSuccessMessage() {
 {% block content %}
 <div class="col-md-8" id="div_holder" style="min-height: 150px">
     <div class="loader">{% trans "Loading" %}...</div>
+
+    <div class="filtered_results_others" v-show="filteredCompanies.length > 0 && q" v-cloak>
+    {% trans "Showing" %} <span class="filtered_count">[[ filteredCompanies.length ]]</span> {% trans "of" %} <span class="total_count">[[ companies.length ]]</span> | <span class="info_clear" v-on:click="{ q = ''; }">{% trans "Reset" %}...</span>
+    </div>
+
     <div class="col-xs-18 col-sm-6 col-md-4" id="div_item" v-for="company in filteredCompanies" v-on:mouseover="activateTooltips()" v-cloak>
         <div class="thumbnail" v-bind:id="'company_' + [[ company.id ]]">
             <h4 class="person_name" style="margin-bottom: 5px;">
