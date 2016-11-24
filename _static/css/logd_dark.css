@@ -1,0 +1,33 @@
+body {
+    background-image: none;
+    background-color: #212121;
+    color: #fdfdfd;
+}
+
+.navbar-default {
+    background-color: #1b1b1b;
+}
+
+.timeline-icon {
+    background: #1b1b1b;
+    color: #737881;
+    box-shadow: 0 0 0 4px #1b1b1b;
+}
+
+.timeline-label {
+    background: #1b1b1b;
+}
+
+.log_date {
+    background-color: #212121;
+    color: #828282;
+}
+
+.log_tools {
+    background-color: #1b1b1b;
+    color: #dadada;
+}
+
+input {
+    background-color: #101010 !important;
+}
