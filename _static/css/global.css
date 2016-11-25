@@ -794,6 +794,10 @@ iframe {
         padding: 3px 5px !important;
     }
 
+    .public_views {
+        top: 46px !important;
+    }
+
     .author {
         font-size: 24px !important;
         margin-top: -56px !important;
