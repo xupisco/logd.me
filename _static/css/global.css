@@ -321,13 +321,16 @@ img.avatar_card {
     position: static;
     margin-top: 0;
     width: 350px;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
 }
 
 #side_affix.affix {
     position: fixed !important;
-    top: 80px;
     width: 350px;
+}
+
+#side_affix.affix-bottom {
+    top: 355px !important;
 }
 
 .editor-toolbar {
