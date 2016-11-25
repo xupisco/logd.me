@@ -19,6 +19,8 @@ urlpatterns = [
 
     # Temp stuff
     url(r'^ajax/change_visibility$', views.changevisibility, name='change_visibility',),
+    url(r'^ajax/change_theme$', views.changetheme, name='change_theme',),
+
     url(r'^ajax/new_log$', views.newlog, name='newlog',),
     url(r'^ajax/remove_log$', views.removelog, name='removelog',),
 

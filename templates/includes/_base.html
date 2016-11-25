@@ -49,10 +49,10 @@
     <link rel="stylesheet" href="{% static 'css/jquery.datetimepicker.css' %}" />
     <script src="{% static 'js/jquery.datetimepicker.full.min.js' %}"></script>
 
-    <!--
+    {% if THEME == 'dark' %}
     <link rel="stylesheet" href="{% static 'css/jquery.datetimepicker-dark.css' %}" />
     <link rel="stylesheet" href="{% static 'css/logd_dark.css' %}" />
-    -->
+    {% endif %}
 
     <script src="{% static 'js/mousetrap.min.js' %}"></script>
     <script src="{% static 'js/clipboard.min.js' %}"></script>
@@ -61,11 +61,11 @@
 
     <script src="{% static 'js/tinymce/tinymce.min.js' %}"></script>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
-    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
+
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
 
@@ -156,6 +156,31 @@
             });
             $(this).addClass('hidden');
             //document.location.reload();
+        })
+
+        $(document).on('click', '.navbar-right .dropdown-menu', function (e) {
+            e.stopPropagation();
+        });
+
+        $('#toggle-theme').bootstrapToggle();
+
+        {% if THEME == 'dark' %}
+            $('#toggle-theme').bootstrapToggle('on')
+        {% endif %}
+
+        $('#toggle-theme').change(function() {
+            var post_data = {
+                'new_theme': $(this).prop('checked') ? 'dark' : '',
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            }
+
+            $.post('{% url "core:change_theme" %}', post_data, function(res) {
+                if (res.success) {
+                    document.location.reload();
+                } else {
+                    showError();
+                }
+            });
         })
     })
 
@@ -250,6 +275,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             <li><a href="/"><span class="glyphicon glyphicon-comment" aria-hidden="true"></span>&nbsp;&nbsp;{% trans "Logs" %}</a></li>
                             <li><a href="/people"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;{% trans "People" %}</a></li>
                             <li><a href="/companies"><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>&nbsp;&nbsp;{% trans "Companies" %}</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li class="theme_chooser"><input id="toggle-theme" type="checkbox" data-toggle="toggle" data-off="{% trans "Light" %}" data-on="{% trans "Dark" %}" data-size="mini" data-width="137"></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/accounts/logout"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;{% trans "Logout" %}...</a></li>
                             {% if request.user.is_staff %}

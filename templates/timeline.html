@@ -88,7 +88,7 @@ $(function() {
         max_height: 300,
         media_live_embeds: true,
         media_dimensions: false,
-        content_css: '{% static "css/custom_tinymce.css" %}',
+        content_css: '{% if THEME == 'dark' %}{% static "css/custom_tinymce-dark.css" %}{% else %}{% static "css/custom_tinymce.css" %}{% endif %}',
         mentions: {
             delay: 0,
             source: {{ mentions | safe }},

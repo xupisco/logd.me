@@ -360,6 +360,14 @@ def removeperson(request):
     return HttpResponse(json.dumps(response_data), content_type="application/json")
 
 
+def changetheme(request):
+    request.session['theme'] = request.POST.get('new_theme', '')
+
+    response_data = {}
+    response_data['success'] = True
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
+
+
 def changevisibility(request):
     status = int(request.POST.get('status', 0))
     log_id = request.POST.get('log_id')

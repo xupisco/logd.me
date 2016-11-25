@@ -226,6 +226,10 @@ img.footer_logo-lab {
     margin-top: 20px;
 }
 
+.thumbnail {
+    border-radius: 0 !important;
+}
+
 .thumbnail_old {
     border-radius: 0;
     -webkit-box-shadow: 0px 1px 10px -1px rgba(0,0,0,0.3);
@@ -915,4 +919,18 @@ iframe {
 
 .info_clear:hover {
     cursor: pointer;
+}
+
+.theme_chooser {
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.toggle, .toggle-handle {
+    border-radius: 0 !important;
+}
+
+.toggle-handle {
+    border-width: 0px 4px !important;
+    height: 23px !important;
 }
