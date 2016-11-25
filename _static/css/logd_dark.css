@@ -136,7 +136,40 @@ input {
     background: #8bc34a;
 }
 
+.new_kind_form {
+    background-color: #101010 !important;
+    border: 2px solid #1b1b1b !important;
+}
+
 #icon_clear {
     background-color: #101010 !important;
     color: #7f2c2c !important;
+}
+
+
+/* TinyMCE */
+
+.mce-container * {
+    background: rgb(27, 27, 27) !important;
+}
+
+.mce-btn-group .mce-btn {
+     border-color: #1b1b1b !important;
+}
+
+.mce-ico {
+    color: #c7c7c7 !important;
+}
+
+.mce-btn-group:not(:first-child) {
+    border-left: 1px solid #2b2b2b !important;
+}
+
+.mce-panel {
+    border: 1px solid #1b1b1b !important;
+}
+
+.mce-label {
+    text-shadow: none !important;
+    color: #efefef !important;
 }
