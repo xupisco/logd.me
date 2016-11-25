@@ -35,7 +35,7 @@ class LogSerializer(serializers.ModelSerializer):
         fields = (
             'id', 'kind', 'body', 'hashtags', 'companies', 'people',
             'start_date', 'end_date', 'reminder', 'created_on',
-            'updated_on', 'meta', 'public_url', 'public',
+            'updated_on', 'meta', 'public_url', 'public', 'public_views'
         )
 
     def get_public_url(self, obj):

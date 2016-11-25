@@ -416,6 +416,7 @@ function parseDropzones() {
                     <div class="public_link clickable helptext" :id="'public_link_for_' + [[ log.id ]]" v-on:click="openPublicLink([[ log.id ]])" v-bind:class="{ 'hidden': !log.public }" title="{% trans "This log is available to anyone with this link!" %}">
                         /pub/[[ log.public_url ]]
                     </div>
+                    <span class="public_views" v-bind:class="{ 'hidden': !log.public }">[[ log.public_views ]] {% trans "views" %}</span>
                     </div>
                     <p v-html="hl_hashtags(log.body)"></p>
 
