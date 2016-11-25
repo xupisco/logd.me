@@ -329,10 +329,6 @@ img.avatar_card {
     width: 350px;
 }
 
-#side_affix.affix-bottom {
-    top: 355px !important;
-}
-
 .editor-toolbar {
     background-color: #f1f1f1;
     border-radius: 0 !important;
