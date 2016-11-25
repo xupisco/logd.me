@@ -18,6 +18,15 @@ body {
     background-color: #1b1b1b;
 }
 
+.dropdown-menu {
+    background-color: #1b1b1b !important;
+    border-radius: 0 !important;
+}
+
+.dropdown-menu > li.inlinenew {
+    color: #cacaca;
+}
+
 .timeline-icon {
     background: #1b1b1b;
     color: #737881;
