@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-22 22:25-0200\n"
-"PO-Revision-Date: 2016-11-16 10:08-0200\n"
+"POT-Creation-Date: 2016-11-25 10:56-0200\n"
+"PO-Revision-Date: 2016-11-25 11:00-0200\n"
 "Last-Translator: Fernando Macedo <fgmacedo@gmail.com>\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -18,178 +18,196 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.8.7.1\n"
 
-#: .\apps\companies\admin.py:13 .\apps\logs\admin.py:15 .\apps\logs\admin.py:32
-#: .\apps\people\admin.py:20
+#: apps/companies/admin.py:14 apps/logs/admin.py:15 apps/logs/admin.py:33
+#: apps/people/admin.py:20
 msgid "owner"
 msgstr "dono"
 
-#: .\apps\companies\apps.py:8 .\apps\companies\models.py:24
-#: .\apps\logs\admin.py:43
+#: apps/companies/apps.py:8 apps/companies/models.py:24 apps/logs/admin.py:44
 msgid "companies"
 msgstr "empresas"
 
-#: .\apps\companies\models.py:11 .\apps\logs\models.py:17
-#: .\apps\people\models.py:12 .\apps\people\models.py:23
+#: apps/companies/models.py:11 apps/logs/models.py:17 apps/people/models.py:12
+#: apps/people/models.py:23
 msgid "name"
 msgstr "nome"
 
-#: .\apps\companies\models.py:12 .\apps\logs\models.py:18
-#: .\apps\people\models.py:13
+#: apps/companies/models.py:12 apps/logs/models.py:18 apps/people/models.py:13
 msgid "slug"
 msgstr "slug"
 
-#: .\apps\companies\models.py:13
+#: apps/companies/models.py:13
 msgid "phone"
 msgstr "telefone"
 
-#: .\apps\companies\models.py:14
+#: apps/companies/models.py:14
 msgid "domain"
 msgstr "domínio"
 
-#: .\apps\companies\models.py:16 .\apps\logs\models.py:39
-#: .\apps\people\models.py:29 .\apps\people\models.py:47
+#: apps/companies/models.py:16 apps/logs/models.py:39 apps/people/models.py:29
+#: apps/people/models.py:47
 msgid "created on"
 msgstr "criado em"
 
-#: .\apps\companies\models.py:17 .\apps\logs\models.py:40
-#: .\apps\people\models.py:30 .\apps\people\models.py:48
+#: apps/companies/models.py:17 apps/logs/models.py:40 apps/people/models.py:30
+#: apps/people/models.py:48
 msgid "updated on"
 msgstr "atualizado em"
 
-#: .\apps\companies\models.py:23
+#: apps/companies/models.py:23
 msgid "company"
 msgstr "empresa"
 
-#: .\apps\core\apps.py:8
+#: apps/core/apps.py:8
 msgid "core"
 msgstr "core"
 
-#: .\apps\logs\admin.py:19
+#: apps/logs/admin.py:19
 msgid "usage"
 msgstr "uso"
 
-#: .\apps\logs\admin.py:39
+#: apps/logs/admin.py:40
 msgid "preview"
-msgstr ""
+msgstr "prévia"
 
-#: .\apps\logs\admin.py:47 .\apps\people\apps.py:8 .\apps\people\models.py:40
+#: apps/logs/admin.py:48 apps/people/apps.py:8 apps/people/models.py:40
 msgid "people"
 msgstr "pessoas"
 
-#: .\apps\logs\apps.py:8
+#: apps/logs/apps.py:8
 msgid "logs"
 msgstr "registros"
 
-#: .\apps\logs\models.py:19
+#: apps/logs/models.py:19
 msgid "icon"
 msgstr "ícone"
 
-#: .\apps\logs\models.py:29
+#: apps/logs/models.py:29
 msgid "date start"
 msgstr "data de início"
 
-#: .\apps\logs\models.py:30
+#: apps/logs/models.py:30
 msgid "date end"
 msgstr "data de término"
 
-#: .\apps\logs\models.py:32
+#: apps/logs/models.py:32
 msgid "reminder"
 msgstr "lembrete"
 
-#: .\apps\logs\models.py:33
+#: apps/logs/models.py:33
 msgid "public"
 msgstr "público"
 
-#: .\apps\logs\models.py:34
+#: apps/logs/models.py:34
 msgid "public views"
 msgstr "exibições"
 
-#: .\apps\people\models.py:24
+#: apps/people/models.py:24
 msgid "email"
 msgstr "email"
 
-#: .\apps\people\models.py:26
+#: apps/people/models.py:26
 msgid "mobile"
 msgstr "celular"
 
-#: .\apps\people\models.py:27
+#: apps/people/models.py:27
 msgid "landline"
 msgstr "linha fixa"
 
-#: .\apps\people\models.py:39
+#: apps/people/models.py:39
 msgid "person"
 msgstr "pessoa"
 
-#: .\apps\people\models.py:51
+#: apps/people/models.py:51
 msgid "was working at"
 msgstr "estava trabalhando em"
 
-#: .\conf\settings.py:119 .\templates\includes\_base-login.html:44
-#: .\templates\includes\_base.html:62 .\templates\login.html:17
+#: conf/settings.py:119 templates/includes/_base-login.html:44
+#: templates/includes/_base.html:75 templates/login.html:17
 msgid "Your personal and friendly life log."
 msgstr "Registros pessoais de forma simples."
 
-#: .\conf\settings.py:177
+#: conf/settings.py:177
 msgid "English"
 msgstr "Inglês"
 
-#: .\conf\settings.py:178
+#: conf/settings.py:178
 msgid "Portuguese (Brazil)"
 msgstr "Português (Brasil)"
 
-#: .\templates\404.html:5
+#: templates/404.html:5
 msgid "Page not found."
 msgstr "Página não encontrada."
 
-#: .\templates\500.html:5
+#: templates/500.html:5
 msgid "Internal server error."
 msgstr "Erro interno no servidor."
 
-#: .\templates\companies.html:66 .\templates\people.html:111
-#: .\templates\timeline.html:229 .\templates\timeline.html:605
+#: templates/companies.html:70 templates/people.html:115
+#: templates/timeline.html:244 templates/timeline.html:641
 msgid "Loading..."
 msgstr "Carregando..."
 
-#: .\templates\companies.html:75
+#: templates/companies.html:79
 msgid "Update company!"
 msgstr "Atualizar empresa!"
 
-#: .\templates\companies.html:76 .\templates\people.html:134
-#: .\templates\timeline.html:256
+#: templates/companies.html:80 templates/people.html:138
+#: templates/timeline.html:271
 msgid "Update..."
 msgstr "Atualizar..."
 
-#: .\templates\companies.html:114 .\templates\companies.html:181
+#: templates/companies.html:118 templates/companies.html:191
 msgid "New company!"
 msgstr "Nova empresa!"
 
-#: .\templates\companies.html:115 .\templates\companies.html:193
+#: templates/companies.html:119 templates/companies.html:203
 msgid "Add company..."
 msgstr "Adicionar empresa..."
 
-#: .\templates\companies.html:137 .\templates\people.html:199
+#: templates/companies.html:133 templates/people.html:195
+#: templates/timeline.html:368
+msgid "Loading"
+msgstr "Carregando"
+
+#: templates/companies.html:136 templates/people.html:198
+#: templates/timeline.html:371
+msgid "Showing"
+msgstr "Exibindo"
+
+#: templates/companies.html:136 templates/people.html:198
+#: templates/timeline.html:371
+msgid "of"
+msgstr "de"
+
+#: templates/companies.html:136 templates/people.html:198
+#: templates/timeline.html:371
+msgid "Reset"
+msgstr "Limpar"
+
+#: templates/companies.html:147 templates/people.html:209
 msgid "Copied!"
 msgstr "Copiado!"
 
-#: .\templates\companies.html:142 .\templates\people.html:205
+#: templates/companies.html:152 templates/people.html:215
 msgid "Edit"
 msgstr "Editar"
 
-#: .\templates\companies.html:142 .\templates\people.html:205
+#: templates/companies.html:152 templates/people.html:215
 msgid "Logs..."
 msgstr "Registros..."
 
-#: .\templates\companies.html:146 .\templates\people.html:209
-#: .\templates\timeline.html:376
+#: templates/companies.html:156 templates/people.html:219
+#: templates/timeline.html:405
 msgid "Sure?"
 msgstr "Certeza?"
 
-#: .\templates\companies.html:146 .\templates\people.html:209
-#: .\templates\timeline.html:376
+#: templates/companies.html:156 templates/people.html:219
+#: templates/timeline.html:405
 msgid "click again..."
 msgstr "clique novamente..."
 
-#: .\templates\companies.html:155 .\templates\timeline.html:355
+#: templates/companies.html:165 templates/timeline.html:384
 msgid ""
 "\n"
 "                    <p>\n"
@@ -207,7 +225,7 @@ msgstr ""
 "                    </p>\n"
 "                    "
 
-#: .\templates\companies.html:168
+#: templates/companies.html:178
 msgid ""
 "\n"
 "                <p>\n"
@@ -225,69 +243,69 @@ msgstr ""
 "                    </p>\n"
 "                    "
 
-#: .\templates\companies.html:184 .\templates\people.html:249
+#: templates/companies.html:194 templates/people.html:259
 msgid "Name"
 msgstr "Nome"
 
-#: .\templates\companies.html:184 .\templates\people.html:249
-#: .\templates\timeline.html:442 .\templates\timeline.html:466
+#: templates/companies.html:194 templates/people.html:259
+#: templates/timeline.html:472 templates/timeline.html:496
 msgid "Required"
 msgstr "Obrigatório"
 
-#: .\templates\companies.html:188
+#: templates/companies.html:198
 msgid "Phone"
 msgstr "Telefone"
 
-#: .\templates\companies.html:194 .\templates\people.html:307
-#: .\templates\timeline.html:492
+#: templates/companies.html:204 templates/people.html:317
+#: templates/timeline.html:524
 msgid "Cancel!"
 msgstr "Cancelar!"
 
-#: .\templates\includes\_base-login.html:43 .\templates\includes\_base.html:61
+#: templates/includes/_base-login.html:43 templates/includes/_base.html:74
 msgid "logd.me"
-msgstr ""
+msgstr "logd.me"
 
-#: .\templates\includes\_base.html:147
+#: templates/includes/_base.html:188
 msgid "Log successfully saved!"
 msgstr "Registro salvo com sucesso!"
 
-#: .\templates\includes\_base.html:151
+#: templates/includes/_base.html:192
 msgid "Person successfully saved!"
 msgstr "Pessoa salva com sucesso!"
 
-#: .\templates\includes\_base.html:155
+#: templates/includes/_base.html:196
 msgid "Company successfully saved!"
 msgstr "Empresa salva com sucesso!"
 
-#: .\templates\includes\_base.html:161
+#: templates/includes/_base.html:202
 msgid "Ouch! Something went wrong..."
 msgstr "Arrrgh! Algo deu errado..."
 
-#: .\templates\includes\_base.html:181 .\templates\includes\_base.html:203
+#: templates/includes/_base.html:222 templates/includes/_base.html:245
 msgid "Logs"
 msgstr "Registros"
 
-#: .\templates\includes\_base.html:182 .\templates\includes\_base.html:204
+#: templates/includes/_base.html:223 templates/includes/_base.html:246
 msgid "People"
 msgstr "Pessoas"
 
-#: .\templates\includes\_base.html:183 .\templates\includes\_base.html:205
+#: templates/includes/_base.html:224 templates/includes/_base.html:247
 msgid "Companies"
 msgstr "Empresas"
 
-#: .\templates\includes\_base.html:187
+#: templates/includes/_base.html:228
 msgid "Type anything..."
 msgstr "Digite qualquer coisa..."
 
-#: .\templates\includes\_base.html:207
+#: templates/includes/_base.html:249
 msgid "Logout"
-msgstr ""
+msgstr "Sair"
 
-#: .\templates\includes\_base.html:216
+#: templates/includes/_base.html:258
 msgid "Login or create your account..."
 msgstr "Faça login ou crie sua conta..."
 
-#: .\templates\includes\_base.html:236 .\templates\login.html:27
+#: templates/includes/_base.html:278 templates/login.html:27
 msgid ""
 "This project is opensource, feel free to use and support! <a href=\"https://"
 "github.com/xupisco/logd.me/\">Fork me!</a>"
@@ -295,15 +313,15 @@ msgstr ""
 "Este projeto é de código aberto, fique a vontade para usar e colaborar! <a "
 "href=\"https://github.com/xupisco/logd.me/\">Github</a>"
 
-#: .\templates\includes\_base.html:246
+#: templates/includes/_base.html:288
 msgid "Hi there!"
 msgstr "Olá!"
 
-#: .\templates\includes\_base.html:246
+#: templates/includes/_base.html:288
 msgid "is using logd.me, it's free... try it today"
 msgstr "está usando o logd.me, é grátis... crie sua conta"
 
-#: .\templates\login.html:19
+#: templates/login.html:19
 msgid ""
 "Don't worry, we don't care who you are... login is just for authentication "
 "purposes."
@@ -311,23 +329,23 @@ msgstr ""
 "Não se preocupe, não queremos suas informações... o login é apenas para fins "
 "de autenticação."
 
-#: .\templates\login.html:21
+#: templates/login.html:21
 msgid "Connect with Facebook"
 msgstr "Entrar com o Facebook"
 
-#: .\templates\people.html:133
+#: templates/people.html:137
 msgid "Update person!"
 msgstr "Atualizar pessoa!"
 
-#: .\templates\people.html:176 .\templates\people.html:245
+#: templates/people.html:180 templates/people.html:255
 msgid "New person!"
 msgstr "Nova pessoa!"
 
-#: .\templates\people.html:177 .\templates\people.html:306
+#: templates/people.html:181 templates/people.html:316
 msgid "Add person..."
 msgstr "Adicionar pessoa..."
 
-#: .\templates\people.html:219
+#: templates/people.html:229
 msgid ""
 "\n"
 "                <p>\n"
@@ -345,7 +363,7 @@ msgstr ""
 "                    </p>\n"
 "                    "
 
-#: .\templates\people.html:232
+#: templates/people.html:242
 msgid ""
 "\n"
 "                <p>\n"
@@ -363,70 +381,82 @@ msgstr ""
 "                    </p>\n"
 "                    "
 
-#: .\templates\people.html:253 .\templates\people.html:271
-#: .\templates\timeline.html:440
+#: templates/people.html:263 templates/people.html:281
+#: templates/timeline.html:470
 msgid "+ new"
 msgstr "+ novo"
 
-#: .\templates\people.html:254 .\templates\people.html:272
-#: .\templates\timeline.html:441
+#: templates/people.html:264 templates/people.html:282
+#: templates/timeline.html:471
 msgid "cancel"
 msgstr "cancelar"
 
-#: .\templates\people.html:255 .\templates\timeline.html:98
-#: .\templates\timeline.html:616
+#: templates/people.html:265 templates/timeline.html:99
+#: templates/timeline.html:652
 msgid "Company"
 msgstr "Empresa"
 
-#: .\templates\people.html:273 .\templates\timeline.html:619
+#: templates/people.html:283 templates/timeline.html:655
 msgid "Role"
 msgstr "Cargo"
 
-#: .\templates\public.html:9
+#: templates/public.html:9
 msgid "Hi... I just want to share something with you!"
 msgstr "Olá... gostaria de compartilhar uma coisa com vocês!"
 
-#: .\templates\public.html:59
+#: templates/public.html:67
 msgid "said"
 msgstr "disse"
 
-#: .\templates\timeline.html:95
+#: templates/timeline.html:96
 msgid "Create"
 msgstr "Criar"
 
-#: .\templates\timeline.html:96
+#: templates/timeline.html:97
 msgid "as"
 msgstr "como"
 
-#: .\templates\timeline.html:97
+#: templates/timeline.html:98
 msgid "Person"
 msgstr "Pessoa"
 
-#: .\templates\timeline.html:255
+#: templates/timeline.html:270
 msgid "Update log!"
 msgstr "Atualizar registro!"
 
-#: .\templates\timeline.html:320 .\templates\timeline.html:437
+#: templates/timeline.html:343 templates/timeline.html:467
 msgid "New log!"
 msgstr "Novo registro!"
 
-#: .\templates\timeline.html:321 .\templates\timeline.html:490
+#: templates/timeline.html:344 templates/timeline.html:522
 msgid "Add log..."
 msgstr "Adicionar registro..."
 
-#: .\templates\timeline.html:384
+#: templates/timeline.html:403
+msgid "Edit this log..."
+msgstr "Editar este registro..."
+
+#: templates/timeline.html:404
+msgid "Remove this log..."
+msgstr "Remover este registro..."
+
+#: templates/timeline.html:413
 msgid "Create public link..."
 msgstr "Criar link público..."
 
-#: .\templates\timeline.html:387
+#: templates/timeline.html:416
 msgid "This log is available to anyone with this link!"
 msgstr "Este registro está disponível para qualquer pessoa com esse link!"
 
-#: .\templates\timeline.html:398
+#: templates/timeline.html:419
+msgid "views"
+msgstr "acessos"
+
+#: templates/timeline.html:428
 msgid "Attach to this log..."
 msgstr "Anexar neste registro..."
 
-#: .\templates\timeline.html:414
+#: templates/timeline.html:444
 msgid ""
 "\n"
 "                    <p>\n"
@@ -450,63 +480,63 @@ msgstr ""
 "strong></div></p>\n"
 "                    "
 
-#: .\templates\timeline.html:427
+#: templates/timeline.html:457
 msgid "Force refresh..."
 msgstr "Forçar atualização..."
 
-#: .\templates\timeline.html:442
+#: templates/timeline.html:472
 msgid "What?"
 msgstr "O que?"
 
-#: .\templates\timeline.html:452
+#: templates/timeline.html:482
 msgid "Name:"
 msgstr "Nome:"
 
-#: .\templates\timeline.html:454
+#: templates/timeline.html:484
 msgid "Icon:"
 msgstr "Ícone:"
 
-#: .\templates\timeline.html:466
+#: templates/timeline.html:496
 msgid "When?"
 msgstr "Quando?"
 
-#: .\templates\timeline.html:471
+#: templates/timeline.html:502
 msgid "Has end date?"
 msgstr "Tem data de término?"
 
-#: .\templates\timeline.html:475
+#: templates/timeline.html:506
 msgid "When ended?"
 msgstr "Quando terminou?"
 
-#: .\templates\timeline.html:479
+#: templates/timeline.html:511
 msgid "Description..."
 msgstr "Descrição..."
 
-#: .\templates\timeline.html:479
+#: templates/timeline.html:511
 msgid "Type at least 5 characters"
 msgstr "Digite pelo menos 5 caracteres"
 
-#: .\templates\timeline.html:481
+#: templates/timeline.html:513
 msgid "Type '@' to mention people and companies."
 msgstr "Digite '@' para citar pessoas e empresas."
 
-#: .\templates\timeline.html:485
+#: templates/timeline.html:517
 msgid "Highlight?"
 msgstr "Destaque?"
 
-#: .\templates\timeline.html:491
+#: templates/timeline.html:523
 msgid "Save draft!"
 msgstr "Salvar rascunho!"
 
-#: .\templates\timeline.html:622
+#: templates/timeline.html:658
 msgid "E-mail"
 msgstr "E-mail"
 
-#: .\templates\timeline.html:625
+#: templates/timeline.html:661
 msgid "Mobile"
 msgstr "Celular"
 
-#: .\templates\timeline.html:629
+#: templates/timeline.html:665
 msgid "No extra info!"
 msgstr "Sem informações adicionais!"
 
