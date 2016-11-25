@@ -8,6 +8,10 @@ body {
     background-color: #1b1b1b;
 }
 
+.footer {
+    background-color: #1b1b1b;
+}
+
 .timeline-icon {
     background: #1b1b1b;
     color: #737881;
@@ -28,6 +32,111 @@ body {
     color: #dadada;
 }
 
+.form-control {
+    border: 1px solid #1b1b1b !important;
+}
+
+.has-feedback .form-control {
+    border: 2px solid #1b1b1b !important;
+}
+
 input {
     background-color: #101010 !important;
+    color: #fff !important;
+}
+
+.custom_select {
+    background-color: #101010 !important;
+    border-color: #1b1b1b !important;
+    color: #fff !important;
+}
+
+.custom_select:hover {
+    background-color: #131313 !important;
+    border-color: #191919;
+    color: #fff !important;
+}
+
+.open>.dropdown-toggle.btn-default {
+    background-color: #1b1b1b !important;
+    color: #fff !important;
+    border-color: #1b1b1b !important;
+}
+
+.custom_select_container .dropdown-menu {
+    background-color: #1b1b1b !important;
+    border-color: #1b1b1b !important;
+}
+
+.xdsoft_datetimepicker {
+    background: #101010 !important;
+    border-color: #1b1b1b !important;
+}
+
+
+/* Timeline */
+
+.timeline-label {
+    background-color: #2d2d2d !important;
+}
+
+.timeline-label p {
+    color: #d4d4d4 !important;
+}
+
+.timeline-label blockquote {
+    border-left: 5px solid #404040 !important;
+}
+
+.timeline-label:after {
+    border-color: transparent #2d2d2d transparent transparent !important;
+}
+
+.timeline-centered:before {
+    background: #2d2d2d !important;
+}
+
+.timeline-icon {
+    background: #2d2d2d !important;
+    color: #cacaca !important;
+    box-shadow: 0 0 0 4px #212121 !important;
+}
+
+.hl_mention_person {
+    color: #ffffff !important;
+    background-color: #769690 !important;
+}
+
+.hl_mention_company {
+    color: #ffffff !important;
+    background-color: #5c7e94 !important;
+}
+
+.hashtag {
+    color: #ffffff !important;
+    background-color: #4c4c2f !important;
+}
+
+.log_tools {
+    background-color: #2d2d2d !important;
+    color: #ececec !important;
+}
+
+.public_link {
+    border: 1px dashed #a25151 !important;
+    background-color: #561117 !important;
+}
+
+.loader {
+    color: #8bc34a !important;
+    background: #8bc34a;
+}
+
+.loader:after, .loader:before {
+    background: #8bc34a;
+}
+
+#icon_clear {
+    background-color: #101010 !important;
+    color: #7f2c2c !important;
 }
