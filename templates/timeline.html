@@ -132,6 +132,13 @@ $(function() {
                   event.preventDefault();
                   return false;
                 }
+                if (event.keyCode == 27) { // esc pressed
+                    if(!$('.mce-fullscreen').length) {
+                        tinymce.activeEditor.iframeElement.blur();
+                    } else {
+                        tinymce.activeEditor.execCommand('mceFullscreen');
+                    }
+                }
             });
             ed.on('FullscreenStateChanged', function(e) {
                 if(!tedfs) {
@@ -189,6 +196,7 @@ $(function() {
     $('#nlog_start_date').datetimepicker({
         format:'d/m/Y H:i',
         step: 30,
+        value: new Date()
     });
 
     $('#nlog_end_date').datetimepicker({

@@ -105,6 +105,25 @@
             hideTooltip(e.trigger)
         });
 
+        Mousetrap.bind('a', function(e) {
+            if($(':focus').attr('id') != "q") {
+                e.preventDefault();
+                if(tinymce) {
+                    tinymce.activeEditor.focus();
+                }
+            }
+        });
+
+        Mousetrap.bind('shift+a', function(e) {
+            if($(':focus').attr('id') != "q") {
+                e.preventDefault();
+                if(tinymce) {
+                    tinymce.activeEditor.focus();
+                    tinymce.activeEditor.execCommand('mceFullscreen');
+                }
+            }
+        });
+
         Mousetrap.bind('/', function(e) {
             if($(':focus').attr('id') != "q") {
                 e.preventDefault();
@@ -112,10 +131,18 @@
             }
         });
 
+        Mousetrap.bind('d', function(e) {
+            if(($(':focus').attr('id') != "q")) {
+                e.preventDefault();
+                $('#nlog_start_date').focus();
+            }
+        });
+
         Mousetrap.bind(['esc', 'escape'], function(e) {
             e.preventDefault();
             vue.q = '';
             $('#q').blur();
+            $('#nlog_start_date').blur();
         });
 
         $('.big_error_message_container').click(function() {
