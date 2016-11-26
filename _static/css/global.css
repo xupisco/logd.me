@@ -318,15 +318,17 @@ img.avatar_card {
 }
 
 #side_affix {
-    position: static;
-    margin-top: 0;
     width: 350px;
-    margin-bottom: 60px;
+    min-height: 830px !important;
 }
 
-#side_affix.affix {
-    position: fixed !important;
-    width: 350px;
+.affix {
+    position: fixed;
+    top: 80px;
+}
+
+.affix-bottom {
+    position: relative;
 }
 
 .editor-toolbar {
