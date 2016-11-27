@@ -1,13 +1,13 @@
 body {
     background-image: none;
-    background-color: #212121;
+    background-color: #1D1F21;
     color: #fdfdfd;
 }
 
 .navbar-default .navbar-nav>.open>a,
 .navbar-default .navbar-nav>.open>a:hover,
 .navbar-default .navbar-nav>.open>a:focus {
-    background-color: #8bc34a;
+    background-color: #1D1F21;
 }
 
 .navbar-default {
@@ -119,7 +119,7 @@ input {
 /* Timeline */
 
 .timeline-label {
-    background-color: #2d2d2d !important;
+    background-color: #232426 !important;
 }
 
 .timeline-label p {
@@ -131,7 +131,7 @@ input {
 }
 
 .timeline-label:after {
-    border-color: transparent #2d2d2d transparent transparent !important;
+    border-color: transparent #232426 transparent transparent !important;
 }
 
 .timeline-centered:before {
@@ -139,7 +139,7 @@ input {
 }
 
 .timeline-icon {
-    background: #2d2d2d !important;
+    background: #232426 !important;
     color: #cacaca !important;
     box-shadow: 0 0 0 4px #212121 !important;
 }
@@ -186,6 +186,10 @@ input {
 #icon_clear {
     background-color: #101010 !important;
     color: #7f2c2c !important;
+}
+
+.user_avatar_public {
+    border: 4px solid #2d2d2d !important;
 }
 
 

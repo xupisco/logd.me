@@ -50,7 +50,13 @@ function hl_hashtags() {
     iframe { height: 356px !important; }
 </style>
 
-<div class="public_logo_holder hidden-xs"><a href="/"><img src="{% static 'images/logd_logo_negative.png' %}" class="public_logo" /></a></div>
+<div class="public_logo_holder hidden-xs">
+    {% if THEME != 'dark' %}
+    <a href="/"><img src="{% static 'images/logd_logo_negative.png' %}" class="public_logo" /></a>
+    {% else %}
+    <a href="/"><img src="{% static 'images/logd_logo.png' %}" class="public_logo" /></a>
+    {% endif %}
+</div>
 
 <div class="col-md-8 col-md-offset-2">
     <div class="timeline-centered" id="main_timeline">
@@ -107,7 +113,11 @@ function hl_hashtags() {
                 </div>
 
                 <div class="timeline-label public_content">
-                    <div class="fb-comments" data-href="" data-width="100%" data-numposts="5"></div>
+                    {% if THEME != 'dark' %}
+                    <div class="fb-comments" data-href="" data-colorscheme="light" data-width="100%" data-numposts="5"></div>
+                    {% else %}
+                    <div class="fb-comments" data-href="" data-colorscheme="dark" data-width="100%" data-numposts="5"></div>
+                    {% endif %}
                 </div>
             </div>
         </article>
