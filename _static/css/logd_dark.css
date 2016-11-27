@@ -7,11 +7,12 @@ body {
 .navbar-default .navbar-nav>.open>a,
 .navbar-default .navbar-nav>.open>a:hover,
 .navbar-default .navbar-nav>.open>a:focus {
-    background-color: #1D1F21;
+    /*background-color: #181a1d;*/
+    background-color: #161719;
 }
 
 .navbar-default {
-    background-color: #1b1b1b;
+    background-color: #161719;
 }
 
 .shareme {
@@ -19,7 +20,7 @@ body {
 }
 
 .footer {
-    background-color: #1b1b1b;
+    background-color: #161719;
 }
 
 .dropdown-menu {
