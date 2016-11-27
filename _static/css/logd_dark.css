@@ -77,13 +77,13 @@ input {
 }
 
 .open>.dropdown-toggle.btn-default {
-    background-color: #1b1b1b !important;
+    background: #101010 !important;
     color: #fff !important;
     border-color: #1b1b1b !important;
 }
 
 .custom_select_container .dropdown-menu, .custom_select_container_company .dropdown-menu,  .custom_select_container_role .dropdown-menu {
-    background-color: #1b1b1b !important;
+    background: #101010 !important;
     border-color: #1b1b1b !important;
 }
 
@@ -112,6 +112,9 @@ input {
     border: 1px solid #2d2d2d !important;
 }
 
+.mce-fullscreen .mce-panel {
+    background-color: #1b1b1b;
+}
 
 /* Timeline */
 

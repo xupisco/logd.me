@@ -319,7 +319,14 @@ img.avatar_card {
 
 #side_affix {
     width: 350px;
-    min-height: 830px !important;
+}
+
+.affix_log {
+    min-height: 750px !important;
+}
+
+.affix_people {
+    min-height: 550px !important;
 }
 
 .affix {
