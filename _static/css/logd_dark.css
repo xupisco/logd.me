@@ -38,17 +38,13 @@ body {
     box-shadow: 0 0 0 4px #1b1b1b;
 }
 
-.timeline-label {
-    background: #1b1b1b;
-}
-
 .log_date {
     background-color: #212121;
     color: #828282;
 }
 
 .log_tools {
-    background-color: #1b1b1b;
+    background-color: #232426;
     color: #dadada;
 }
 
@@ -164,11 +160,6 @@ input.form-little-full {
     background-color: #4c4c2f !important;
 }
 
-.log_tools {
-    background-color: #2d2d2d !important;
-    color: #ececec !important;
-}
-
 .public_link {
     border: 1px dashed #a25151 !important;
     background-color: #561117 !important;
@@ -210,6 +201,11 @@ input.form-little-full {
 
 .mce-ico {
     color: #c7c7c7 !important;
+}
+
+.mce-tab {
+    text-shadow: none !important;
+    color: #fff !important;
 }
 
 .mce-btn-group:not(:first-child) {

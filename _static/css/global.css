@@ -15,6 +15,10 @@ html {
     z-index: -1;
 }
 
+.log_image {
+    max-width: 100%
+}
+
 .login_header {
     font-size: 53px;
     font-family: 'Ubuntu Condensed';
