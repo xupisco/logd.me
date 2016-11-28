@@ -302,6 +302,10 @@ img.avatar_card {
     display: inline-block;
 }
 
+.label, .btn {
+    border-radius: 0 !important;
+}
+
 #icon_clear {
     margin-left: 272px;
     top: 19px;
