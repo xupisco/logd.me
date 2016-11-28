@@ -287,8 +287,12 @@ def newlog(request):
         else:
             kind = LogKind.objects.get(id=nlog_kind_id)
 
-        start_date = datetime.strptime(nlog_start_date, "%d/%m/%Y %H:%M")
-        end_date = datetime.strptime(nlog_end_date, "%d/%m/%Y %H:%M") if nlog_end_date else None
+        if translation.get_language() == 'pt-br':
+            start_date = datetime.strptime(nlog_start_date, "%d/%m/%Y %H:%M")
+            end_date = datetime.strptime(nlog_end_date, "%d/%m/%Y %H:%M") if nlog_end_date else None
+        else:
+            start_date = datetime.strptime(nlog_start_date, "%m/%d/%Y %H:%M")
+            end_date = datetime.strptime(nlog_end_date, "%m/%d/%Y %H:%M") if nlog_end_date else None
 
         if not is_update:
             nlog = Log(

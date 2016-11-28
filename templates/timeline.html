@@ -195,17 +195,34 @@ $(function() {
         showIcon: true
     });
 
+    {% if LANG == 'pt-br' %}
     jQuery.datetimepicker.setLocale('pt-BR');
     $('#nlog_start_date').datetimepicker({
         format:'d/m/Y H:i',
         step: 30,
         value: new Date()
     });
+    {% else %}
+    jQuery.datetimepicker.setLocale('en-US');
+    $('#nlog_start_date').datetimepicker({
+        format:'m/d/Y H:i',
+        step: 30,
+        value: new Date()
+    });
+    {% endif %}
 
     $('#nlog_end_date').datetimepicker({
+        {% if LANG == 'pt-br' %}
         format: 'd/m/Y H:i',
+        {% else %}
+        format: 'm/d/Y H:i',
+        {% endif %}
         onShow:function(ct) {
+            {% if LANG == 'pt-br' %}
             var start_date = moment($('#nlog_start_date').val(), "DD/MM/YYYY HH:mm");
+            {% else %}
+            var start_date = moment($('#nlog_start_date').val(), "MM//DDYYYY HH:mm");
+            {% endif %}
             this.setOptions({
                 minDate: $('#nlog_start_date').val() ? start_date.toDate() : false
             })
@@ -258,10 +275,18 @@ function loadSingleLog(log) {
             $("#nlog_kind").val(res.kind.id).change();
         }
 
+        {% if LANG == 'pt-br' %}
         $('#nlog_start_date').val(moment(res_start_date).format('DD/MM/YYYY HH:mm'));
+        {% else %}
+        $('#nlog_start_date').val(moment(res_start_date).format('MM/DD/YYYY HH:mm'));
+        {% endif %}
         if(res.end_date) {
             $('.has_enddate').click();
+            {% if LANG == 'pt-br' %}
             $('#nlog_end_date').val(moment(res_end_date).format('DD/MM/YYYY HH:mm'));
+            {% else %}
+            $('#nlog_end_date').val(moment(res_end_date).format('MM/DD/YYYY HH:mm'));
+            {% endif %}
         }
         if(res.reminder) {
             $('#nlog_highlight').prop('checked', true);
@@ -497,7 +522,7 @@ function parseDropzones() {
             </div>
             <div class="form-group has-feedback has-feedback-right">
                 <label for="nlog_start_date">{% trans "When?" %}</label><div class="form_error pull-right" id="error_nlog_start_date"> {% trans 'Required' %}</div>
-                <input type="text" class="form-control" id="nlog_start_date" placeholder="dd/mm/yyyy hh:mm">
+                <input type="text" class="form-control" id="nlog_start_date" placeholder="{% if LANG == 'pt-br' %}dd/mm/yyyy{% else %}mm/dd/yyyy{% endif %} hh:mm">
                 <i id="nlog_start_date-picker" class="form-control-feedback glyphicon glyphicon-calendar" style="color: #b9b9b9"></i>
             </div>
             <div class="checkbox">
@@ -507,7 +532,7 @@ function parseDropzones() {
             </div>
             <div class="form-group end_date hidden has-feedback has-feedback-right">
                 <label for="nlog_enddate">{% trans "When ended?" %}</label>
-                <input type="text" class="form-control" id="nlog_end_date" placeholder="dd/mm/yyyy hh:mm">
+                <input type="text" class="form-control" id="nlog_end_date" placeholder="{% if LANG == 'pt-br' %}dd/mm/yyyy{% else %}mm/dd/yyyy{% endif %} hh:mm">
                 <i id="nlog_end_date-picker" class="form-control-feedback glyphicon glyphicon-calendar" style="color: #b9b9b9"></i>
             </div>
             <div class="form-group">
@@ -562,7 +587,11 @@ vue = new Vue({
                 return (
                     (log.body.toLowerCase().fuzzy(localq, ratio)) ||
                     (log.meta.toLowerCase().fuzzy(localq, ratio)) ||
+                    {% if LANG == 'pt-br' %}
                     (moment(log.start_date).format("DD/MM/YYYY").indexOf(localq) != -1)
+                    {% else %}
+                    (moment(log.start_date).format("MM/DD/YYYY").indexOf(localq) != -1)
+                    {% endif %}
                 )
             }.bind(this))
         }
@@ -696,7 +725,11 @@ vue = new Vue({
     },
     filters: {
         moment: function(date) {
+            {% if LANG == 'pt-br' %}
             return moment(date).format('DD/MM/YYYY HH:mm');
+            {% else %}
+            return moment(date).format('MM/DD/YYYY HH:mm');
+            {% endif %}
         }
     }
 });
