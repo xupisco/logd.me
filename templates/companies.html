@@ -59,7 +59,7 @@ function loadCompanies() {
 
         if(first_load) {
             $('.loader').hide();
-            $('.nothing_found').show();
+            $('.nothing_found').removeClass('hidden');
             first_load = false;
         }
     });
