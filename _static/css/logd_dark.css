@@ -32,12 +32,6 @@ body {
     color: #cacaca;
 }
 
-.timeline-icon {
-    background: #1b1b1b;
-    color: #737881;
-    box-shadow: 0 0 0 4px #1b1b1b;
-}
-
 .log_date {
     background-color: #212121;
     color: #828282;
@@ -137,6 +131,10 @@ input.form-little-full {
 
 .timeline-centered:before {
     background: #2d2d2d !important;
+}
+
+.timeline-icon.bg-secondary {
+    background-color: #c73d3d !important;
 }
 
 .timeline-icon {
