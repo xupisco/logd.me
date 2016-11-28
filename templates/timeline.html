@@ -367,14 +367,14 @@ function parseDropzones() {
 {% endblock %}
 
 {% block content %}
-<div class="col-md-8" style="min-height: 150px" v-bind:class="{ 'has_warning': filteredLogs.length > 0 && q }">
+<div class="col-md-8" style="min-height: 750px" v-bind:class="{ 'has_warning': filteredLogs.length > 0 && q }">
     <div class="loader">{% trans "Loading" %}...</div>
 
     <div class="filtered_results" v-show="filteredLogs.length > 0 && q" v-cloak>
     {% trans "Showing" %} <span class="filtered_count">[[ filteredLogs.length ]]</span> {% trans "of" %} <span class="total_count">[[ logs.length ]]</span> | <span class="info_clear" v-on:click="{ q = ''; }">{% trans "Reset" %}...</span>
     </div>
 
-    <div class="timeline-centered" id="main_timeline" style="min-height: 750px;">
+    <div class="timeline-centered" id="main_timeline">
 
         <article class="timeline-entry" v-if="!filteredLogs.length && q" v-cloak>
             <div class="timeline-entry-inner">
