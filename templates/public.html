@@ -28,7 +28,13 @@ $(function() {
 function hl_hashtags() {
     txt = $('.log_content').html()
     var all_re = /(#[a-z0-9][a-z0-9\-_]*)/ig;
-    $('.log_content').html('<p>' + txt.replace(all_re, "<span class='hashtag'>$1</span>") + '</p>');
+    var img_re = /(http:\/\/[^"]*?\.(jpg|png|gif))/ig;
+    //var media_re = /(http:|https:|)\/\/(player.|www.)?(vimeo\.com|youtu(be\.com|\.be|be\.googleapis\.com))\/(video\/|embed\/|watch\?v=|v\/)?([A-Za-z0-9._%-]*)(\&\S+)?/ig
+    txt = txt.replace(all_re, "<span class='hashtag'>$1</span>");
+    txt = txt.replace(img_re, "<img src='$1'/ class='log_image'>");
+    //txt = txt.replace(media_re, "<img src='$1'/ class='log_image'>");
+
+    $('.log_content').html('<p>' + txt + '</p>');
 }
 </script>
 {% endblock %}
