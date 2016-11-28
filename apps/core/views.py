@@ -289,10 +289,16 @@ def newlog(request):
 
         if translation.get_language() == 'pt-br':
             start_date = datetime.strptime(nlog_start_date, "%d/%m/%Y %H:%M")
-            end_date = datetime.strptime(nlog_end_date, "%d/%m/%Y %H:%M") if nlog_end_date else None
+            if nlog_end_date:
+                end_date = datetime.strptime(nlog_end_date, "%d/%m/%Y %H:%M")
+            else:
+                end_date = None
         else:
             start_date = datetime.strptime(nlog_start_date, "%m/%d/%Y %H:%M")
-            end_date = datetime.strptime(nlog_end_date, "%m/%d/%Y %H:%M") if nlog_end_date else None
+            if nlog_end_date:
+                end_date = datetime.strptime(nlog_end_date, "%m/%d/%Y %H:%M")
+            else:
+                end_date = None
 
         if not is_update:
             nlog = Log(
