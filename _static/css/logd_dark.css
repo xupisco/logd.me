@@ -143,6 +143,10 @@ input.form-little-full {
     box-shadow: 0 0 0 4px #212121 !important;
 }
 
+.author {
+    color: #fff !important;
+}
+
 .hl_mention_person {
     color: #ffffff !important;
     background-color: #769690 !important;
