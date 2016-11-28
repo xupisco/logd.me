@@ -5,8 +5,9 @@ Your personal and friendly life log, cut the crap... only the essentials!
 [![Build Status](https://travis-ci.org/xupisco/logd.me.svg?branch=master)](https://travis-ci.org/xupisco/logd.me)
 
 
-## Screenshot
-[![Home / Logs](http://i.imgur.com/MdnDs9j.png)](http://i.imgur.com/MdnDs9j.png)
+## Screenshots
+[![Home / Dark](http://i.imgur.com/5UkvtNL.png)](http://i.imgur.com/5UkvtNL.png)
+[![Home / Light](http://i.imgur.com/GWpIDQF.png)](http://i.imgur.com/GWpIDQF.png)
 
 
 ## Setup
@@ -20,8 +21,7 @@ Your personal and friendly life log, cut the crap... only the essentials!
 7. Visit /admin/socialaccount/socialapp/
 8. [Create a Facebook APP](https://developers.facebook.com/)
 9. Add a new App ID and Secret Key for facebook provider
-10. Thank @croves...
-11. Enjoy!
+10. Enjoy!
 
 
 ### conf/settings.ini
@@ -38,7 +38,7 @@ DATABASE_URL=sqlite://./conf/db.sqlite3
 
 ## Try it now
 
-logd.me is available on [Heroku](http://logd.me)!
+logd.me is available at [logd.me](http://logd.me)!
 
 
 ## UNDER MIT LICENSE
