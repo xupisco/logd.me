@@ -11,6 +11,7 @@ var parsed_tooltips = false;
 var parsed_dropzone = false;
 var tedfs = false;
 var first_load = true;
+var index;
 
 $(function() {
     $('.has_enddate').click(function() {
@@ -306,7 +307,9 @@ function loadLogs() {
     $.getJSON('/api/v1/logs/', function(res) {
         vue.logs = res;
         parsed_tooltips = false;
+        setupSearch(res);
         $('#fake_loading').removeClass('icon-spin');
+
         if(first_load) {
             $('.loader').hide();
             $('.nothing_found').removeClass('hidden');
@@ -314,6 +317,27 @@ function loadLogs() {
             first_load = false;
         }
     });
+}
+
+function setupSearch(res) {
+    index = null;
+    index = lunr(function () {
+        this.field('start_date', { boost: 10 })
+        this.field('end_date', { boost: 10 })
+        this.field('body')
+        this.field('meta', { boost: 20 })
+        this.ref('id')
+    })
+
+    for(var l = 0; l < res.length; l++) {
+        index.add({
+            id: res[l].id,
+            start_date: res[l].start_date,
+            end_date: res[l].end_date,
+            body: res[l].body,
+            meta: res[l].meta
+        })
+    }
 }
 
 function showSuccessMessage() {
