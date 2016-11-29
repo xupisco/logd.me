@@ -325,6 +325,10 @@
     margin-top: 10px !important;
 }
 
+.timeline-label ul > ul {
+    margin-top: 0px !important;
+}
+
 .timeline-label h1:first-child {
     margin-top: 0 !important;
 }
