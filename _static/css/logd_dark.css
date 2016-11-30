@@ -124,6 +124,7 @@ input.form-little-full {
 
 .timeline-label blockquote {
     border-left: 5px solid #404040 !important;
+    background-color: #2b2b2b;
 }
 
 .timeline-label:after {
