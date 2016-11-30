@@ -161,12 +161,12 @@ input.form-little-full {
 
 .hashtag {
     color: #ffffff !important;
-    background-color: #4c4c2f !important;
+    background-color: #444c4c !important
 }
 
 .public_link {
-    border: 1px dashed #a25151 !important;
-    background-color: #561117 !important;
+    border: 1px dashed #713333 !important;
+    background-color: #3a090e !important;
 }
 
 .loader {
