@@ -947,3 +947,13 @@ iframe {
     border-width: 0px 4px !important;
     height: 23px !important;
 }
+
+.goto_post {
+    position: fixed;
+    right: 72px;
+    top: 14px;
+    z-index: 99979;
+    color: #fff;
+    padding: 5px 5px;
+    background-color: #253444;
+}

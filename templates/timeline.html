@@ -31,6 +31,10 @@ $(function() {
         $('#cancel_new_kind').hide();
     }
 
+    $('.goto_post').click(function() {
+        moveToForm('.log_form');
+    })
+
     $('form#new_log').submit(function() {
         var errors = false;
         $('#error_nlog_start_date').hide();
@@ -316,6 +320,8 @@ function loadLogs() {
             $('.loader').hide();
             $('.nothing_found').removeClass('hidden');
             $('.begin').removeClass('hidden');
+            $('.goto_post').removeClass('hidden');
+            $('.goto_post').addClass('visible-xs');
             $('.pages_controller').removeClass('hidden');
             first_load = false;
         }
@@ -424,6 +430,10 @@ function parseDropzones() {
 
     <div class="filtered_results" v-show="filteredLogs.length > 0 && q" v-cloak>
     {% trans "Showing" %} <span class="filtered_count">[[ filteredLogs.length ]]</span> {% trans "of" %} <span class="total_count">[[ logs.length ]]</span> | <span class="info_clear" v-on:click="{ q = ''; }">{% trans "Reset" %}...</span>
+    </div>
+
+    <div class="goto_post hidden" v-cloak>
+    {% trans "+ log..." %}
     </div>
 
     <div class="timeline-centered" id="main_timeline">
