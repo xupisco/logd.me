@@ -616,7 +616,7 @@ function apply_pagination(ar) {
     } else {
         vue.pagination = true;
         vue.pages = []
-        var num_pages = ar.length / vue.perpage;
+        var num_pages = Math.ceil(ar.length / vue.perpage);
 
 
         for(var p = 0; p < num_pages; p++) {
