@@ -11,6 +11,8 @@ var parsed_tooltips = false;
 var parsed_dropzone = false;
 var tedfs = false;
 var first_load = true;
+var pagination = true;
+var perpage = 15;
 var index;
 
 $(function() {
@@ -314,6 +316,7 @@ function loadLogs() {
             $('.loader').hide();
             $('.nothing_found').removeClass('hidden');
             $('.begin').removeClass('hidden');
+            $('.pages_controller').removeClass('hidden');
             first_load = false;
         }
     });
@@ -504,6 +507,18 @@ function parseDropzones() {
             </div>
         </article>
 
+        <article class="timeline-entry begin hidden pages_controller" v-show="pagination" v-cloak>
+            <div class="timeline-entry-inner">
+                <div class="pagination_holder">
+                    <div class="page page_num page_prev" v-on:click="change_page(page - 1)"><</div>
+                    <div class="page page_nums">
+                        <span class="page_num" v-on:click="change_page(p.num)" v-bind:class="{ 'page_current': (p.num == page) }" v-for="p in pages">[[ p.num ]]</span>
+                    </div>
+                    <div class="page page_num page_next" v-on:click="change_page(page + 1)">></div>
+                </div>
+            </div>
+        </article>
+
         <article class="timeline-entry begin hidden nothing_found">
             <div class="timeline-entry-inner">
                 <div id="fake_reload" class="timeline-icon bg-black" style="background: #333;" title="{% trans "Force refresh..." %}">
@@ -593,11 +608,41 @@ String.prototype.fuzzy = function(term, ratio) {
     return (matches/this.length >= ratio || term == "")
 };
 
+function apply_pagination(ar) {
+    new_ar = []
+    if(ar.length <= vue.perpage) {
+        vue.pagination = false;
+        new_ar = ar;
+    } else {
+        vue.pagination = true;
+        vue.pages = []
+        var num_pages = ar.length / vue.perpage;
+
+
+        for(var p = 0; p < num_pages; p++) {
+            vue.pages.push({
+                num: p + 1
+            })
+        }
+
+        //for(var l = ; l <= (vue.page * (vue.perpage + 1)); l++) {
+        //    new_arr.push(ar[l]);
+        //}
+        new_ar = ar.splice((vue.page * vue.perpage) - 1, vue.perpage);
+    }
+
+    return new_ar
+}
+
 vue = new Vue({
     el: '#vue_app',
     delimiters: ["[[", "]]"],
     data: {
         q: '{{ q }}',
+        pagination: pagination,
+        perpage: perpage,
+        page: 1,
+        pages: [],
         logs: ''
     },
     computed: {
@@ -607,7 +652,7 @@ vue = new Vue({
             var localq = self.q.replace('#', '').toLowerCase();
             var ratio = 0.75;
             parsed_tooltips = false;
-            return this.logs.filter(function(log) {
+            filtered_response = this.logs.filter(function(log) {
                 return (
                     (log.body.toLowerCase().fuzzy(localq, ratio)) ||
                     (log.meta.toLowerCase().fuzzy(localq, ratio)) ||
@@ -618,6 +663,7 @@ vue = new Vue({
                     {% endif %}
                 )
             }.bind(this))
+            return apply_pagination(filtered_response)
         }
     },
     methods: {
@@ -626,6 +672,13 @@ vue = new Vue({
         },
         removeLog: function(id, ev) {
             showRemoveConfirmation(id[0][0]);
+        },
+        change_page: function(num) {
+            $('html, body').animate({
+                scrollTop: 0
+            }, 500, function() {
+                vue.page = num;
+            });
         },
         hl_hashtags: function(txt) {
             var all_re = /(#[a-z0-9][a-z0-9\-_]*)/ig;

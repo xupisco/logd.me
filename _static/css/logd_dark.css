@@ -250,3 +250,17 @@ input.form-little-full {
 .dropdown-menu .divider {
     background-color: #0e0e0e !important;
 }
+
+.page_num {
+    background-color: #232426;
+    border: 0;
+}
+
+.page_num:hover {
+    color: #fff;
+}
+
+.page_current {
+    color: #fff;
+    font-weight: bold;
+}

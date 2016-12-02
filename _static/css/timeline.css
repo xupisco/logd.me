@@ -423,3 +423,30 @@
         transform: rotate(359deg);
     }
 }
+
+.pagination_holder {
+    text-align: center;
+    margin-left: 25px;
+}
+
+.page {
+    display: inline;
+}
+
+.page_num {
+    background-color: #fff;
+    margin-right: 1px;
+    padding: 2px 5px;
+    border: 1px solid #d8d8d8;
+    color: #b3b3b3;
+}
+
+.page_num:hover {
+    cursor: pointer;
+    color: #000;
+}
+
+.page_current {
+    color: #000;
+    font-weight: bold;
+}
