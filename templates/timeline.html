@@ -628,7 +628,7 @@ function apply_pagination(ar) {
         //for(var l = ; l <= (vue.page * (vue.perpage + 1)); l++) {
         //    new_arr.push(ar[l]);
         //}
-        new_ar = ar.splice((vue.page * vue.perpage) - 1, vue.perpage);
+        new_ar = ar.splice((vue.page * vue.perpage) - vue.perpage, vue.perpage);
     }
 
     return new_ar
