@@ -55,9 +55,9 @@ class LogSerializer(serializers.ModelSerializer):
             str(val) for val in obj.companies.values_list('name', )
         )
 
-        highligh = "!!!" if obj.reminder else ""
+        highligh = ", !!!" if obj.reminder else ""
 
         res = list(obj.people.values_list('name', 'email')) + \
             list(obj.companies.values_list('name'))
 
-        return ', '.join(tuple([x[0] for x in res])) + ', ' + highligh
+        return ', '.join(tuple([x[0] for x in res])) + ', ' + obj.kind.name + highligh
