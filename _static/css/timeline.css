@@ -450,3 +450,8 @@
     color: #000;
     font-weight: bold;
 }
+
+
+.timeline-centered .timeline-entry .timeline-entry-inner .timeline-icon:hover {
+    cursor: pointer;
+}

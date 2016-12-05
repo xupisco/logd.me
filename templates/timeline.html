@@ -414,7 +414,12 @@ function qs(el) {
     if(current_content.length) {
         current_content += " "
     }
-    vue.q = current_content + $(el).html();
+    if($(el).hasClass('timeline-icon')) {
+        val = $(el).attr('title');
+    } else {
+        val = $(el).html();
+    }
+    vue.q = current_content + val;
 }
 </script>
 
@@ -460,7 +465,7 @@ function parseDropzones() {
         <article class="timeline-entry" :id="'entry_' + log.id" v-for="log in filteredLogs" v-cloak>
             <div class="timeline-entry-inner">
 
-                <div class="timeline-icon" v-bind:class="{ 'bg-secondary': log.reminder }" v-bind:title="log.kind.name">
+                <div class="timeline-icon" v-bind:class="{ 'bg-secondary': log.reminder }" v-bind:title="log.kind.name" onclick="qs(this);" >
                     <span class="glyphicon" v-bind:class="'glyphicon-' + [[ log.kind.glyphicon_name ]]" aria-hidden="true"></span>
                 </div>
 
