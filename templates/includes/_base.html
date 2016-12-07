@@ -256,7 +256,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <form class="navbar-form navbar-left" role="search">
                     <div class="form-group">
                         <input id="q" type="text" v-model="q" class="form-control mousetrap" placeholder="{% trans "Type anything..." %}">
-                        <div id="icon_clear" class="glyphicon glyphicon-remove hidden-xs" aria-hidden="true"></div>
+                        <div id="icon_clear" v-show="q.length" class="glyphicon glyphicon-remove hidden-xs" aria-hidden="true"></div>
                     </div>
 
                 </form>
