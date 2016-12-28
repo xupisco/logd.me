@@ -7,3 +7,4 @@ markdown==2.6.7
 whitenoise==3.2.1
 dj-database-url==0.4.1
 hashids==1.1.0
+psycopg2==2.6.2
