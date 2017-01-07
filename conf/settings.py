@@ -12,7 +12,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GRAPPELLI_ADMIN_TITLE = 'logd.me'
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = config('SECRET_KEY', default='supersecret')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False, cast=bool)
@@ -130,7 +130,7 @@ WSGI_APPLICATION = 'conf.wsgi.application'
 DATABASES = {
     'default': dj_database_url.parse(
         url=config(
-            'DATABASE_URL', default='postgres://owncrm:1234@127.0.0.1/owncrm')
+            'DATABASE_URL', default='sqlite://./conf/db.sqlite3')
     )
 }
 
