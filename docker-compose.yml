@@ -1,6 +1,7 @@
 version: '2'
 services:
   web:
+    container_name: logdme_web
     build:
       context: .
       dockerfile: Dockerfile-${APP_ENV}
@@ -8,15 +9,3 @@ services:
       - ./:/usr/src/app/
     ports:
       - "${APP_PORT}:8000"
-    depends_on:
-      - db
-  db:
-    image: postgres:9.4
-    env_file:
-      - .env
-    volumes:
-      - logdme_data:/var/lib/postgresql/data
-
-volumes:
-  logdme_data:
-    external: true
