@@ -1,0 +1,11 @@
+version: '2'
+services:
+  web:
+    container_name: logdme_web
+    build:
+      context: .
+      dockerfile: Dockerfile-${APP_ENV}
+    volumes:
+      - ./:/usr/src/app/
+    ports:
+      - "${APP_PORT}:8000"
