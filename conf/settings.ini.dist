@@ -1,0 +1,6 @@
+[settings]
+SECRET_KEY=<http://randomkeygen.com/>
+DEBUG=True
+
+GTM_ID=<Google Tag Manager ID>
+DATABASE_URL=postgres://logdme:logdme@db:5432/logdme
