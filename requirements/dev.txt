@@ -1,6 +1,6 @@
 -r base.txt
 ipdb==0.10.1
-django-debug-toolbar==1.6
+django-debug-toolbar==1.11.1
 django-debug-toolbar-template-profiler==1.0.1
 
 django-extensions==1.6.7
