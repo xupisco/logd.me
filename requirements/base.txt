@@ -1,4 +1,4 @@
-Django==1.11.29
+Django==2.2.24
 pytz==2016.7
 python-decouple==3.0
 django-allauth==0.28.0
